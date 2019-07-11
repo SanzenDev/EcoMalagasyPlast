@@ -6,7 +6,7 @@ Il y en a encore certains bugs surtout au niveau de l'affichage mais comme c'est
  1. Front-End:
      * HTML, CSS, JQuery
  2. Back-end:
-     * symfony3 (FosUserBundler, CKEditor, VichUploader, SwiftMailer, ...)
+     * symfony3 (FosUserBundler, CKEditor, VichUploader, SwiftMailer, ...), PHP
  3. Base de données:
      * MySQL
  4. Autres: Photoshop 
