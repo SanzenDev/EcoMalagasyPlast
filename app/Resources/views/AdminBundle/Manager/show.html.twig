@@ -77,7 +77,7 @@
 	              </li>
 	              <li class="list-inline-item mR-20">
 	                <a href="
-{% if entity == 'news' %}{{path('update', {'entity': 'news', 'slug':obj.slug, 'token': obj.token })}}{% endif %}{% if entity == 'partenaire' %}{{path('update', {'entity': 'partenaire', 'slug':obj.slug, 'token': obj.token })}}{% endif %}{% if entity == 'dechet' %}{{path('update', {'entity': 'dechet', 'slug':obj.slug, 'token': obj.token })}}{% endif %}{% if entity == 'page' %}{{path('update', {'entity': 'page', 'slug':obj.slug, 'token': obj.token })}}{% endif %}
+{% if entity == 'news' %}{{path('admin_manage_update', {'entity': 'news', 'slug':obj.slug, 'token': obj.token })}}{% endif %}{% if entity == 'partenaire' %}{{path('admin_manage_update', {'entity': 'partenaire', 'slug':obj.slug, 'token': obj.token })}}{% endif %}{% if entity == 'dechet' %}{{path('admin_manage_update', {'entity': 'dechet', 'slug':obj.slug, 'token': obj.token })}}{% endif %}{% if entity == 'page' %}{{path('admin_manage_update', {'entity': 'page', 'slug':obj.slug, 'token': obj.token })}}{% endif %}
 	                " class="d-b td-n pY-5 pX-10 bgcH-grey-100 c-grey-700" data-toggle="tooltip" data-placement="right" title="Modifier">
 	                  <i class="c-grey-900 ti-pencil-alt mR-5"></i>
 	                  <span>Modifier</span>
