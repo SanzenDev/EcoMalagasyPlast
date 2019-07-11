@@ -17,7 +17,7 @@ Il y en a encore certains bugs surtout au niveau de l'affichage mais comme c'est
 
 ## :cloud: Set up et Installation:
 ```sh
-git https://github.com/SanzenDev/EcoMalagasyPlast.git
+git https://github.com/SanzenDev/EcoMalagasyPlast.git  # clone this repository to your local
 ```
 
 * Lancez le serveur (WAMP pour le mien)
