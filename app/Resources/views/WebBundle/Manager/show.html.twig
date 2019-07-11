@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {% if entity =='client' or entity == 'partenaire' %}
+        Mon Compte - {{ obj.name }}
+    {% endif %}
+    {% if entity == 'dechet' %}
+        {{ obj.name }} ({{ obj.mesuredAmount }})
+    {% endif %}
+    {% if entity == 'news' %}
+        {{ obj.metaTitle }} - Actualité 
+    {% endif %}
+    {% if entity == 'page' %}
+        {{ obj.metaTitle }} 
+    {% endif %}
+    {% if entity == 'commande' %}
+        {{ obj.id }}
+    {% endif %}
+    | {{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+
+{% if entity != 'news' and entity != 'page' %}
+    <div class="row pY-0 pX-60@lg body pT-20@md+ pT-10@md-">
+    	<div class="col-lg-8 col-xl-9 m-0 pL-40@md+ main">
+        	{% include "WebBundle/"~entity|title~"/show.html.twig" with {'entity': obj } %} 
+        </div> <!-- /.col -->
+
+        {{ render(controller("AppWebBundle:Main:aside")) }}
+    </div> <!-- /.row --> 
+{% endif %}
+
+{% if entity == 'page' %}
+
+    {% include "WebBundle/Page/show.html.twig" with {'entity': obj } %}         
+
+{% endif %}
+
+{% if entity == 'news' %}
+<div class="row pY-0 pX-60@lg body pT-20@md+ pT-10@md-">
+        <div class="col-lg-1 col-xl-2 col-md-0 col-sm-0 col-0"></div>
+        <div class="col-lg-10 col-xl-8 m-0 pL-40@md+ main">
+            {% include "WebBundle/News/show.html.twig" with {'entity': obj } %}         
+        </div> <!-- /.col --> 
+    </div> <!-- /.row --> 
+
+{% endif %}
+
+
+{% endblock %}

@@ -1,0 +1,244 @@
+# Learn more about services, parameters and containers at
+# https://symfony.com/doc/current/service_container.html
+parameters:
+    app.flood_event.commande_seconde: 120
+
+services:
+    # default configuration for services in *this* file
+    _defaults:
+        # automatically injects dependencies in your services
+        autowire: true
+        # automatically registers your services as commands, event subscribers, etc.
+        autoconfigure: true
+        # this means you cannot fetch services directly from the container via $container->get()
+        # if you need to do this, you can override this setting on individual services
+        public: false
+
+    # makes classes in src/AppBundle available to be used as services
+    # this creates a service per class whose id is the fully-qualified class name
+    AppBundle\:
+        resource: '../../src/AppBundle/*'
+        # you can exclude directories or files
+        # but if a service is unused, it's removed anyway
+        exclude: '../../src/AppBundle/{Entity,Repository,Tests}'
+
+    # controllers are imported separately to make sure they're public
+    # and have a tag that allows actions to type-hint services
+    AppBundle\Controller\:
+        resource: '../../src/AppBundle/Controller'
+        public: true
+        tags: ['controller.service_arguments']
+
+    # flood 
+    app.flood_event.commande:
+        class: App\CoreBundle\EventListener\FloodCommandeEvent
+        arguments:
+            - "%app.flood_event.commande_seconde%"
+        tags:
+          - { name: doctrine.event_listener, event: prePersist}
+
+    app.contact_subscriber:
+        class: App\CoreBundle\EventListener\ContactSubscriber
+        arguments: ["@mailer", "@templating", "%email_sender%"]
+        tags:
+         - { name: kernel.event_subscriber, alias: contact_subscriber }
+
+    app.dechet_subscriber:
+        class: App\CoreBundle\EventListener\DechetSubscriber
+        arguments: ["@mailer", "@doctrine.orm.entity_manager", "@templating", "%email_sender%"]
+        tags:
+            - { name: kernel.event_subscriber, alias: dechet_subscriber }
+
+    app.news_subscriber:
+        class: App\CoreBundle\EventListener\NewsSubscriber
+        arguments: ["@mailer", "@doctrine.orm.entity_manager","@templating", "%email_sender%"]
+        tags:
+            - { name: kernel.event_subscriber, alias: news_subscriber }
+    app.client_subscriber:
+        class: App\CoreBundle\EventListener\ClientSubscriber
+        arguments: ["@mailer", "@templating", "%email_receiver%"]
+        tags:
+            - { name: kernel.event_subscriber, alias: client_subscriber }
+    app.partenaire_subscriber:
+        class: App\CoreBundle\EventListener\PartenaireSubscriber
+        arguments: ["@mailer", "@templating", "%email_receiver%"]
+        tags:
+            - { name: kernel.event_subscriber, alias: partenaire_subscriber }
+    app.commande_subscriber:
+        class: App\CoreBundle\EventListener\CommandeSubscriber
+        arguments: ["@mailer", "@templating", "%email_receiver%"]
+        tags:
+            - { name: kernel.event_subscriber, alias: commande_subscriber }
+    # -- TWIG EXTENSIONS --
+    app.timestamp.extension:
+        class: App\CoreBundle\Twig\Extensions\TimestampExtension
+        tags:
+            - { name: twig.extension, alias: timestamp }
+        public: true
+
+    #redirection
+    app.redirect.login :
+        class : App\CoreBundle\Redirection\AfterLoginRedirection
+        arguments : [ '@router' ]
+
+    app.redirect.registration :
+        class : App\CoreBundle\Redirection\AfterRegistrationRedirection
+        arguments : [ '@router' ]
+        tags :
+            - { name : kernel.event_subscriber, alias: registration_redirection }
+    #fos_user_form
+    app.form.registration:
+        class: App\WebBundle\Form\RegistrationType
+        tags:
+            - { name: form.type, alias: app_user_registration }
+    app.form.profile:
+        class: App\WebBundle\Form\ProfileType
+        arguments: ['@?security.token_storage']
+        tags:
+            - { name: form.type, alias: app_user_profile }
+
+    # form
+    app.form.admin.news:
+        class: App\AdminBundle\Form\NewsType
+        tags:
+            - { name: form.type, alias: admin_news }
+    app.form.admin.newsImage:
+        class: App\AdminBundle\Form\NewsImageType
+        tags:
+            - { name: form.type, alias: admin_news_image }
+    app.form.admin.newsVideoMp4:
+        class: App\AdminBundle\Form\NewsVideoMp4Type
+        tags:
+            - { name: form.type, alias: admin_news_video_mp4 }
+    app.form.admin.newsVideoOgg:
+        class: App\AdminBundle\Form\NewsVideoOggType
+        tags:
+            - { name: form.type, alias: admin_news_video_ogg }
+    app.form.admin.newsVideoWebm:
+        class: App\AdminBundle\Form\NewsVideoWebmType
+        tags:
+            - { name: form.type, alias: admin_news_video_webm }
+    app.form.admin.newsPdf:
+        class: App\AdminBundle\Form\NewsPdfType
+        tags:
+            - { name: form.type, alias: admin_news_pdf }
+    app.form.admin.newsZip:
+        class: App\AdminBundle\Form\NewsZipType
+        tags:
+            - { name: form.type, alias: admin_news_zip }
+    app.form.admin.newsOtherImages:
+        class: App\AdminBundle\Form\NewsOtherImagesType
+        tags:
+            - { name: form.type, alias: admin_news_other_image }
+    app.form.admin.pageOtherImages:
+        class: App\AdminBundle\Form\PageOtherImagesType
+        tags:
+            - { name: form.type, alias: admin_page_other_image }
+    app.form.admin.page:
+        class: App\AdminBundle\Form\PageType
+        tags:
+            - { name: form.type, alias: admin_page }
+    app.form.admin.pageImage:
+        class: App\AdminBundle\Form\PageImageType
+        tags:
+            - { name: form.type, alias: admin_page_image }
+    app.form.admin.partenaireImage:
+        class: App\AdminBundle\Form\PartenaireImageType
+        tags:
+            - { name: form.type, alias: admin_partenaire_image }
+    app.form.admin.dechetImage:
+        class: App\AdminBundle\Form\DechetImageType
+        tags:
+            - { name: form.type, alias: admin_dechet_image }
+    app.form.admin.partenaireLogo:
+        class: App\AdminBundle\Form\PartenaireLogoType
+        tags:
+            - { name: form.type, alias: admin_partenaire_logo }
+    app.form.admin.partenaire:
+        class: App\AdminBundle\Form\PartenaireType
+        tags:
+            - { name: form.type, alias: admin_partenaire }
+
+    app.form.type.contact_type:
+        class: App\WebBundle\Form\ContactType
+        arguments: ['@?security.token_storage']
+        tags:
+            - { name: form.type, alias: contact}
+    app.form.type.newsletter_type:
+        class: App\WebBundle\Form\NewsletterType
+        arguments: ['@?security.token_storage']
+        tags:
+            - { name: form.type, alias: newsletter}
+    app.form.type.client_type:
+        class: App\WebBundle\Form\ClientType
+        arguments: ['@?security.token_storage']
+        tags:
+            - { name: form.type, alias: client}
+
+    app.form.type.commande_type:
+        class: App\WebBundle\Form\CommandeType
+        arguments: ['@?security.token_storage']
+        tags:
+            - { name: form.type, alias: commande}
+
+   #REPOSITORY
+    # -- DOCTRINE ENTITY REPOSITORY --
+    app.repository.contact:
+        class: Doctrine\ORM\EntityRepository
+        factory: ["@doctrine", getRepository]
+        arguments:
+            - App\CoreBundle\Entity\Contact
+        public: true
+
+    app.repository.news:
+        class: Doctrine\ORM\EntityRepository
+        factory: ["@doctrine", getRepository]
+        arguments:
+            - App\CoreBundle\Entity\News
+        public: true
+
+    app.repository.newsletter:
+        class: Doctrine\ORM\EntityRepository
+        factory: ["@doctrine", getRepository]
+        arguments:
+            - App\CoreBundle\Entity\Newsletter
+        public: true
+
+    app.repository.utilisateur:
+        class: Doctrine\ORM\EntityRepository
+        factory: ["@doctrine", getRepository]
+        arguments:
+            - App\CoreBundle\Entity\Utilisateur
+        public: true
+
+    app.repository.partenaire:
+        class: Doctrine\ORM\EntityRepository
+        factory: ["@doctrine", getRepository]
+        arguments:
+            - App\CoreBundle\Entity\Partenaire
+        public: true
+
+    app.repository.client:
+        class: Doctrine\ORM\EntityRepository
+        factory: ["@doctrine", getRepository]
+        arguments:
+            - App\CoreBundle\Entity\Client
+        public: true
+    app.repository.dechet:
+        class: Doctrine\ORM\EntityRepository
+        factory: ["@doctrine", getRepository]
+        arguments:
+            - App\CoreBundle\Entity\Dechet
+        public: true
+    app.repository.page:
+        class: Doctrine\ORM\EntityRepository
+        factory: ["@doctrine", getRepository]
+        arguments:
+            - App\CoreBundle\Entity\Page
+        public: true
+    app.repository.commande:
+        class: Doctrine\ORM\EntityRepository
+        factory: ["@doctrine", getRepository]
+        arguments:
+            - App\CoreBundle\Entity\Commande
+        public: true

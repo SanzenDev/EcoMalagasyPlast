@@ -1,0 +1,97 @@
+<li class="notifications dropdown">
+    <span class="counter bgc-blue-600">{{count_total}}</span>
+    <a href="" class="dropdown-toggle no-after" data-toggle="dropdown">
+        <i class="ti-bell"></i>
+    </a>
+
+    <ul class="dropdown-menu">
+        <li class="pX-20 pY-5 bdB">
+            <i class="ti-bell pR-10"></i>
+            <span class="fsz-sm fw-600 c-grey-900">Notification</span>
+        </li>
+        <li>
+            <ul class="ovY-a pos-r scrollable lis-n p-0 m-0 fsz-sm">
+                <li>
+                    <a href="{{path('admin_manage_filter', {'entity': 'contact', 'filter': 'checked'})}}" class='peers fxw-nw td-n pX-20 pY-10 bdB c-grey-800 cH-blue bgcH-grey-100'>
+                        <div class="peer peer-greed">
+                            <div>
+                                <div class="peers jc-sb fxw-nw">
+                                    <div class="peer">
+                                        <p class="fw-500 mB-0"><i class="ti-email mR-10 fsz-sm"></i>Nouveaux messages</p>
+                                    </div>
+                                    <div class="peer">
+                                        <span class="badge badge-success fsz-sm">{{ count_contacts }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{path('admin_manage_filter', {'entity': 'client', 'filter': 'checked'})}}" class='peers fxw-nw td-n pX-20 pY-10 bdB c-grey-800 cH-blue bgcH-grey-100'>
+                        <div class="peer peer-greed">
+                            <div>
+                                <div class="peers jc-sb fxw-nw">
+                                    <div class="peer">
+                                        <p class="fw-500 mB-0"><i class="ti-wallet mR-10 fsz-sm"></i>Nouveaux clients</p>
+                                    </div>
+                                    <div class="peer">
+                                        <span class="badge badge-warning fsz-sm">{{ count_clients }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{path('admin_manage_filter', {'entity': 'partenaire', 'filter': 'checked'})}}" class='peers fxw-nw td-n pX-20 pY-10 bdB c-grey-800 cH-blue bgcH-grey-100'>
+                        <div class="peer peer-greed">
+                            <div>
+                                <div class="peers jc-sb fxw-nw">
+                                    <div class="peer">
+                                        <p class="fw-500 mB-0"><i class="ti-stamp mR-10 fsz-sm"></i>Nouveaux partenaires</p>
+                                    </div>
+                                    <div class="peer">
+                                        <span class="badge badge-danger fsz-sm">{{ count_partenaires }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{path('admin_manage_filter', {'entity': 'newsletter', 'filter': 'checked'})}}" class='peers fxw-nw td-n pX-20 pY-10 bdB c-grey-800 cH-blue bgcH-grey-100'>
+                        <div class="peer peer-greed">
+                            <div>
+                                <div class="peers jc-sb fxw-nw">
+                                    <div class="peer">
+                                        <p class="fw-500 mB-0"><i class="ti-pin-alt mR-10 fsz-sm"></i>Nouveaux abonnées</p>
+                                    </div>
+                                    <div class="peer">
+                                        <span class="badge badge-dark fsz-sm">{{count_newsletters}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                 <li>
+                    <a href="{{path('admin_manage_filter', {'entity': 'commande', 'filter': 'checked'})}}" class='peers fxw-nw td-n pX-20 pY-10 bdB c-grey-800 cH-blue bgcH-grey-100'>
+                        <div class="peer peer-greed">
+                            <div>
+                                <div class="peers jc-sb fxw-nw">
+                                    <div class="peer">
+                                        <p class="fw-500 mB-0"><i class="ti-shopping-cart mR-10 fsz-sm"></i>Nouvelles commandes</p>
+                                    </div>
+                                    <div class="peer">
+                                        <span class="badge badge-dark fsz-sm">{{count_commandes}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</li>

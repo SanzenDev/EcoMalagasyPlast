@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<div class="row mT-40">
+  <div class="col-md-12">
+      <div class="pX-20">
+          <h4>{{ dechet.name }}</h4>                 
+      </div> <!-- /.bg-white -->
+    </div> <!-- /.col -->
+</div> <!-- /.row --> 
+
+<div class="row mT-20@xl+">
+  <div class="col-xl-2 col-md-6">
+    <div class="bgc-white p-10@sm- p-20@sm+">
+        <img src="{{ vich_uploader_asset(dechet.dechetImage, 'file') }}" class="w-100p@md+ w-50@md"/>
+    </div> <!-- /.bg-white -->
+  </div>
+
+  <div class="col-xl-10 col-md-12 mY-30@md">
+      <h6 class="text-weight-bold c-grey-800 pB-5 mB-10">Information :</h6>
+
+        <table class="table bd">
+          <tr>
+            <td>Type de déchet</td>
+            <th><a href="{{ path('web_dechet_show', {'slug': dechet.slug}) }}">{{ dechet.name }}</a></th>
+          </tr>
+            <tr>
+            <td>Reste</td>
+            <th>{{ dechet.mesuredAmount }}</th>
+          </tr>
+          </tr>
+      </table>
+  
+      <h6 class="text-weight-bold c-grey-800 pB-5 mB-10">Detail du commande :</h6>
+
+        <table class="table bd">
+          <tr>
+            <td>Vous avez commandé:</td>
+            <th>{{ commande.mesuredAmount }} de {{ dechet.name }} le {{ commande.createdAt|date('d F Y à H:i:s' ) }}</th>
+          </tr>
+            <tr>
+            <td>Delais</td>
+            <th>Votre commande sera annulée si vous ne le prennez pas dans une semaine le {{ commande.delais|date('d/m/Y') }} </th>
+          </tr>
+          </tr>
+      </table>
+    </div>
+</div>
+
+<div class="text-center mY-100@xl+ mY-30@lg-">
+        {% if not commande.finished %}
+        <a class="btn btn-danger btn-lg" href="{{path('web_commande_cancel', {'id': commande.id })}}">Annuler la commande</a>
+        {% endif %}
+        <a class="btn btn-warning mY-20 btn-lg" href="{{path('print', {'entity': 'commande', 'id': commande.id })}}"><i class="ti-printer mR-5"></i>Imprimer</a>
+</div>
+{% endblock %}

@@ -1,0 +1,13 @@
+admin_dashboard:
+    path:     /admin
+    defaults: { _controller: AppAdminBundle:Main:index }
+
+admin_manager:
+    resource: "@AppAdminBundle/Resources/config/routing/manager.yml"
+    prefix:   /admin
+admin_user:
+    resource: "@AppAdminBundle/Resources/config/routing/user.yml"
+    prefix:   /admin
+print:
+    path:  /facture/{entity}/{id}
+    defaults: { _controller: AppAdminBundle:Main:print }

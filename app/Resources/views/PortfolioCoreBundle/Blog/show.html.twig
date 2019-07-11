@@ -1,0 +1,31 @@
+{% extends 'PortfolioCoreBundle/Blog/base.html.twig' %}
+
+{% block title %}
+  {{ entity.title }} | Tiavina Michael, developpeur full-stack web/mobile - Antananarivo, Madagascar
+{% endblock %}
+
+{% block body %}
+ <div class="row show-blog text-center">
+    <div class="col-md-12 pX-20@md- p-0@md+">
+
+        <h1 class="dark mT-40 font-nunito waypoint" data-animation="slide-in-left">{{entity.title}}</h1>
+        <div class="bg-dark header-bar waypoint mT-20 mB-10" data-animation="slide-in-left" data-delay=".5s"></div> 
+       
+        <div class="pX-60@md+ mT-20">
+               <div class="image text-center"> 
+                    <img src="{{ vich_uploader_asset(entity.image, 'file') }}" class="w-50p@md+ w-100p@sm- mB-10"/>
+                    <span class="date d-b">{% if entity.createdAt %}{{ entity.createdAt|date('d F Y') }}{% endif %}</span>
+              </div>
+
+              <div class="text pY-20">{{entity.content|raw}} </div>
+              {% if tags != 0 %}
+                 <div class="tags pY-40"> 
+                    <ul class="list-unstyled">
+                        {% for tag in tags %}<li>{{ tag|capitalize }}</li>{% endfor %}
+                    </ul>
+                </div>
+              {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

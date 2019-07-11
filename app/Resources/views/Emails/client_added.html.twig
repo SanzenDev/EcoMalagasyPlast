@@ -1,0 +1,9 @@
+<h1>Nouveau client: {{ entity.name }}</h1>
+
+<p><small>Ajouté le {{ entity.createdAt|created_ago }}</small></p>
+<p><small>Email: </small><strong> {{ entity.user.email }}</strong></p>
+<p><small>Tél: </small><strong> {{ entity.tel }}</strong></p>
+
+<p>
+    <a href="{{ app.request.getSchemeAndHttpHost() ~ path('admin_manage_show', { 'entity': 'client', 'slug': entity.slug }) }}">Voir plus</a>
+</p>

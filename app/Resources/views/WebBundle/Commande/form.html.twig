@@ -1,0 +1,20 @@
+<div class="form bg-form bdrs-5 p-20@md p-20@md-">
+    <h5 class="pT-15@md- mB-30@xl+">Entrez la quantité de déchets que vous voulez commander</h5>
+    {{ form_start(form, {'class': 'mT-20'}) }}  
+       <div class="form-group">
+		    {{form_label(form.quantity)}}
+		    {{form_widget(form.quantity)}}
+		    {{form_errors(form.quantity)}} 
+        </div> 
+        <div class="form-group">
+		    {{form_label(form.reason)}}
+		    {{form_widget(form.reason)}}
+		    {{form_errors(form.reason)}}
+        </div> 
+		{{form_rest(form)}}
+        <div class="form-group ta-l@md+">
+            <small class="form-text text-muted"><strong class="c-red-900">*</strong> champ obligatoire.</small>
+            <button type="submit" class="signin-btn">Envoyer</button>
+        </div>
+	{{ form_end(form) }}
+</div> <!-- /.form -->

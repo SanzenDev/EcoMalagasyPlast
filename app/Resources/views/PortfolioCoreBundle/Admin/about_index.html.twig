@@ -1,0 +1,53 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for entity in entities %}
+    <tr>
+      <th scope="row"><a href="#">{{ entity.id }}</a></th>
+      <td class="action">
+        <ul class="list-unstyled">
+            <li class="d-ib mR-10">
+                <a href="{{path('admin_ps_update', {'entity': 'about', 'token': entity.token})}}" class="c-grey-900" data-toggle="tooltip" data-placement="top" title="Modifier">
+                    <i class="ti-pencil-alt"></i>
+                </a>
+            </li>
+             <li class="d-ib mR-10">
+                <a href="" class="c-grey-900" data-toggle="modal" data-target="#id-{{entity.id}}" title="Supprimer">
+                    <i class="ti-trash"></i>
+                </a>
+                 <!-- Modal -->
+                <div class="modal fade" id="id-{{entity.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog  modal-sm" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">
+                            <i class="ti-alert mR-10 c-red-900"></i>Suppression
+                        </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <p>
+                            Voulez-vous vraiment supprimer?
+                        </p>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                        <a href="{{path('admin_ps_delete', {'entity': 'about', 'token': entity.token })}}" class="btn btn-primary">Confirmer</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </li>
+        <ul>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>

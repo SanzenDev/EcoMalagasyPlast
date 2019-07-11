@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block fos_user_content %}
+<div class="alert alert-success confirmed">
+	 Bienvenu <b> <a href="{{ path('fos_user_profile_show') }}" title="Voir mon profil">{{ app.user.username }} </a></b>, votre compte a été bien crée. 
+	 <a href="{{ path('fos_user_profile_edit') }}" title="Editer mon profil">Compléter mes informations</a>
+
+    <ul class="mT-20">
+        <li><a href="{{ path('web_partenaire_new') }}">Devenir Partenaire</a></li>
+        <li><a href="{{ path('web_client_new') }}">Devenir Client</a></li>
+    </ul>
+</div>
+{% endblock fos_user_content %}

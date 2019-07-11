@@ -1,0 +1,9 @@
+<h1>Nouvelle commande de : {{ commande.client.name }}</h1>
+
+<p><small>faites le {{ commande.createdAt|created_ago }}</small></p>
+<p><small>Annuler le {{ commande.delais|date('m-d-Y') }}</small></p>
+<p><strong> {{ commande.quantity }} sur {{commande.dechet.amount}}</strong></p>
+
+<p>
+    <a href="{{ app.request.getSchemeAndHttpHost() ~ path('web_commande_show', { 'slug_dechet': 'commande.dechet.slug', 'id': commande.id }) }}">Voir plus</a>
+</p>

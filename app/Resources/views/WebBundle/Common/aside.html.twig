@@ -1,0 +1,104 @@
+<aside class="col-lg-4 col-xl-3 m-0 pT-20@md+">
+    {% if aside_news|length > 0 %}
+    <div class="mT-40@md- aside-01">
+        <h4 class="pB-10 mB-15">Nos <span class="c">Actualité</span><span class="headline-middle-line"></span></h4>
+
+        {% for entity in aside_news %}
+        <div class="mB-20">
+                <h1 class="mB-0@xl- mB-5@xl+">
+                    <a href="{{ path('web_manage_show', {'entity': 'news', 'slug': entity.slug }) }}">
+                        {{ entity.title }} {% if entity.newsVideoMp4 or entity.newsVideoOgg or entity.newsVideoWebm %}(VIDEO){% endif %}
+                    </a>
+                </h1>
+                <small>
+                    {% if entity.createdAt %}{{ entity.createdAt|date('d F Y') }}{% endif %}
+                </small>
+        </div>  <!-- /.row -->
+        {% endfor %}
+        <div class="readMoreLink  pX-20@md+ ta-r@md+">
+            <a href="{{ path('web_manage_index', {'entity': 'news' }) }}">Voir toutes les actualités</a> 
+        </div> <!-- /.col -->
+    </div> <!-- /.col -->
+    {% endif %}
+
+    {% if aside_dechets|length > 0 %}
+    <div class="mT-40@md- mT-50@md+ aside-03">
+        <h4 class="pB-10 mB-15">Déchets<span class="headline-middle-line"></span></h4>
+
+        {% for entity in aside_dechets %}
+        <div class="block row mB-30@md- mB-0@md mB-30@xl+">
+
+            <div class="col-lg-3 col-xl-6 col-sm-4 col-4 p-0 left mT-5">
+                <figure class="ov-h">
+                    <img src="{{ vich_uploader_asset(entity.dechetImage, 'file') }}" class="pT-10@sm-"/>
+                </figure>
+            </div> <!-- /.col -->
+            <div class="col-lg-9 col-xl-6 col-sm-8 col-8 pX-0@md+ p-0 right pL-10">
+                <h1 class="pT-10@sm- mB-20@lg+">
+                    <a href="{{ path('web_dechet_show', {'slug': entity.slug }) }}">
+                        {{ entity.name }}
+                    </a>
+                </h1>
+                <span class="fsz-md">{{ entity.mesuredAmount }}</span>
+
+                {% if entity.amount != 0 %}
+                <span class="float-md-right float-xl-none d-b@md- mT-50@xl+ mT-30@sm mT-10@sm- d-n@md d-b@xl+">
+                    <a href="{{ path('web_dechet_show', {'slug': entity.slug }) }}" class="gray-button shop-btn round pX-20@md- c-white">
+                        <i class="ti-shopping-cart"></i>
+                        <span class="mL-5@md- bdL bdc-white">Commander</span>
+                    </a>
+                </span>
+                 <span class="float-md-right mT-30@md- d-n@md- d-n@xl+ mT-nv-10 z-9">
+                   <a href="{{ path('web_dechet_show', {'slug': entity.slug }) }}" class="gray-button shop-btn round pX-20@md- c-white">
+                        <i class="ti-shopping-cart"></i>
+                    </a>
+                </span>
+
+                {% else %}
+                <span class="float-md-right float-xl-none d-b@md- mT-50@xl+ mT-30@sm mT-10@sm- d-n@md d-b@xl+">
+                   <a href="{{ path('web_dechet_show', {'slug': entity.slug }) }}" class="btn-warning pB-10@md- pT-10 no-shop-btn pX-20@md- c-white text-uppercase">
+                        <i class="ti-na"></i>
+                        <span class="pL-5@md- bdL bdc-white">Déstocké</span>
+                    </a>
+                </span>
+                 <span class="float-md-right mT-30@md- d-n@md- d-n@xl+ mT-nv-10 z-9">
+                   <a href="{{ path('web_dechet_show', {'slug': entity.slug }) }}" class="btn-warning no-shop-btn c-white">
+                        <i class="ti-na"></i>
+                    </a>
+                </span>
+                {% endif %}
+             </div> <!-- /.col -->
+        </div> <!-- /.row -->
+        {% endfor %}
+        <div class="readMoreLink  pX-20@md+ ta-r@md+">
+            <a href="{{ path('web_manage_index', {'entity': 'dechet' }) }}">Voir tous nos déchets</a> 
+        </div> <!-- /.col -->
+    </div> <!-- /.aside-02 -->
+    {% endif %}
+
+    {% if aside_partenaires|length > 0 %}
+    <div class="mT-40@md- mT-30@md+ aside-02">
+        <h4 class="pB-10 mB-15">Nos <span class="c">Partenaire</span><span class="headline-middle-line"></span></h4>
+
+        <ul class="list-unstyled">
+            {% for entity in aside_partenaires %}
+           <li>
+                <h1 class="text-uppercase">
+                    <a href="{{ path('web_manage_show', {'entity': 'partenaire', 'slug': entity.slug }) }}">
+                        {{ entity.name }}
+                    </a>
+                </h1>
+            </li>
+            {% endfor %}
+            <li class="readMoreLink mT-30@md- pY-10@md+ pX-20@md+">
+                <a href="{{ path('web_manage_index', {'entity': 'partenaire' }) }}">Voir tout</a> 
+            </li>
+        </ul>
+    </div> <!-- /.aside-02 -->
+    {% endif %}
+
+     <div class="mT-40@md- mT-50@md+ aside-04 text-center pY-20">
+            <a href="{{ path('web_manage_new', {'entity': 'newsletter' }) }}" class="black-button">S'inscrire à notre newsletter</a>
+    </div> <!-- /.aside-02 -->
+
+</aside> <!-- /.row -->

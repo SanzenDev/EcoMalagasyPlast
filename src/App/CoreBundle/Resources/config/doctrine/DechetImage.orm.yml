@@ -1,0 +1,17 @@
+App\CoreBundle\Entity\DechetImage:
+    type:  entity
+    repositoryClass: App\CoreBundle\Repository\DechetImageRepository
+    table: dechet_image
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            column: name
+            type: string
+            length: 255
+        updatedAt:
+            column: updated_at
+            type: datetime

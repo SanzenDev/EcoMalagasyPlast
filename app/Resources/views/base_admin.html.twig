@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="Sufee Admin - HTML5 Admin Template">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>{% block title %}Administration | Eco Malagasy Plast{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+        <link rel="stylesheet" href="{{asset('bundles/app/css/app.css')}}"/>
+        <link rel="stylesheet" href="{{asset('bundles/app/css/themify-icons.css')}}"/>
+        <link rel="stylesheet" href="{{asset('bundles/app/css/admin.css')}}"/>
+           
+    </head>
+    <body class="app">
+
+        <div id='loader'>
+            <div class="spinner"></div>
+        </div>
+
+        <div>
+           {% include 'AdminBundle/Common/left_sidebar.html.twig' %}
+            <!-- #Main ============================ -->
+            <div class="page-container">
+                <!-- ### $Topbar ### -->
+                <div class="header navbar">
+                    <div class="header-container">
+                        <ul class="nav-left">
+                            <li>
+                                <a id='sidebar-toggle' class="sidebar-toggle" href="javascript:void(0);">
+                                    <i class="ti-menu"></i>
+                                </a>
+                            </li>
+                        </ul>
+
+                        <ul class="nav-right">                      
+
+                            {{ render(controller("AppAdminBundle:Main:notification")) }}
+
+
+                            <li class="dropdown">
+                                <a href="" class="dropdown-toggle no-after peers fxw-nw ai-c lh-1" data-toggle="dropdown">
+                                    <div class="peer mR-10">
+
+                                    {% if app.user and app.user.userImage %}
+                                        <img class="user-avatar w-2r h-2r bdrs-50p" src="{{ vich_uploader_asset(app.user.userImage, 'file') }}" alt="User Avatar">
+                                    {% else %}
+                                        <img src="{{asset('bundles/app/images/default-avatar.png')}}"  class="user-avatar w-2r h-2r bdrs-50p" alt="User Avatar"/>
+                                    {% endif %}
+                                    </div>
+                                </a>
+                                <ul class="dropdown-menu fsz-sm">
+                                    <li>
+                                        <a href="#" class="d-b td-n pY-5 bgc-grey-900 bgcH-grey-100 c-grey-700">
+                                            <span class="c-white">{% if app.user %}{{ app.user.username }}{% else %}Compte Inconnu{% endif %}</span>
+                                        </a>
+                                    </li>
+                                    {% if app.user %}
+                                    <li role="separator" class="divider"></li>
+                                    <li>
+                                        <a href="{{ path('fos_user_profile_show') }}" class="d-b td-n pY-5 bgcH-grey-100 c-grey-700">
+                                            <i class="ti-user mR-10"></i>
+                                            <span>Profil</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ path('fos_user_profile_edit') }}" class="d-b td-n pY-5 bgcH-grey-100 c-grey-700">
+                                            <i class="ti-pencil-alt mR-10"></i>
+                                            <span>Modifier</span>
+                                        </a>
+                                    </li>
+                                    <li role="separator" class="divider"></li>
+                                    <li>
+                                        <a href="{{ path('fos_user_security_logout') }}" class="d-b td-n pY-5 bgcH-grey-100 c-grey-700">
+                                            <i class="ti-power-off mR-10"></i>
+                                            <span>Se déconnecter</span>
+                                        </a>
+                                    </li>
+                                    {% endif %}
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>  <!-- /.header-container -->
+                </div>  <!-- header navbar -->
+
+           
+               <!-- ### $App Screen Content ### -->
+                <main class='main-content bgc-grey-100'>
+                    <div id='mainContent' class="p-0">
+                        <div class="container-fluid">
+
+                            {% if app.session.flashbag.has('danger') or app.session.flashbag.has('info') or app.session.flashbag.has('warning') %}
+                                {% for type, messages in app.session.flashbag.all() %}
+
+                            <div class="alert alert-{{type}} bdrs-0" role="alert">
+                                <button class="close" data-dismiss="alert">&times;</button>
+                                <ul class="list-unstyled">
+                                    {% for message in messages %}
+                                    <li>
+                                        <i class="{% if app.session.flashbag.has('danger') or app.session.flashbag.has('warning') %}ti-close{% elseif app.session.flashbag.has('info') %}ti-success{% endif %}mR-10 badge-{{type}}"></i>{{ message }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+
+                                {% endfor %}
+                            {% endif %}
+
+                            {%block body%}{%endblock%}
+
+                       </div>
+                    </div>
+                  </div>
+                </main>
+
+                <!-- ### $App Screen Footer ### -->
+                <footer class="bdT ta-c p-30 lh-0 fsz-sm c-grey-600">
+
+                    <span>Copyright © "now"|date('Y') }}. Designer et développer par <a href="#" target='_blank' title="Colorlib">Tiavina Michael</a>. Tout droit reservé.</span>
+                </footer>
+            </div>   <!-- page-container -->
+
+        </div>
+
+        <script>
+            (function() {
+                if('serviceWorker' in navigator) {
+                    navigator.serviceWorker.register('assets/js/service-worker.js');
+                }
+            })();
+
+            window.addEventListener('load', () => {
+                const loader = document.getElementById('loader');
+                setTimeout(() => {
+                    loader.classList.add('fadeOut');
+                }, 10);
+            });
+        </script>
+
+        <script src="{{asset('bundles/app/js/jquery.js')}}"></script>
+        <script src="{{asset('bundles/app/js/app.js')}}"></script>
+        <script src="{{asset('bundles/app/js/admin.js')}}"></script>
+        {% block javascripts %}{% endblock %}
+
+    </body>
+</html>

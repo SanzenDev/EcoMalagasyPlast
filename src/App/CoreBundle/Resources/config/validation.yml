@@ -1,0 +1,259 @@
+App\CoreBundle\Entity\News:
+    properties:
+        title:
+            - NotBlank: ~
+            - Length:
+                min: 10
+                max: 255
+                minMessage: "Le titre devrait avoir au moins {{ limit }} caractères"
+                maxMessage: "Le titre ne devrait pas dépasser {{ limit }} caractères"
+        content:
+            - NotBlank: ~
+        metaTitle:
+            - Length:
+                max: 255
+                maxMessage: "Le metatitre ne devrait pas dépasser {{ limit }} caractères"
+
+        metaDescription:
+            - Length:
+                max: 255
+                maxMessage: "La metadescription ne devrait pas dépasser {{ limit }} caractères"
+
+        metaKeywords:
+            - Length:
+                max: 255
+                maxMessage: "Les mots clés ne devraient pas dépasser {{ limit }} caractères"
+
+App\CoreBundle\Entity\Page:
+    properties:
+        title:
+            - NotBlank: ~
+            - Length:
+                min: 10
+                max: 255
+                minMessage: "Le titre devrait avoir au moins {{ limit }} caractères"
+                maxMessage: "Le titre ne devrait pas dépasser {{ limit }} caractères"
+        content:
+            - NotBlank: ~
+        metaTitle:
+            - Length:
+                max: 255
+                maxMessage: "Le metatitre ne devrait pas dépasser {{ limit }} caractères"
+
+        metaDescription:
+            - Length:
+                max: 255
+                maxMessage: "La metadescription ne devrait pas dépasser {{ limit }} caractères"
+
+        metaKeywords:
+            - Length:
+                max: 255
+                maxMessage: "Les mots clés ne devraient pas dépasser {{ limit }} caractères"
+
+App\CoreBundle\Entity\Client:
+    properties:
+        name:
+            - NotBlank: ~
+            - Length:
+                max: 255
+                maxMessage: "Le nom ne devrait pas dépasser {{ limit }} caractères"
+        address:
+            - Length:
+                max: 255
+                maxMessage: "L'adresse ne devrait pas dépasser {{ limit }} caractères"
+
+        tel:
+            - Length:
+                max: 14
+                maxMessage: "Le numero ne devrait pas dépasser {{ limit }} caractères"
+            - Regex:
+                pattern: '/^\+[1-9]{3}[0-9]{9}$/'
+                message: 'Le numero devrait faire 12 chiffres et de la forme +261340000000'
+
+App\CoreBundle\Entity\Partenaire:
+    properties:
+        name:
+            - NotBlank: ~
+            - Length:
+                max: 255
+                maxMessage: "Le nom ne devrait pas dépasser {{ limit }} caractères"
+        responsable:
+            - Length:
+                max: 255
+                maxMessage: "Le nom ne devrait pas dépasser {{ limit }} caractères"
+        address:
+            - Length:
+                max: 255
+                maxMessage: "L'adresse ne devrait pas dépasser {{ limit }} caractères"
+        fb:
+            - Regex:
+                pattern: '#^((http|https)://)?(mobile|web|www|m)+(\.[a-zA-Z]+)+(\.com)(/.*)+$#'
+                message: "Cette valeur n'est pas une valeur URL facebook valide"
+        website:
+            - Regex:
+                pattern: '#^((http|https)://)?(mobile|web|www|m)+(\.[a-zA-Z0-9\-]+)+(:[0-9]+)?(/.*)?$#'
+                message: "Cette valeur n'est pas une valeur URL valide"
+        tel:
+            - Length:
+                max: 14
+                maxMessage: "Le numero ne devrait pas dépasser {{ limit }} caractères"
+            - Regex:
+                pattern: '/^\+[1-9]{3}[0-9]{9}$/'
+                message: 'Le numero devrait faire 12 chiffres et de la forme +261340000000'
+        livraison:
+            - Regex:
+                pattern: '/^\d+$/'
+                message: 'La livraison doit être un chiffre'
+        description:
+            - Length:
+                min: 100
+                minMessage: "La description devrait avoir au moins {{ limit }} caractères"
+ 
+
+App\CoreBundle\Entity\Dechet:
+    properties:
+        name:
+            - NotBlank: ~
+            - Length:
+                max: 255
+                maxMessage: "Le nom ne devrait pas dépasser {{ limit }} caractères"
+        amount:
+            - Regex:
+                pattern: '/^\d+$/'
+                message: 'La quantité doit être un chiffre'
+
+App\CoreBundle\Entity\Commande:
+    properties:
+        reason:
+            - Length:
+                max: 255
+                maxMessage: "Vous ne devriez pas dépasser {{ limit }} caractères"
+        quantity:
+            - Regex:
+                pattern: '/^\d+$/'
+                message: 'La quantité doit être un chiffre'
+
+App\CoreBundle\Entity\Contact:
+    properties:
+        name:
+            - NotBlank: ~
+            - Length:
+                max: 255
+                minMessage: "Le nom devrait avoir au moins {{ limit }} caractères"
+                maxMessage: "Le nom ne devrait pas dépasser {{ limit }} caractères"
+        subject:
+            - Length:
+                max: 255
+                minMessage: "Le sujet du message devrait avoir au moins {{ limit }} caractères"
+                maxMessage: "Le sujet du message pas dépasser {{ limit }} caractères"
+        message:
+            - NotBlank: ~
+        email:
+            - Email: ~
+            - NotBlank: ~
+
+App\CoreBundle\Entity\NewsImage:
+    properties:
+        legend:
+            - Length:
+                min: 4
+                max: 50
+                minMessage: "La légende de la photo devrait au moins avoir {{ limit }} caractères"
+                maxMessage: "La légende de la photo ne devrait pas dépasser les {{ limit }} caractères"
+
+        file:
+            - File:
+                maxSize: 5M
+                mimeTypes: [application/jpeg, application/png ]
+                mimeTypesMessage: Fichier jpeg, png uniquement
+                maxSizeMessage: L'image ne doit pas depasser 5Mo
+
+App\CoreBundle\Entity\PageImage:
+    properties:
+        legend:
+            - Length:
+                min: 4
+                max: 255
+                minMessage: "La légende de la photo devrait au moins avoir {{ limit }} caractères"
+                maxMessage: "La légende de la photo ne devrait pas dépasser les {{ limit }} caractères"
+
+        file:
+            - File:
+                maxSize: 5M
+                mimeTypes: [application/jpeg, application/png ]
+                mimeTypesMessage: Fichier jpeg, png uniquement
+                maxSizeMessage: L'image ne doit pas depasser 5Mo
+
+
+App\CoreBundle\Entity\DechetImage:
+    properties:
+        file:
+            - File:
+                maxSize: 5M
+                mimeTypes: [application/jpeg, application/png ]
+                mimeTypesMessage: Fichier jpeg, png uniquement
+                maxSizeMessage: L'image ne doit pas depasser 5Mo
+
+App\CoreBundle\Entity\PartenaireLogo:
+    properties:
+        file:
+            - File:
+                maxSize: 5M
+                mimeTypes: [application/jpeg, application/png ]
+                mimeTypesMessage: Fichier jpeg, png uniquement
+                maxSizeMessage: L'image ne doit pas depasser 5Mo
+
+App\CoreBundle\Entity\UtilisateurImage:
+    properties:
+        file:
+            - File:
+                maxSize: 5M
+                mimeTypes: [application/jpeg, application/png ]
+                mimeTypesMessage: Fichier jpeg, png uniquement
+                maxSizeMessage: L'image ne doit pas depasser 5Mo
+
+App\CoreBundle\Entity\NewsOtherImages:
+    properties:
+        file:
+            - File:
+                maxSize: 5M
+                mimeTypes: [application/jpeg, application/png ]
+                mimeTypesMessage: Fichier jpeg, png uniquement
+                maxSizeMessage: L'image ne doit pas depasser 5Mo
+
+App\CoreBundle\Entity\PageOtherImages:
+    properties:
+        file:
+            - File:
+                maxSize: 5M
+                mimeTypes: [application/jpeg, application/png ]
+                mimeTypesMessage: Fichier jpeg, png uniquement
+                maxSizeMessage: L'image ne doit pas depasser 5Mo
+
+
+# FILE
+App\CoreBundle\Entity\NewsPdf:
+    properties:
+        file:
+            - File:
+                maxSize: 50M
+                mimeTypes: [application/pdf]
+                mimeTypesMessage: Fichier pdf uniquement
+
+App\CoreBundle\Entity\NewsZip:
+    properties:
+        file:
+            - File:
+                maxSize: 15M
+                mimeTypes: [application/zip ]
+                mimeTypesMessage: Fichier zip uniquement
+ 
+
+App\CoreBundle\Entity\NewsVideoMp4:
+    properties:
+        file:
+            - File:
+                maxSize: 100M
+                mimeTypes: [ video/mp4 ]
+                mimeTypesMessage: Fichier mp4 uniquement
+                maxSizeMessage: La video ne doit pas depasser 100Mo

@@ -1,0 +1,37 @@
+App\CoreBundle\Entity\Newsletter:
+    type: entity
+    repositoryClass: App\CoreBundle\Repository\NewsletterRepository
+    table: newsletter
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        email:
+            column: email
+            type: string
+            length: 255
+        createdAt:
+            column: created_at
+            type: datetime
+            gedmo:
+                timestampable:
+                    on: create
+        checked:
+            column: checked
+            type: boolean
+        token:
+            column: token
+            type: string
+            length: 255
+        slug:
+            column: slug
+            type: string
+            length: 255
+            gedmo:
+                slug:
+                    separator: -
+                    style: lower
+                    fields:
+                       - email

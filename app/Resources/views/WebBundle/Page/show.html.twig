@@ -1,0 +1,63 @@
+{% if entity.pageImage and entity.pageImage.cover %}
+
+<div class="i pY-0 m-auto page-cover">
+    <figure class="ov-h">
+        <img src="{{ vich_uploader_asset(entity.pageImage, 'file') }}" class="w-100p" >
+        <figcaption>
+            <h4 class="text-uppercase d-n@md- c-white">RETOUR A <a href="{{ path('homepage')}}">L'ACCUEIL</a></h4>
+            <h2 class="mY-25@md+ c-white">{{ entity.title }}</h2>
+            <h6 class="c-white">Quelque explication ou un sous-titre sur la page. un peu long</h6>
+        </figcaption>
+    </figure>
+</div>
+
+{% endif %}
+
+<div class="row pY-0 pX-60@lg">
+
+    <div class="col-lg-12 m-0 mY-10">
+        <div class="breadcrumbs">
+            <ul class="list-unstyled">
+                <li><a class="mR-3" href="{{ path('homepage') }}">Accueil</a> »</li>
+                <li class="non_active"><a class="mR-3" href="#">Actualité</a> »</li>
+                <li class="active"><a href="#">{{ entity.title }}</a></li>
+            </ul>
+        </div>
+
+       <div class="t pY-20">
+            <h2 class="page-title">{{ entity.title }}</h2>
+        </div>
+
+        {% if entity.pageImage and not entity.pageImage.cover %}
+        <div class="i pY-10 m-auto ta-c">
+            <figure>
+                <img title="{{ sitename }},{{ entity.title }}, Malagasy, Madagascar" src="{{ vich_uploader_asset(entity.pageImage, 'file') }}" >
+            </figure>
+        </div>
+        {% endif %}
+
+
+        <div class="text">
+            {{ entity.content|raw }}
+        </div> <!-- /.text -->
+
+        {% if entity.pageOtherImages|length != 0 %}
+            {% for image in entity.pageOtherImages if image.width %}
+            <div class="i pY-10 m-auto ta-c">
+                <figure>
+                    <img title="{{ sitename }},{{ entity.title }}, Malagasy, Madagascar" src="{{ vich_uploader_asset(image, 'file') }}" class="w-100p">
+                </figure>
+            </div>
+          {% endfor %}
+        {% endif %}
+
+        {% if entity.pageOtherImages|length > 0 %}
+        <div class="image-collection pY-10 text-left">
+          {% for image in entity.pageOtherImages if not image.width %}
+            <figure>
+                <img title="{{ sitename }},{{ entity.title }}, Malagasy, Madagascar" src="{{ vich_uploader_asset(image, 'file') }}" >
+            </figure>
+          {% endfor %}
+        </div>
+        {% endif %}
+  </div> <!-- /.col -->

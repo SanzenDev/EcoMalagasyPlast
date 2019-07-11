@@ -1,0 +1,218 @@
+<div class="sidebar">
+    <div class="sidebar-inner">
+        <!-- ### $Sidebar Header ### -->
+        <div class="sidebar-logo">
+            <div class="peers ai-c fxw-nw">
+                <div class="peer peer-greed">
+                    <a class="sidebar-link td-n" href="#">
+                    </a>
+                </div>
+                <div class="peer">
+                    <div class="mobile-toggle sidebar-toggle">
+                        <a href="" class="td-n">
+                            <i class="ti-arrow-circle-left"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ### $Sidebar Menu ### -->
+        <ul class="sidebar-menu scrollable pos-r">
+            <li class="nav-item dropdown">
+                <a class="dropdown-toggle" href="javascript:void(0);">
+                    <span class="icon-holder">
+                      <i class="c-orange-500 ti-search"></i>
+                    </span>
+                    <span class="title">Rechercher</span>
+                    <span class="arrow">
+                      <i class="ti-angle-right"></i>
+                    </span>
+                </a>
+                <ul class="dropdown-menu sidebar-form">
+                    <li>
+                      <input type="text" placeholder="Rechercher..." class="pY-5 pL-3 search-input">
+                    </li>
+                    <li>
+                        <form class="search-select-form">
+                            <select> 
+                                <option value="partenaire">Partenaire</option> 
+                                <option value="utilisateur">Administrateur</option> 
+                                <option value="dechet">Déchet</option>
+                                <option value="newsletter">Abonnés</option>
+                                <option value="news">News</option>
+                                <option value="contact">Contact</option>
+                                <option value="client">Client</option>
+                            </select>
+                        </form>
+                    </li>
+                    <li>
+                        <a class="text-center pY-5 search-button">Rechercher</a>
+                    </li>
+                </ul>
+            </li>
+             <li class="nav-item active">
+                <a class="sidebar-link admin_dashboard" href="{{ path('admin_dashboard')}}">
+                    <span class="icon-holder">
+                      <i class="c-blue-500 ti-home"></i>
+                    </span>
+                    <span class="title">Dashboard</span>
+                </a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="dropdown-toggle" href="javascript:void(0);">
+                    <span class="icon-holder">
+                      <i class="c-orange-500 ti-clipboard"></i>
+                    </span>
+                    <span class="title">Actualité</span>
+                    <span class="arrow">
+                      <i class="ti-angle-right"></i>
+                    </span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="{{ path('admin_manage_new',{'entity': 'news'}) }}" class="sidebar-link">Ajouter</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('admin_manage_index',{'entity': 'news'}) }}" class="sidebar-link">Liste</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="dropdown-toggle" href="javascript:void(0);">
+                    <span class="icon-holder">
+                        <i class="c-purple-500 ti-trash"></i>
+                    </span>
+                    <span class="title">Déchets</span>
+                    <span class="arrow">
+                        <i class="ti-angle-right"></i>
+                    </span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a  href="{{ path('admin_manage_new',{'entity': 'dechet'}) }}">Ajouter</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('admin_manage_index',{'entity': 'dechet'}) }}">Liste</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="dropdown-toggle" href="javascript:void(0);">
+                    <span class="icon-holder">
+                        <i class="c-brown-500 ti-layout"></i>
+                    </span>
+                    <span class="title">Page</span>
+                    <span class="arrow">
+                        <i class="ti-angle-right"></i>
+                    </span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a  href="{{ path('admin_manage_new',{'entity': 'page'}) }}">Ajouter</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('admin_manage_index',{'entity': 'page'}) }}">Liste</a>
+                    </li>
+                </ul>
+            </li>
+             <li class="nav-item dropdown">
+                <a class="dropdown-toggle" href="javascript:void(0);">
+                    <span class="icon-holder">
+                        <i class="c-deep-orange-500 ti-id-badge"></i>
+                    </span>
+                    <span class="title">Administrateur</span>
+                    <span class="arrow">
+                        <i class="ti-angle-right"></i>
+                    </span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="{{ path('admin_manage_new',{'entity': 'utilisateur'}) }}">Ajouter</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('admin_manage_index',{'entity': 'utilisateur'}) }}">Liste</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a class="sidebar-link"  href="{{ path('admin_manage_index',{'entity': 'commande'}) }}">
+                    <span class="icon-holder">
+                      <i class="c-deep-purple-500 ti-shopping-cart"></i>
+                    </span>
+                    <span class="title">Commandes</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="sidebar-link"  href="{{ path('admin_manage_index',{'entity': 'partenaire'}) }}">
+                    <span class="icon-holder">
+                      <i class="c-green-500 ti-stamp"></i>
+                    </span>
+                    <span class="title">Partenaires</span>
+                </a>
+            </li>
+             <li class="nav-item">
+                <a class="sidebar-link"  href="{{ path('admin_manage_index',{'entity': 'client'}) }}">
+                    <span class="icon-holder">
+                      <i class="c-blue-500 ti-wallet"></i>
+                    </span>
+                    <span class="title">Clients</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="sidebar-link"  href="{{ path('admin_manage_index',{'entity': 'contact'}) }}">
+                    <span class="icon-holder">
+                      <i class="c-yellow-500 ti-email"></i>
+                    </span>
+                    <span class="title">Messages</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="sidebar-link"  href="{{ path('admin_manage_index',{'entity': 'newsletter'}) }}">
+                    <span class="icon-holder">
+                      <i class="c-indigo-500 ti-pin-alt"></i>
+                    </span>
+                    <span class="title">Abonnés</span>
+                </a>
+            </li>
+              <li class="nav-item dropdown">
+                <a class="dropdown-toggle" href="javascript:void(0);">
+                    <span class="icon-holder">
+                        <i class="c-blue-900 ti-world"></i>
+                    </span>
+                    <span class="title">Vue Utilisateur</span>
+                    <span class="arrow">
+                        <i class="ti-angle-right"></i>
+                    </span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="{{ path('homepage') }}">Accueil</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('web_manage_index', {'entity': 'dechet'}) }}">Déchets</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('web_manage_index', {'entity': 'news'}) }}">Actualités</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('web_client_new') }}">Devenir Partenaire</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('web_manage_new', {'entity': 'contact'}) }}">Contact</a>
+                    </li>
+
+                    <li>
+                        <a href="{{ path('web_partenaire_new') }}">Devenir Partenaire</a>
+                    </li>
+                   <li>
+                        <a href="{{ path('web_manage_new', {'entity': 'newsletter'}) }}">Newsletter</a>
+                    </li>
+                   <li>
+                        <a href="#">Plan du site</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>

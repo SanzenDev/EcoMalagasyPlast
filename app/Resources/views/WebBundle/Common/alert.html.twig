@@ -1,0 +1,15 @@
+{% if app.session.flashbag.has('danger') or app.session.flashbag.has('info') or app.session.flashbag.has('warning') %}
+    {% for type, messages in app.session.flashbag.all() %}
+
+<div class="alert alert-{{type}} bdrs-0 mB-0" role="alert">
+    <button class="close" data-dismiss="alert">&times;</button>
+    <ul class="list-unstyled">
+    	{% for message in messages %}
+        <li>
+        	<i class="{% if app.session.flashbag.has('danger') or app.session.flashbag.has('warning') %}ti-close{% elseif app.session.flashbag.has('info') %}ti-success{% endif %}mR-10 badge-{{type}}"></i>{{ message }}</li>
+        {% endfor %}
+    </ul>
+</div>
+
+    {% endfor %}
+{% endif %}

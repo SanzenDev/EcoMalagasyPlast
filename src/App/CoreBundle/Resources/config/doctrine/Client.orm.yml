@@ -1,0 +1,92 @@
+App\CoreBundle\Entity\Client:
+    type: entity
+    repositoryClass: App\CoreBundle\Repository\ClientRepository
+    table: client
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            column: name
+            type: string
+            length: 255
+        tel:
+            column: tel
+            type: string
+            length: 255
+        address:
+            column: address
+            type: string
+            length: 255
+            nullable: true
+        nif:
+            column: nif
+            type: string
+            nullable: true
+        stat:
+            column: stat
+            type: string
+            nullable: true
+        rce:
+            column: rce
+            type: string
+            nullable: true
+
+        slug:
+            column: slug
+            type: string
+            length: 255
+            gedmo:
+                slug:
+                    separator: -
+                    style: lower
+                    fields:
+                       - name
+        token:
+            column: token
+            type: string
+            length: 255
+
+        createdAt:
+            column: created_at
+            type: datetime
+            gedmo:
+                timestampable:
+                    on: create
+        lastSendDate:
+            column: last_send_date
+            type: datetime
+            nullable: true
+        updatedAt:
+            column: updated_at
+            type: datetime
+            type: boolean
+            gedmo:
+                timestampable:
+                    on: update
+        enabled:
+            column: enabled
+            type: boolean
+            nullable: true
+        checked:
+            column: checked
+            type: boolean
+            nullable: true
+        showed:
+            column: showed
+            type: boolean
+            nullable: true
+
+    oneToMany:
+        commandes:
+            targetEntity: Commande
+            mappedBy: client
+            cascade: [ persist ]
+            orphanRemoval: true
+
+    oneToOne:
+        user:
+            targetEntity: Utilisateur
+            inversedBy: client

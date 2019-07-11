@@ -1,0 +1,71 @@
+ <div class="col-md-7">
+      <div class="bgc-white p-10@sm- p-20@sm+ bd">
+          <h6 class="text-weight-bold c-grey-800 bdB pB-5 mB-10">Image</h6>
+          <img src="{{ vich_uploader_asset(entity.pageImage, 'file') }}" class="w-50p"/>
+      </div> <!-- /.bg-white -->
+
+      <div class="bgc-white p-10@sm- p-20@sm+ bd">
+          <h6 class="text-weight-bold c-grey-800 bdB pB-5 mB-10">Contenu</h6>
+          <div>
+              {{ entity.content|raw }}
+          </div> <!-- /.bg-white -->
+      </div> <!-- /.bg-white -->
+ </div> <!-- /.col -->
+
+   <div class="col-md-5">
+      <div class="bgc-white  p-10@sm- p-20@sm+ bd">
+          <h6 class="text-weight-bold c-grey-800 bdB pB-5 mB-10">Information</h6>
+
+           <table class="table">
+              <tr>
+                <td>Id :</td>
+                <td>{{ entity.id }}</td>
+              </tr>
+              <tr>
+                <td>Titre de la page</td>
+                <td>{{ entity.title }}</td>
+              </tr>
+               <tr>
+                <td>URL :</td>
+                <td>{{ entity.slug }}</td>
+              </tr>
+                <tr>
+                <td>Ajouté le :</td>
+                <td>{% if entity.createdAt %}{{ entity.createdAt|date('d-m-Y H:i:s') }}{% endif %}</td>
+              </tr>
+                <tr>
+                <td>Modifié le : </td>
+                <td>{% if entity.updatedAt %}{{ entity.updatedAt|date('d-m-Y H:i:s') }}{% else %}<code class="highlighter-rouge">Pas encore modifié</code>{% endif %}</td>
+              </tr>
+             </tr>
+              <tr>
+                <td>Ajouté par :</td>
+              <td>{% if entity.user %}<a href="{{path('admin_manage_show', {'entity': 'utilisateur', 'slug': entity.user.slug })}}">{{ entity.user.lastName }}{% else %}Compte inconnu{% endif %}</a></td>
+              </tr>
+               <tr>
+                <td>Publié? </td>
+             <td>
+                <a href="{{path('admin_manage_publish', {'entity': 'page', 'slug': entity.slug, })}}" data-toggle="tooltip" data-placement="top" title="Cliquez pour ne plus valider">
+                    <i class="{% if entity.enabled %}ti-check c-green-600 {% else %}ti-close c-red-600 {% endif %} font-weight-bold"></i>
+                </a>
+              </td>
+              </tr>
+          </table>
+    </div> <!-- /.bg-white -->
+    <div class="bgc-white  p-10@sm+ bd">
+        <h6 class="text-weight-bold c-grey-800 bdB pB-5 mB-10">SEO</h6>
+
+          <div>
+            <strong>Métatitre : </strong>
+              {% if entity.metaTitle %}{{ entity.metaTitle|raw }}{% endif %}
+          </div>
+          <div>
+            <strong>Métadescription : </strong>
+              {% if entity.metaDescription %}{{ entity.metaDescription|raw }}{% endif %}
+          </div>
+          <div>
+            <strong>Mot clés : </strong>
+            {% if entity.metaKeywords %}{{ entity.metaKeywords|raw }}{% endif %}
+        </div>
+    </div> <!-- /.bg-white -->
+  </div> <!-- /.col -->

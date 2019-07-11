@@ -1,0 +1,60 @@
+ <div class="breadcrumbs">
+    <ul class="list-unstyled">
+        <li><a class="mR-3" href="{{ path('homepage') }}">Accueil</a> »</li>
+        <li class="non_active"><a class="mR-3" href="{{ path('web_manage_index', {'entity': 'news'}) }}">Actualité</a> »</li>
+        <li class="active"><a href="#">{{ entity.title|length > 60 ? entity.title|slice(0, 60) ~ '...' : entity.title }}</a></li>
+    </ul>
+</div>
+<div class="t pY-20@lg- pT-50@lg+ pB-20@lg+">
+    <h1>{{ entity.title }}</h1>
+</div>
+
+{% if entity.newsVideoMp4 or entity.newsVideoOgg or entity.newsVideoWebm%}
+<div class="i pY-10 text-center">
+    <video controls poster="{{ vich_uploader_asset(entity.newsImage, 'file') }}" class="w-100p table-dark">
+        {% if entity.newsVideoMp4 %}
+        <source src="{{ vich_uploader_asset(entity.newsVideoMp4, 'file') }}" type="video/webm" />
+        {% endif %}
+        {% if entity.newsVideoOgg %}
+        <source src="{{ vich_uploader_asset(entity.newsVideoOgg, 'file') }}" type="video/ogg"/>
+        {% endif %}
+        {% if entity.newsVideoWebm %}
+        <source src="{{ vich_uploader_asset(entity.newsVideoWebm, 'file') }}" type="video/mp4"/>
+        {% endif %}
+        Votre Navigateur ne permet pas de lire ce vidéo
+    </video> 
+</div>
+{% endif %}
+
+<div class="i pY-10 text-center">
+    <figure>
+        <img src="{{ vich_uploader_asset(entity.newsImage, 'file') }}">
+        {% if entity.newsImage.legend %}<figcaption class="bgc-grey-200 p-10">{{entity.newsImage.legend}}</figcaption>{% endif %}
+    </figure>
+</div> <!-- /.image-block -->
+
+<div class="text pT-10@lg+ {% if not entity.newsOtherImages|length > 0 or entity.newsPdf or entity.newsPdf %}pB-80@lg+{% endif %}">
+    {{ entity.content|raw }}
+</div> <!-- /.text -->
+ 
+{% if entity.newsOtherImages|length  > 0 %}
+<div class="image-collection pY-10 text-left">
+    {% for image in entity.newsOtherImages %}
+    <figure>
+        <img src="{{ vich_uploader_asset(image, 'file') }}">
+    </figure>
+    {% endfor %}
+</div>
+{% endif %}
+
+  {% if entity.newsPdf or entity.newsPdf %}
+ <div class="downloadLink pY-40">
+      {% if entity.newsPdf %}
+        <a href="{{ vich_uploader_asset(entity.newsPdf, 'file') }}" class="mY-10"><i class="ti-download font-weight-bold mR-10"></i>Télécharger PDF</a>
+     {% endif %}
+     {% if entity.newsZip %}
+        <a href="{{ vich_uploader_asset(entity.newsZip, 'file') }}" class="mY-10"><i class="ti-download font-weight-bold mR-10"></i>Télécharger ZIP</a>
+      {% endif %}
+  </div>
+
+  {% endif %}

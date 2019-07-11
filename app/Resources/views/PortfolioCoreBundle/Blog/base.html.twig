@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{% block title %}{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+        <link rel="stylesheet" href="{{asset('bundles/app/css/app.css')}}"/>
+        <link rel="stylesheet" href="{{asset('bundles/app/css/themify-icons.css')}}"/>
+        <link rel="stylesheet" href="{{asset('bundles/portfolio/css/style.css')}}"/>
+
+    </head>
+    <body>
+  
+    <div class="main">
+        <header class="main-bg">
+            <nav class="navbar navbar-expand-lg pT-5@md+ menu-header-2 pL-10@md+">
+                <a class="navbar-brand homepage" href="{{path('ps_home')}}">
+                    <img src="{{ asset('bundles/portfolio/images/logo.png') }}" />
+                </a>
+                <span class="right">
+                    <a class="c-white d-n@md+ mobile-menu" href="#">
+                        Portfolio
+                    </a>
+                     <a class="c-white d-n@md+ mobile-menu" href="#">
+                        Blog
+                    </a>
+                </span>
+                <div class="collapse navbar-collapse text-right">
+                    <ul class="navbar-nav mL-a@md+ link-wrap">
+                        <li class="nav-item pX-10 mR-5">
+                            <a href="#" class="anchor-link">
+                                Portfolio
+                            </a>
+                        </li>
+                         <li class="nav-item pX-10 mR-5">
+                            <a href="#" class="anchor-link">
+                                Blog
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <div class="me text-center pB-80">
+                <h1 class="font-nunito mT-30 mB-20"><span class="primary">Designer</span> <span class="c-white font-weight-bold">/<span> <span class="secondary">Developpeur</span></h1> 
+                <h1 class="mT-60@sm+ mT-10@sm-"><span class="c-white">Hi! Je suis </span><span class="primary name">Tiavina Michael R.</span></h1> 
+                <h3 class="c-white mB-40 mT-30@sm-">Je suis développeur full-stack web et mobile</h3>
+                <h6 class="mT-80"><a class="download" href="#">Me Contacter</a></h6> 
+            </div>
+        </header>
+
+        <main class='main-content p-0'>
+            <div id='mainContent' class="m-0 p-0">
+                <div class="container-fluid pX-0"> 
+
+                    {% block body %}{% endblock %}
+
+ 
+                    <footer class="row main-bg text-center pT-60 pB-30@md- pB-60@md+">
+                        <div class="col-md-12 pX-20@md- p-0@md+">
+                             <div class="row text-center">
+                                <div class="col-lg-2 col-sm-12 p-0">
+                                    <img src="{{ asset('bundles/portfolio/images/logo.png') }}" class="logo-footer"/>
+                                </div> 
+                                 <div class="pY-20@md- col-lg-1 p-0 col-sm-12">
+                                    <a href="#" class=" social-button"><i class="ti-facebook"></i></a>
+                                </div> 
+                                 <div class="pY-20@md- col-lg-2 offset-lg-2 p-0 col-sm-12 ta-r@md+">
+                                    <ul class="list-unstyled  ta-l@md+">
+                                      <li class="mB-15"><h6 class="font-weight-bold"><span class="primary font-weight-bold">_ </span>Contact</h6></li>
+                                      <li>VN 50B Ankazolava</li>
+                                      <li>Antananarivo</li>
+                                      <li>Madagascar</li>
+                                    </ul>
+                                </div> 
+                                <div class="pY-20@md- col-lg-5 p-0 col-sm-12 ta-r@md+">
+                                    <ul class="list-unstyled  ta-l@md+">
+                                      <li class="mB-15"><h6 class="font-weight-bold"><span class="primary font-weight-bold">_ </span>Poste</h6></li>
+                                      <li>Développeur MERN Stack/Symfony</li>
+                                      <li>Développeur Back/Front-End</li>
+                                      <li>Développeur Mobile Android/IOS</li>
+                                      <li>Web Designer</li>
+                                      <li>Formateur Développeur</li>
+                                    </ul>
+                                </div> 
+                            </div> 
+                        </div>
+                    </footer> 
+                    
+                </div> 
+           </div> <!-- /#mainContent -->
+        </main> <!-- /.main -->
+    </div>
+   
+    <script src="{{asset('bundles/app/js/jquery.js')}}"></script>
+    <script src="{{asset('bundles/app/js/app.js')}}"></script>
+    <script src="{{asset('bundles/portfolio/js/jquery.waypoints.min.js')}}"></script>
+    <script src="{{asset('bundles/portfolio/js/main.js')}}"></script>
+    </body>
+</html>
+  

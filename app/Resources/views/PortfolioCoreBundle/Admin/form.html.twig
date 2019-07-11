@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{% block title %}{{ sitename }}{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+        <link rel="stylesheet" href="{{asset('bundles/app/css/app.css')}}"/>
+        <link rel="stylesheet" href="{{asset('bundles/app/css/themify-icons.css')}}"/>
+        <style>
+            legend{font-size: 1em}
+            div.form-control{border: none; padding: 0}
+            .form-check {display: none}
+        </style>
+    </head>
+    <body>
+  
+    <div class="main">
+
+        <main class='main-content p-0'>
+            <div id='mainContent' class="m-0 p-0">
+                <div class="container-fluid pX-0"> 
+ 
+                    <div class="row text-center">
+                        <div class="col-md-12 pY-30 pX-20@md-">
+                            <h4>Formulaire {{ entity }}</h4>
+
+                            {% include "PortfolioCoreBundle/Admin/"~entity~"_form.html.twig" with {'form': form, 'entity': entity } %}
+
+                        </div>
+                    </div>
+                    
+                </div> 
+           </div> <!-- /#mainContent -->
+        </main> <!-- /.main -->
+    </div>
+   
+        {% block javascripts %}{% endblock %}
+        <script src="{{asset('bundles/app/js/jquery.js')}}"></script>
+        <script src="{{asset('bundles/app/js/app.js')}}"></script>
+        <script src="{{asset('bundles/app/js/images-collection.js')}}"></script>
+    </body>
+</html>

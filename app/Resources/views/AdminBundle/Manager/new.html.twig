@@ -1,0 +1,53 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block breadcrumb %}
+      <span class="breadcrumb-item active">
+        {% if entity == 'dechet' %}<a href="#">Ajouter Dechet</a>{% endif %}
+        {% if entity == 'news' %}<a href="#">Ajouter Actualité</a>{% endif %}
+        {% if entity == 'page' %}<a href="#">Ajouter Page</a>{% endif %}
+        {% if entity == 'utilisateur' %}<a href="#">Ajouter Utilisateur</a>{% endif %}
+      </span>
+{% endblock %}
+
+{% block title %}
+    Ajouter {{ entity|capitalize }} - 
+    | {{ parent() }}
+{% endblock %}
+
+{% block body %}
+<div class="row">
+    <div class="col-md-10 offset-md-1">
+        <div class="bgc-white pY-10 pX-20 bgc-grey-700">
+
+            <h6 class="c-white d-ib">Ajouter {{entity}}</h6>
+
+            <div class="btn-group d-ib float-right" role="group">
+                <button id="actions" type="button" class="btn cur-p bgc-white no-after dropdown-toggle mT-nv-3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="ti-more-alt"></i>
+                </button>
+                <ul class="dropdown-menu fsz-sm" aria-labelledby="actions">
+                      <li>
+                        <a href="{% if entity == 'news' %}{{path('admin_manage_index', {'entity': 'news'})}}{%endif%}{% if entity == 'dechet' %}{{path('admin_manage_index', {'entity': 'dechet'})}}{% endif %}{% if entity == 'page' %}{{path('admin_manage_index', {'entity': 'page'})}}{% endif %}" class="d-b td-n pY-5 pX-10 bgcH-grey-100 c-grey-700" data-toggle="tooltip" data-placement="right" title="Voir la liste">
+                            <i class="c-grey-900 ti-list mR-10"></i>
+                            <span>Retour à la liste</span>
+                        </a>
+                      </li>
+                </ul>
+            </div>    <!-- /.btn-group --> 
+
+        </div>    <!-- /.bgc-white -->
+
+        <div class="bgc-white p-20 bd">
+            <div class="mT-5">
+
+            {% include "AdminBundle/"~entity|title~"/form.html.twig" with {'form': form, 'entity': entity } %} 
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+   {% if entity == 'news' or entity == 'page' %}<script src="{{asset('bundles/app/js/images-collection.js')}}"></script>{% endif %}
+{% endblock %}

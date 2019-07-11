@@ -1,0 +1,28 @@
+app_manager:
+    resource: "@AppWebBundle/Resources/config/routing/manager.yml"
+    prefix:   /
+app_client:
+    resource: "@AppWebBundle/Resources/config/routing/client.yml"
+    prefix:   /
+app_dechet:
+    resource: "@AppWebBundle/Resources/config/routing/dechet.yml"
+    prefix:   /
+app_partenaire:
+    resource: "@AppWebBundle/Resources/config/routing/partenaire.yml"
+    prefix:   /
+
+homepage:
+    path:     /
+    defaults: { _controller: AppWebBundle:Main:home }
+flux_index:
+    path:     /flux
+    defaults: { _controller: AppWebBundle:Main:flux }
+sitemap:
+    path:     /plan-du-site
+    defaults: { _controller: AppWebBundle:Main:sitemap }
+facture_pdf:
+    path:     /facture
+    defaults: { _controller: AppAdminBundle:Main:print }
+app_search:
+    path:     /recherche/{key}
+    defaults: { _controller: AppWebBundle:Main:search }

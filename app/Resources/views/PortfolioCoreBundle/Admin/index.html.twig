@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{% block title %}{{ sitename }}{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+        <link rel="stylesheet" href="{{asset('bundles/app/css/app.css')}}"/>
+        <link rel="stylesheet" href="{{asset('bundles/app/css/themify-icons.css')}}"/>
+
+    </head>
+    <body>
+  
+    <div class="main">
+
+        <main class='main-content p-0'>
+            <div id='mainContent' class="m-0 p-0">
+                <div class="container-fluid pX-0"> 
+ 
+                    <div class="row text-center">
+                        <div class="col-md-12 pY-30">
+                            <h4>Liste {{ entity }}</h4>
+
+                            {% if entities|length != 0 %}
+                                {% include "PortfolioCoreBundle/Admin/"~entity~"_index.html.twig" with {'entities': entities, 'entity': entity } %}
+
+                                <div class="p-30 float-right">
+                                    {{ knp_pagination_render(entities) }}
+                                </div>
+                            {% else %}
+                                <div class="p-30 center">
+                                    <h4>Pas encore de données</h4>
+                                </div>                            
+                            {% endif %}
+                        </div>
+                    </div>
+                    
+                </div> 
+           </div> <!-- /#mainContent -->
+        </main> <!-- /.main -->
+    </div>
+   
+        {% block javascripts %}{% endblock %}
+        <script src="{{asset('bundles/app/js/jquery.js')}}"></script>
+        <script src="{{asset('bundles/app/js/app.js')}}"></script>
+    </body>
+</html>

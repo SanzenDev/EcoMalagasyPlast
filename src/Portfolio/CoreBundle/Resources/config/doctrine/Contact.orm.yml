@@ -1,0 +1,25 @@
+Portfolio\CoreBundle\Entity\Contact:
+    type: entity
+    repositoryClass: Portfolio\CoreBundle\Repository\ContactRepository
+    table: ps_contact
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            column: name
+            type: string
+            length: 255
+        email:
+            column: email
+            type: string
+            length: 255
+        message:
+            column: message
+            type: text
+        token:
+            column: token
+            type: string
+            length: 255

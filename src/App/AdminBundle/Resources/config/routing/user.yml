@@ -1,0 +1,4 @@
+admin_user_set_admin:
+    path:     /user/{token}
+    defaults: { _controller: AppAdminBundle:User:setAdmin }
+

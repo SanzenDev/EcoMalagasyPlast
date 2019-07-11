@@ -1,0 +1,82 @@
+App\CoreBundle\Entity\Utilisateur:
+    type: entity
+    repositoryClass: App\CoreBundle\Repository\UtilisateurRepository
+    table: fos_user
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields: 
+        token:
+            column: token
+            type: string
+            length: 255
+        lastName:
+            column: last_name
+            type: string
+            length: 30
+            nullable: true
+        checked:
+            column: checked
+            type: boolean
+        active:
+            column: active
+            type: boolean
+        ip:
+            column: ip
+            type: string
+        slug:
+            column: slug
+            type: string
+            length: 255
+            gedmo:
+                slug:
+                    separator: -
+                    style: lower
+                    fields:
+                       - username
+        createdAt:
+            column: created_at
+            type: datetime
+            gedmo:
+                timestampable:
+                    on: create
+        updatedAt:
+            column: updated_at
+            type: datetime
+            type: boolean
+            gedmo:
+                timestampable:
+                    on: update
+
+    oneToOne:
+        userImage:
+            targetEntity: UtilisateurImage
+            cascade: [ persist ]
+            orphanRemoval: true
+        client:
+            targetEntity: Client
+            mappedBy: user
+            cascade: [ persist ]
+            orphanRemoval: true
+        partenaire:
+            targetEntity: Partenaire
+            mappedBy: user
+            cascade: [ persist ]
+            orphanRemoval: true
+
+    oneToMany:
+        pages:
+            targetEntity: Page
+            mappedBy: user
+            cascade: [ persist ]
+            orphanRemoval: true
+        newss:
+            targetEntity: News
+            mappedBy: user
+            cascade: [ persist ]
+            orphanRemoval: true
+
+    lifecycleCallbacks:
+        prePersist: [ setIpValue, setTokenValue, setLastNameValue, setSuperAdminValue ]

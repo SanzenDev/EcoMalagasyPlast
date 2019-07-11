@@ -1,0 +1,83 @@
+<div class="row cover signup-cover d-n@md-">
+    <div class="col-md-12 p-0">
+        <div class="pB-0">
+            <img src="{{ asset('bundles/app/images/signup-header.jpg') }}" class="w-100p">
+        </div> 
+    </div>
+</div> <!-- ./row -->
+
+<div class="row signup form">
+    <div class="col-lg-7 col-xl-6 offset-xl-1 col-md-12 col-12 col-sm-12 col-12 pX-30@md- pB-30@md- left">
+        <div class="clear">
+            <h2>Contactez-nous</h2>
+
+            {{ form_start(form) }} 
+                <div class="form-group">
+                    {{form_label(form.subject)}}
+                    {{form_widget(form.subject)}}
+                    {{form_errors(form.subject)}} 
+                </div>
+                <div class="form-group">
+                    {{form_label(form.name)}}
+                    {{form_widget(form.name)}}
+                    {{form_errors(form.name)}} 
+                </div>
+                <div class="form-group">
+                    {{form_label(form.email)}}
+                    {{form_widget(form.email)}}
+                    {{form_errors(form.email)}} 
+                </div>
+                <div class="form-group">
+                    {{form_label(form.message)}}
+                    {{form_widget(form.message)}}
+                    {{form_errors(form.message)}} 
+                </div>
+
+                {{form_rest(form)}}
+
+                <div class="form-group ta-l@md+ mT-40@sm+">
+                    <small class="form-text text-muted"><strong class="c-red-900">*</strong> champ obligatoire.</small>
+
+                    <button type="submit" class="signin-btn">Envoyez</button>
+                </div> 
+
+            {{ form_end(form) }}
+
+            <h4 class="mT-60 d-n@md+">Nos coordonnées</h4>
+            <div class="mT-20 coord d-n@md+">
+                <ul class="list-unstyled">
+                    <li><i class="ti-location-pin mR-10"></i>Lot VK 67 Bis Ankazolava</li>
+                    <li class="pL-20">Antananarivo</li>
+                    <li class="pL-20">Madagascar</li>
+                    <li class="mT-10"><i class="ti-mobile mR-10"></i>+2614567890</li>
+                    <li class="mT-10"><i class="ti-email mR-10"></i>monemail@email.com</li>
+                </ul>
+            </div>
+
+        </div> <!-- ./clear -->
+    </div> <!-- ./col -->
+
+    <div class="col-lg-5 col-xl-4 order-md-first order-sm-first col-md-12 order-first col-12 col-sm-12 order-lg-7 order-xl-7 pX-30@md- pB-20@sm- right">
+
+        <div class="breadcrumbs">
+            <ul class="list-unstyled">
+                <li><a class="mR-3" href="#">Accueil</a> »</li>
+                <li class="active"><a href="#">Contact</a></li>
+            </ul>
+        </div>  <!-- /.breadcrumbs -->
+        <div class="mT-20 d">
+            <p>Un projet, une question, Remplissez le formulaire ci-dessous et nous vous répondons dans les plus brefs délais</p>
+        </div>  <!-- /.d -->
+        <h4 class="mT-60 d-n@md-">Nos coordonnées</h4>
+        <div class="mT-20 coord d-n@md-">
+            <ul class="list-unstyled">
+                <li><i class="ti-location-pin mR-10"></i>Lot VK 67 Bis Ankazolava</li>
+                <li class="pL-20">Antananarivo</li>
+                <li class="pL-20">Madagascar</li>
+                <li class="mT-10"><i class="ti-mobile mR-10"></i>+2614567890</li>
+                <li class="mT-10"><i class="ti-email mR-10"></i>monemail@email.com</li>
+            </ul>
+        </div>  <!-- /.coord -->
+
+    </div> <!-- ./col -->
+</div> <!-- ./row -->

@@ -1,0 +1,54 @@
+ <div class="col-md-12">
+    <div class="bgc-white p-10@sm- p-20@sm+ bd">
+        <h6 class="text-weight-bold c-grey-800 bdB pB-5 mB-10">Image</h6>
+        <img src="{{ vich_uploader_asset(entity.dechetImage, 'file') }}" class="w-50p"/>
+    </div> <!-- /.bg-white -->
+
+    <div class="bgc-white  p-10@sm- p-20@sm+ bd">
+        <h6 class="text-weight-bold c-grey-800 bdB pB-5 mB-10">Information</h6>
+
+         <table class="table">
+            <tr>
+              <td>Id :</td>
+              <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+              <td>Type du déchet</td>
+              <td>{{ entity.name }}</td>
+            </tr>
+             <tr>
+              <td>URL :</td>
+              <td>{{ entity.slug }}</td>
+            </tr>
+              <tr>
+              <td>Reste</td>
+              <td>{{ entity.amount }}</td>
+            </tr>
+              <tr>
+              <td>Ajouté le :</td>
+              <td>{% if entity.createdAt %}{{ entity.createdAt|date('d-m-Y H:i:s') }}{% endif %}</td>
+            </tr>
+              <tr>
+              <td>Modifié le : </td>
+              <td>{% if entity.createdAt %}{{ entity.createdAt|date('d-m-Y H:i:s') }}{% else %}<code class="highlighter-rouge">Pas encore modifié</code>{% endif %}</td>
+            </tr>
+           </tr>
+             <tr>
+              <td>Publié? </td>
+
+              <td>
+                <a href="{{path('admin_manage_publish', {'entity': 'dechet', 'slug': entity.slug, })}}" data-toggle="tooltip" data-placement="top" title="Cliquez pour ne plus valider">
+                    <i class="{% if entity.enabled %}ti-check c-green-600 {% else %}ti-close c-red-600 {% endif %} font-weight-bold"></i>
+                </a>
+              </td>
+            </tr>
+        </table>
+  </div> <!-- /.bg-white -->
+
+  {% if entity.descripiton %}
+    <div class="bgc-white p-10@sm- p-20@sm+ bd">
+        <h6 class="text-weight-bold c-grey-800 bdB pB-5 mB-10">Description</h6>
+        {{ entity. description }}
+    </div> <!-- /.bg-white -->
+    {% endif %}
+</div> <!-- /.col -->

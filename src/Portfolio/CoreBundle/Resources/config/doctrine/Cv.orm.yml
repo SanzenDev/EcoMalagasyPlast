@@ -1,0 +1,20 @@
+Portfolio\CoreBundle\Entity\Cv:
+    type: entity
+    repositoryClass: Portfolio\CoreBundle\Repository\CvRepository
+    table: ps_cv
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        token:
+            column: token
+            type: string
+            length: 255
+
+    oneToOne:
+        fichier:
+            targetEntity: Fichier
+            cascade: [ persist ]
+            orphanRemoval: true

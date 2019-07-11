@@ -1,0 +1,48 @@
+{% extends 'PortfolioCoreBundle:Blog:base.html.twig' %}
+
+{% block title %}
+  Les articles de Tiavina Michale Ralainirina, developpeur full-stack web/mobile - Antananarivo, Madagascar
+{% endblock %}
+
+{% block body %}
+ 
+<div class="row blog text-center">
+    <div class="col-md-12 pX-20@md- p-0@md+">
+      <div class="row blog text-center">
+          <div class="col-md-12 pX-20@md- p-0@md+">
+
+              <h1 class="dark mT-40 font-nunito waypoint" data-animation="slide-in-left" id="blog">Mes Articles</h1>
+              <div class="bg-dark header-bar waypoint mT-20 mB-10" data-animation="slide-in-left" data-delay=".5s"></div> 
+                 
+              <div class="row pX-60@md+">
+                  {% for entity in entities %}
+                      <div class="col-lg-6 col-sm-12 col-12 pX-20@sm text-left pY-20 mB-20 waypoint" data-animation="fade-in">
+                             <div class="image"> 
+                                  <img src="{{ vich_uploader_asset(entity.image, 'file') }}" class="w-100p"/>
+                            </div>
+                              <div class="title pT-15"> 
+                                  <h1><a href="{{path('ps_blog_show',{'slug': entity.slug})}}" class="font-weight-bold">{{ entity.title }} </a></h1>
+                            </div>
+                             <div class="date pB-10"> 
+                                  <div class="pB-20 text-uppercase">{% if entity.createdAt %}{{ entity.createdAt|date('d F Y') }}{% endif %}</div>
+                            </div>
+                             <div class="text"> 
+                                  {{ entity.content|length > 150 ? entity.content|slice(0, 150) ~ '...' : entity.content|raw }}
+                            </div>
+
+                        </div>
+                    {% endif %}
+                  </div>
+              </div>
+          </div>
+
+          <div class="row text-right pY-20">
+            <div class="col-lg-6 offset-lg-3">
+                        {{ knp_pagination_render(entities) }}
+            </div>
+          </div>
+
+      </div>
+  </div>
+</div>
+{% endbody %}

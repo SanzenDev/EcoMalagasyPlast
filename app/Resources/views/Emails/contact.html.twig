@@ -1,0 +1,12 @@
+<h1>Nouveau message : {{ entity.name }}</h1>
+
+<p><small>Envoyé {{ entity.createdAt|created_ago }}</small>par <strong>{{entity.email}}</strong></p>
+<h6><small>{{ entity.subject }}</small></h6>
+
+<blockquote style="color: #666666; font-style: italic;">
+      {{ entity.message }}
+</blockquote>
+
+<p>
+    <a href="{{ app.request.getSchemeAndHttpHost() ~ path('admin_manage_show', { entity: 'contact', 'slug': entity.slug }) }}">Voir plus</a>
+</p>

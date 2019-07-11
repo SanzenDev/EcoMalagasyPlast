@@ -1,0 +1,130 @@
+<!DOCTYPE>
+<html>
+    <head>
+       <meta charset="UTF-8" />
+        <title></title>
+        <link rel="stylesheet" href="{{asset('bundles/app/css/app.css')}}"/>
+    </head>
+    <body>
+      <div class="container-fluid">
+          <div class="row">
+            <div class="col-lg-8 offset-lg-2">
+                {% if entity != 'commande' %}
+                <h1>Information {{ entity|capitalize }}</h1>
+                <div class="text-right pY-30">
+                    <ul class="list-unstyled">
+                        <li class="mY-10"><h5 class="font-weight-bold">{{ obj.name }}</h5></li>
+                        <li class="mY-10"><span>Référence: </span><span>{{ obj.token }}</span></li>
+                    </ul>
+                </div>
+                <table class="table">
+                    <tr>
+                        <td>Nom de la société:</td>
+                        <td>{{ obj.name }}</td>
+                    </tr>
+                     <tr>
+                        <td>Compte créé le :</td>
+                        <td>{{ obj.createdAt|date('d/m/Y') }}</td>
+                    </tr>
+                      {% if obj.address %}
+                      <tr>
+                        <td>Adresse :</td>
+                        <td>{{ obj.address }}</td>
+                      </tr>
+                      {% endif %}
+                    <tr>
+                        <td>Email</td>
+                        <td>{{ obj.user.email }}</td>
+                    </tr>
+                    <tr>
+                        <td>Téléphone</td>
+                        <td>{{ obj.tel }}</td>
+                    </tr>
+                    {% if obj.nif %}
+                      <tr>
+                        <td>NIF :</td>
+                        <td>{{ obj.nif }}</td>
+                      </tr>
+                    {% endif %}
+                     {% if obj.stat %}
+                      <tr>
+                        <td>STAT :</td>
+                        <td>{{ obj.stat }}</td>
+                      </tr>
+                    {% endif %}
+                     {% if obj.nif %}
+                      <tr>
+                        <td>RCE :</td>
+                        <td>{{ obj.rce }}</td>
+                      </tr>
+                    {% endif %}
+                </table>
+
+                {% else %}
+                <h1>Information Commande</h1>
+                <div class="text-right pY-30">
+                    <ul class="list-unstyled">
+                        <li class="mY-10">
+                          <h5 class="font-weight-bold">{{ obj.client.name }}</h5>
+                        </li>
+                        <li class="mY-10">
+                          <span>Référence: </span><span>{{ obj.token }}</span>
+                        </li>
+                        <li class="mY-10">
+                          <span>Faite le: </span><span>{{ obj.createdAt|date('d/m/Y à H:i:s') }}</span>
+                        </li>
+                    </ul>
+                </div>
+                <table class="table">
+                    <tr>
+                        <td>Type de dechet</td>
+                        <td>{{ obj.dechet.name }}</td>
+                    </tr>
+                    <tr>
+                        <td>Quantité du déchet</td>
+                        <td>{{ obj.dechet.mesuredAmount }}</td>
+                    </tr>
+                      <tr>
+                        <td>Quantité Commandeé:</td>
+                        <td>{{ obj.mesuredAmount }}</td>
+                      </tr>
+                    <tr>
+                        <td>Email</td>
+                        <td>{{ obj.client.user.email }}</td>
+                    </tr>
+                    <tr>
+                        <td>Téléphone</td>
+                        <td>{{ obj.client.tel }}</td>
+                    </tr>
+                    {% if obj.client.nif %}
+                      <tr>
+                        <td>NIF :</td>
+                        <td>{{ obj.client.nif }}</td>
+                      </tr>
+                    {% endif %}
+                     {% if obj.client.stat %}
+                      <tr>
+                        <td>STAT :</td>
+                        <td>{{ obj.client.stat }}</td>
+                      </tr>
+                    {% endif %}
+                     {% if obj.client.nif %}
+                      <tr>
+                        <td>RCE :</td>
+                        <td>{{ obj.client.rce }}</td>
+                      </tr>
+                    {% endif %}
+                </table>
+                {% endif %}
+
+               <div class="text-right pT-60 mT-60">
+                    <ul class="list-unstyled">
+                        <li class="mR-30 d-ib"><p>{{ sitename }}</p></li>
+                        <li class="d-ib"><p>{{ entity != 'partenaire' ? 'Client' : 'Partenaire'}}</p></li>
+                    </ul>
+                </div>
+            </div>
+           </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,74 @@
+ <div class="col-md-7">
+      <div class="bgc-white p-10@sm- p-20@sm+ bd">
+          <h6 class="text-weight-bold c-grey-800 bdB pB-5 mB-10">Image</h6>
+          {% if entity.userImage %}
+          <img src="{{ vich_uploader_asset(entity.userImage, 'file') }}" class="w-50p"/>
+          {% else %}
+              <img src="{{ asset('bundles/app/images/default-avatar.png') }}" alt="profil-pic" class="text-center mB-10">
+          {% endif %}
+      </div> <!-- /.bg-white -->
+ </div> <!-- /.col -->
+
+   <div class="col-md-5">
+      <div class="bgc-white  p-10@sm- p-20@sm+ bd">
+          <h6 class="text-weight-bold c-grey-800 bdB pB-5 mB-10">Information</h6>
+
+           <table class="table">
+              <tr>
+                <td>Id :</td>
+                <td>{{ entity.id }}</td>
+              </tr>
+              <tr>
+                <td>Username</td>
+                <td>{{ entity.username }}</td>
+              </tr>
+             <tr>
+                <td>Nom</td>
+                <td>{% if entity.lastName %}{{ entity.lastName }}{% else %}<code class="highlighter-rouge">Pas de nom</code>{% endif %}</td>
+              </tr>
+              <tr>
+                <td>Email</td>
+                <td>{{ entity.email }}</td>
+              </tr>
+                <tr>
+                <td>Ajouté le :</td>
+                <td>{% if entity.createdAt %}{{ entity.createdAt|date('d-m-Y H:i:s') }}{% endif %}</td>
+              </tr>
+                <tr>
+                <td>Modifié le : </td>
+                <td>{% if entity.updatedAt %}{{ entity.updatedAt|date('d-m-Y H:i:s') }}{% else %}<code class="highlighter-rouge">Pas encore modifié</code>{% endif %}</td>
+              </tr>
+             </tr>
+          </table>
+          <div class="mT-10">
+              <a class="btn btn-sm btn-success" href="{{path('admin_user_set_admin', {'token': entity.token })}}">
+                {% if entity.isSuperAdmin %} ADMINISTRATEUR {% else %} NON ADMINISTRATEUR {% endif %}               
+              </a>
+          </div>
+          <div class="mT-10">
+            <ul class="list-unstyled">
+              {% for role in entity.roles %}
+                {% if role == 'ROLE_USER' %}
+                  <li></li>
+                {% elseif role == 'ROLE_ADMIN' or role == 'ROLE_SUPER_ADMIN'%}
+                  <li class="mT-5"><span class="btn btn-warning">Administrateur</span></li>
+                {% elseif role == 'ROLE_PARTENAIRE'%}
+                  <li class="mT-5"><span class="btn btn-primary">Partenaire</span></li>
+                {% elseif role == 'ROLE_CLIENT' %}
+                  <li class="mT-5"><span class="btn btn-info">Client</span></li>
+                {% endif %}
+
+                {% if not loop.last %},{% endif %}
+              {% endfor %}
+            </ul>
+          </div>
+        </div> <!-- /.bg-white -->
+  </div> <!-- /.col -->
+
+    {% if entity.partenaire %}
+      {% include "AdminBundle/Partenaire/show.html.twig" with {'entity': entity.parenaire } %} 
+    {% endif %}
+
+    {% if entity.client %}
+      {% include "AdminBundle/Client/show.html.twig" with {'entity': entity.client } %} 
+    {% endif %}

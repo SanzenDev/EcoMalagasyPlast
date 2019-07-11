@@ -1,0 +1,7 @@
+web_client_update:
+    path:     /clients/modifier/{slug}
+    defaults: { _controller: AppWebBundle:Client:update }
+web_client_new:
+    path:     /clients/formulaire
+    defaults: { _controller: AppWebBundle:Client:new }
+

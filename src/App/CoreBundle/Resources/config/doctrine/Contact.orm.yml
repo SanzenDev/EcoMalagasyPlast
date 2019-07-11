@@ -1,0 +1,49 @@
+App\CoreBundle\Entity\Contact:
+    type: entity
+    repositoryClass: App\CoreBundle\Repository\ContactRepository
+    table: contact
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            column: name
+            type: string
+            length: 255
+        email:
+            column: email
+            type: string
+            length: 255
+        subject:
+            column: subject
+            type: string
+            length: 255
+        message:
+            column: message
+            type: text
+        createdAt:
+            column: created_at
+            type: datetime
+            gedmo:
+                timestampable:
+                    on: create
+        checked:
+            column: checked
+            type: boolean
+        token:
+            column: token
+            type: string
+            length: 255
+
+        # slug:
+        #     column: slug
+        #     type: string
+        #     length: 255
+        #     gedmo:
+        #         slug:
+        #             separator: -
+        #             style: lower
+        #             fields:
+        #                - email

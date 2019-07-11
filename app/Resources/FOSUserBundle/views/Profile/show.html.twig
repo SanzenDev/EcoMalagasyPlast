@@ -1,0 +1,156 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    Mon compte | {{ parent() }}
+{% endblock %}
+
+{% block fos_user_content %}
+<div class="row pY-0 pX-60@lg body pT-20@md+ pT-10@md-">
+    <div class="col-lg-8 m-0 pL-40@md+ main">
+        <div class="breadcrumbs">
+            <ul class="list-unstyled">
+                <li><a class="mR-3" href="#">Accueil</a> »</li>
+                {% if app.user.hasRole('ROLE_PARTENAIRE') %}
+                <li class="non_active">
+                	<a class="mR-3" href="#">Partenaire</a> »
+                </li>                	
+                {% endif %}
+                {% if app.user.hasRole('ROLE_CLIENT') %}
+                <li class="non_active">
+                	<a class="mR-3" href="#">Client</a> »
+                </li>
+                {% endif %}
+                {% if app.user.hasRole('ROLE_ADMIN')  or app.user.hasRole('ROLE_SUPERADMIN') %}
+                <li class="non_active">
+                	<a class="mR-3" href="#">Administrateur</a> »
+                </li>
+                {% endif %}
+
+                </li>
+                <li class="active">
+                	<a href="#">Mon Compte</a>
+	            </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+{#  #}
+<div class="row clear f-dechet pB-30@md- pT-10@md- pT-20@md pT-40@lg+ mB-40@md pB-100@lg+">
+    <div class="col-lg-12">
+        <div class="m-a row text-center block">
+        {% if app.user.partenaire and app.user.hasRole('ROLE_PARTENAIRE') %}
+            <div class="col-xl-4 col-md-4 col-sm-12 col-12 pY-20@sm-">
+                <div class="in p-0">
+                    {% if app.user.partenaire.partenaireImage or app.user.partenaire.partenaireLogo %}
+                    <figure class="ov-h m-0 img-container">
+                        {% if app.user.partenaire and app.user.partenaire.partenaireImage %}
+                        <img src="{{ vich_uploader_asset(app.user.partenaire.partenaireImage, 'file') }}" class="w-100p"/>
+                        {% else %}
+                        <img src="{{ vich_uploader_asset(app.user.partenaire.partenaireLogo, 'file') }}" class="w-100p"/>
+                        {% endif %}
+                    </figure>
+                    {% endif %}                     
+                    <div class="text-center">
+                        <h3 class="bdB pY-5">
+                            {{ app.user.partenaire.name }}
+                        </h3>
+                        <p class="gapY-10">{{ app.user.email }}</p>
+                        <p class="gapY-10">{{ app.user.partenaire.tel }}</p>
+                        <p class="gapY-10">{{ app.user.partenaire.address }}</p>
+                        {% if app.user.partenaire.website %}
+                            <p class="gapY-10">{{ app.user.partenaire.website }}</p>
+                        {% endif %}
+                        <ul class="list-unstyled d-ib mT-20">
+                        {% if app.user.partenaire.nif %}
+                            <li><small>NIF : </small>{{ app.user.partenaire.nif }}</li>
+                        {% endif %}
+                        {% if app.user.partenaire.stat %}
+                            <li><small>STAT : </small>{{ app.user.partenaire.stat }}</li>
+                        {% endif %}
+                        {% if app.user.partenaire.rce %}
+                            <li><small>RCE : </small>{{ app.user.partenaire.rce }}</li>
+                        {% endif %}
+                        </ul>
+                    </div>
+                    <div class="text-center mT-10 pY-10 bdT">
+                        <ul class="list-unstyled">
+                            <li class="d-ib mR-10"><a href="{{ path('fos_user_profile_edit') }}" ><i class="ti-pencil-alt mR-5"></i>Modifier</a></li>
+                            <li class="d-ib mL-10"><a href="{{ path('fos_user_change_password') }}" ><i class="ti-pencil mR-5"></i>Changer mot de passe</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>  <!-- ./col --> 
+            {% endif %}
+            {% if app.user.client and app.user.hasRole('ROLE_CLIENT') %}
+            <div class="col-xl-4 col-md-4 col-sm-12 col-12 pY-20@sm-">
+                <div class="in p-0">                              
+                    <div class="text-center">
+                        <h3 class="bdB pY-5">
+                            {{ app.user.client.name }}
+                        </h3>
+                        <p class="gapY-10">{{ app.user.email }}</p>
+                        <p class="gapY-10">{{ app.user.client.tel }}</p>
+                        <p class="gapY-10">{{ app.user.client.address }}</p>
+                        <ul class="list-unstyled d-ib mT-20">
+                        {% if app.user.client.nif %}
+                            <li><small>NIF : </small>{{ app.user.client.nif }}</li>
+                        {% endif %}
+                        {% if app.user.client.stat %}
+                            <li><small>STAT : </small>{{ app.user.client.stat }}</li>
+                        {% endif %}
+                        {% if app.user.client.rce %}
+                            <li><small>RCE : </small>{{ app.user.client.rce }}</li>
+                        {% endif %}
+                        </ul>
+                    </div>
+                    <div class="text-center mT-10 pY-10 bdT">
+                        <ul class="list-unstyled">
+                            <li class="d-ib mR-10"><a href="{{ path('fos_user_profile_edit') }}" ><i class="ti-pencil-alt mR-5"></i>Modifier</a></li>
+                            <li class="d-ib mL-10"><a href="{{ path('fos_user_change_password') }}" ><i class="ti-pencil mR-5"></i>Changer mot de passe</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>  <!-- ./col --> 
+            {% endif %}
+        </div>  <!-- ./row --> 
+    </div>  <!-- ./col --> 
+</div>  <!-- ./row --> 
+{#  #}
+
+
+
+
+            {% if app.user.hasRole('ROLE_CLIENT')  and not app.user.client %}
+            <div class="readMoreLink mY-10 alert alert-success">
+                <a href="{{ path('web_client_new') }}">
+                    Continuez l'inscription
+                </a> 
+            </div>
+            {% endif %}
+            {% if app.user.hasRole('ROLE_PARTEINAIRE')  and not app.user.partenaire %}
+            <div class="readMoreLink mY-10 alert alert-success">
+                <a href="{{ path('web_client_new') }}">
+                    Continuez l'inscription
+                </a> 
+            </div>
+            {% endif %}
+
+{% if app.user.client %}
+<div class="pX-30@md+ mY-100">
+    <h4 class="mT-50 mB-15 text-center">Suivi des commandes que vous avez faites</h4>
+    {% if app.user.client.commandes|length > 0 %}
+    {{ render(controller("AppWebBundle:Commande:commandeByUser", {'client_id': app.user.client.id})) }}
+
+    {% else %}
+        <div class="no-result">
+            <div class="p-30 text-center">
+                <span class="ti-na fsz-lg d-b mB-30"></span>
+                <span class="r ">Vous n'avez pas encore commandé de déchet.</span>
+            </div>
+        </div>  <!-- ./row -->
+    {% endif %}
+</div>
+{% endif %}
+
+{% endblock fos_user_content %}

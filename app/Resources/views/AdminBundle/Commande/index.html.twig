@@ -1,0 +1,88 @@
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Dechet</th>
+        <th scope="col">Quantité</th>
+        <th scope="col">Faite le</th>
+        <th scope="col">Annulée le</th>
+        <th scope="col">Par</th>
+        <th scope="col">Validé</th>
+        <th scope="col">Vu</th>
+        <th scope="col">Expiré</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for entity in entities %}
+      <tr>
+        <th scope="row"><a href="#">{{ entity.id }}</a></th>
+        <td>{{ entity.dechet.name }} ({{entity.dechet.mesuredAmount}})</td>
+        <td>{{ entity.mesuredAmount }}</td>
+        <td>{% if entity.createdAt %}{{ entity.createdAt|date('d/m/Y') }}{% endif %}</td>
+        <td>{% if 'now'|date('d/m/Y') < entity.delais|date('d/m/Y') %}{{ entity.delais|date('d/m/Y') }}{% else %}<code class="highlighter-rouge">Commande déjà faite</code>{% endif %}</td>
+        <td>{% if entity.client and entity.client.name %}{{ entity.client.name }}{% endif %}</td>
+        <td>
+          <a href="{{path('admin_manage_publish', {'entity': 'commande', 'slug': entity.slug })}}" data-toggle="tooltip" data-placement="top" title="Marqué comme validé">
+              <i class="{% if entity.enabled %}ti-check c-green-600 {% else %}ti-close c-red-600 {% endif %} font-weight-bold"></i>
+          </a>
+        </td>
+        <td>
+          <a href="{{path('admin_manage_check', {'entity': 'commande', 'slug': entity.slug })}}" data-toggle="tooltip" data-placement="top" title="Marquez comme vu">
+              <i class="{% if entity.checked %}ti-check c-green-600 {% else %}ti-close c-red-600 {% endif %} font-weight-bold"></i>
+          </a>
+        </td>
+        <td>
+          {% if entity.finished %}
+            <i class="ti-close c-green-600 font-weight-bold"></i>
+          {% else %}
+            <i class="ti-check c-red-600 font-weight-bold"></i>
+          {% endif %}
+        </td>
+        <td class="action">
+          <ul class="list-unstyled">
+              <li class="d-ib mR-10">
+                  <a href="{{path('web_commande_show', {'slug_dechet': entity.dechet.slug, 'id': entity.id })}}" class="c-grey-900" data-toggle="tooltip" data-placement="top" title="Voir">
+                      <i class="ti-eye"></i>
+                  </a>
+              </li>
+               <li class="d-ib mR-10">
+                  <a href="" class="c-grey-900" data-toggle="modal" data-target="#id-{{entity.id}}" title="Supprimer">
+                      <i class="ti-trash"></i>
+                  </a>
+                   <!-- Modal -->
+                  <div class="modal fade" id="id-{{entity.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog  modal-sm" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">
+                              <i class="ti-alert mR-10 c-red-900"></i>Suppression
+                          </h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <p>
+                              Voulez-vous vraiment supprimer?
+                          </p>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                          <a href="{{path('admin_manage_delete', {'entity': 'commande', 'token': entity.token })}}" class="btn btn-primary">Confirmer</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+              </li>
+               <li class="d-ib mR-10">
+                  <a href="{{path('print', {'entity': 'commande', 'id': entity.id })}}" class="c-grey-900" data-toggle="tooltip" data-placement="top" title="Imprimer">
+                      <i class="ti-printer"></i>
+                  </a>
+              </li>
+          <ul>
+        </td>
+      </tr>
+      {% endfor %}      
+    </tbody>
+</table>

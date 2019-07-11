@@ -1,0 +1,21 @@
+App\CoreBundle\Entity\PageOtherImages:
+    type:  entity
+    repositoryClass: App\CoreBundle\Repository\PageOtherImagesRepository
+    table: page_other_image
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            column: name
+            type: string
+            length: 255
+        updatedAt:
+            column: updated_at
+            type: datetime
+        width:
+            column: width
+            type: boolean
+            nullable: true

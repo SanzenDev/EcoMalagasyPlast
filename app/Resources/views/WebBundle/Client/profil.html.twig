@@ -1,0 +1,36 @@
+
+<table class="table mT-20">    
+      <tr>
+        <td>Nom de la société</td>
+        <td>{{ entity.name }}</td>
+      </tr>
+      {% if entity.address %}
+      <tr>
+        <td>Adresse</td>
+        <td>{{ entity.address }}</td>
+      </tr>
+      {% endif %}
+      <tr>
+        <td>Créé le :</td>
+        <td>{% if entity.createdAt %}{{ entity.createdAt|date('d/m/Y') }}{% endif %}</td>
+      </tr>
+</table>
+
+ <div class="downloadLink pY-40">
+        <a href="{{ path('facture_pdf', {'entity': 'client', 'id': entity.id})}}" class="mY-10"><i class="ti-download font-weight-bold mR-10"></i>Facture</a>
+  </div>
+
+<h4 class="mT-50 mB-15 text-center">Suivi des commandes que vous avez faites</h4>
+{% if entity.commandes|length > 0 %}
+   {# {% include "WebBundle/Commande/index.html.twig" with {'entities': entity.commandes} %} #}
+  {{ render(controller("AppWebBundle:Commande:commandeByUser", {'client_id': entity.id})) }}
+
+{% else %}
+      <div class="no-result">
+          <div class="p-30 text-center">
+              <span class="ti-na fsz-lg d-b mB-30"></span>
+              <span class="r ">Vous n'avez pas encore commandé de déchet.</span>
+          </div>
+      </div>  <!-- ./row -->
+{% endif %}
+

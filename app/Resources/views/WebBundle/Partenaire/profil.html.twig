@@ -1,0 +1,53 @@
+<div class="breadcrumbs">
+    <ul class="list-unstyled">
+        <li><a class="mR-3" href="{{path('homepage')}}">Accueil</a> »</li>
+        <li class="non_active"><a class="mR-3" href="#">Partenaire</a> »</li>
+        <li class="active"><a href="#">{{ entity.name }}</a></li>
+    </ul>
+</div>
+
+<div class="t pY-20">
+    <h1 class="">{{ entity.name }}</h1>
+</div>
+
+{% if entity.partenaireImage %}
+<div class="i pY-10 text-center">
+    <figure>
+        <img src="{{ vich_uploader_asset(entity.partenaireImage, 'file') }}" class="w-100p@sm- w-40p@sm+ ta-c@sm+">
+    </figure>
+</div>
+{% endif %}
+{% if entity.partenaireLogo %}
+<div class="i pY-10 text-center">
+    <figure>
+        <img src="{{ vich_uploader_asset(entity.partenaireLogo, 'file') }}" class="w-100p@sm- w-40p@sm+ ta-c@sm+">
+    </figure>
+</div>
+{% endif %}
+<table class="table">     
+  <tr>
+      <td>Adresse</td>
+      <td>{{ entity.address }}</td>
+    </tr>
+    <tr>
+      <td>Téléphone</td>
+      <td>{% if entity.tel %}{{ entity.tel }}{% else %}<code class="highlighter-rouge">Vous n'avez indiqué votre numéro</code>{% endif %}</td>
+    </tr>
+    <tr>
+      <td>Lien Facebook</td>
+      <td>{% if entity.fb %}{{ entity.fb }}{% else %}<code class="highlighter-rouge">Vous n'avez indiqué votre lien facebook</code>{% endif %}</td>
+    </tr>
+      <tr>
+        <td>Site Web</td>
+        <td>{% if entity.website %}{{ entity.website }}{% else %}<code class="highlighter-rouge">Pas de site web</code>{% endif %}</td>
+      </tr>
+      <tr>
+        <td>Livraison</td>
+        <td>{% if entity.livraison %}{{ entity.livraison }}{% endif %}</td>
+      </tr>
+</table>
+
+<div class="text">
+      <h4>Description</h4>
+        {{ entity.description|raw }}
+</div> <!-- /.text -->

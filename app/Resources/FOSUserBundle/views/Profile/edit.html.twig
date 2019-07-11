@@ -1,0 +1,31 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    Modifier mon compte | {{ parent() }}
+{% endblock %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block fos_user_content %}
+ <div class="row form">
+    <div class="col-lg-8 offset-lg-2 col-xl-6 offset-xl-3 col-md-12 col-12 col-sm-12 pX-30@md- left">
+        <div class="clear">
+            <div class="breadcrumbs pY-10@md+">
+                <ul class="list-unstyled">
+                    <li><a class="mR-3" href="{{ path('homepage') }}">Accueil</a> »</li>
+                    <li class="active"><a href="#">Modifier mon compte</a></li>
+                </ul>
+            </div>
+            <h2 class="mT-20">Modifier mon compte</h2>
+            {{ form_start(form, { 'action': path('fos_user_profile_edit'), 'attr': { 'class': 'fos_user_profile_edit pT-15' } }) }}
+
+                {{ form_widget(form) }}
+                <div class="form-group ta-l@md+ mT-40@sm+">
+                    <button type="submit" class="signin-btn">Enregistrer</button>
+                </div> 
+            {{ form_end(form) }}
+            </div>
+        </div> <!-- ./clear -->
+    </div> <!-- ./col -->
+</div> <!-- ./row -->
+{% endblock fos_user_content %}

@@ -1,0 +1,7 @@
+ps_blog_index:
+    path:     /tiavina-michael/blog
+    defaults: { _controller: PortfolioCoreBundle:Blog:index }
+ps_blog_show:
+    path:     /tiavina-michael/blog/{slug}
+    defaults: { _controller: PortfolioCoreBundle:Blog:show }
+

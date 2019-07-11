@@ -1,0 +1,115 @@
+ <div class="col-md-7">
+      <div class="bgc-white p-10@sm- p-20@sm+ bd">
+          <h6 class="text-weight-bold c-grey-800 bdB pB-5 mB-10">Image</h6>
+          <img src="{{ vich_uploader_asset(entity.partenaireLogo, 'file') }}" class="w-50p"/>
+      </div> <!-- /.bg-white -->
+      <div class="bgc-white p-10@sm- p-20@sm+ bd">
+          <h6 class="text-weight-bold c-grey-800 bdB pB-5 mB-10">Image</h6>
+          <img src="{{ vich_uploader_asset(entity.partenaireImage, 'file') }}" class="w-50p"/>
+      </div> <!-- /.bg-white -->
+
+      <div class="bgc-white p-10@sm- p-20@sm+ bd">
+          <h6 class="text-weight-bold c-grey-800 bdB pB-5 mB-10">Contenu</h6>
+          <div>
+              {{ entity.description|raw }}
+          </div> <!-- /.bg-white -->
+      </div> <!-- /.bg-white -->
+ </div> <!-- /.col -->
+
+   <div class="col-md-5">
+      <div class="bgc-white  p-10@sm- p-20@sm+ bd">
+          <h6 class="text-weight-bold c-grey-800 bdB pB-5 mB-10">Information</h6>
+
+           <table class="table">
+              <tr>
+                <td>Id :</td>
+                <td>{{ entity.id }}</td>
+              </tr>
+              <tr>
+                <td>Nom de la société</td>
+                <td>{{ entity.name }}</td>
+              </tr>
+               <tr>
+                <td>Nom du responsable</td>
+                <td>{% if entity.responsable %}{{ entity.responsable }}{% else %}<code class="highlighter-rouge">Pas de responsable</code>{% endif %}</td>
+              </tr>
+               <tr>
+                <td>URL :</td>
+                <td>{{ entity.slug }}</td>
+              </tr>
+
+              <tr>
+                <td>NIF</td>
+                <td>{% if entity.nif %}{{ entity.nif }}<code class="highlighter-rouge">Pas de NIF</code>{% endif %}</td>
+              </tr>
+              <tr>
+                <td>STAT</td>
+                <td>{% if entity.stat %}{{ entity.stat }}<code class="highlighter-rouge">Pas de STAT</code>{% endif %}</td>
+              </tr>
+              <tr>
+                <td>RCE</td>
+                <td>{% if entity.rce %}{{ entity.rce }}<code class="highlighter-rouge">Pas de RCE</code>{% endif %}</td>
+              </tr>
+               <tr>
+                <td>Téléphone</td>
+                <td>{% if entity.tel %}{{ entity.tel }}{% else %}<code class="highlighter-rouge">Pas de numéro téléphone</code>{% endif %}</td>
+              </tr>
+              <tr>
+                <td>Site Web</td>
+                <td>{% if entity.website %}{{ entity.website }}{% else %}<code class="highlighter-rouge">Pas de site web</code>{% endif %}</td>
+              </tr>
+              <tr>
+                <td>Livraison</td>
+                <td>{% if entity.livraison %}{{ entity.livraison }}{% else %}<code class="highlighter-rouge">Pas de livraison</code>{% endif %}</td>
+              </tr>
+               <tr>
+                <td>Type</td>
+                <td>{% if entity.type %}{{ entity.type }}{% else %}<code class="highlighter-rouge">Pas de type</code>{% endif %}</td>
+              </tr>
+               <tr>
+                <td>Adresse</td>
+                <td>{% if entity.address %}{{ entity.address }}{% else %}<code class="highlighter-rouge">Pas d'adresse</code>{% endif %}</td>
+              </tr>
+
+              <tr>
+               <td>Facebook</td>
+                <td>{% if entity.fb %}{{ entity.fb }}{% else %}<code class="highlighter-rouge">Pas de lien facebook</code>{% endif %}</td>
+              </tr>
+              <tr>
+                <tr>
+                <td>Ajouté le :</td>
+                <td>{% if entity.createdAt %}{{ entity.createdAt|date('d-m-Y H:i:s') }}{% endif %}</td>
+              </tr>
+                <tr>
+                <td>Modifié le : </td>
+                <td>{% if entity.createdAt %}{{ entity.createdAt|date('d-m-Y H:i:s') }}{% else %}<code class="highlighter-rouge">Pas encore modifié</code>{% endif %}</td>
+              </tr>
+             </tr>
+              <tr>
+                <td>Ajouté par :</td>
+                <td>{% if entity.user %}{{ entity.user.username }}{% endif %}</td>
+              </tr>
+               <tr>
+                <td>Validé? </td>
+                <td>
+                  <a href="{{path('admin_manage_check', {'entity': 'partenaire', 'slug': entity.slug })}}" data-toggle="tooltip" data-placement="top" title="Cliquez pour ne plus valider">
+                      <i class="{% if entity.checked %}ti-check c-green-600 {% else %}ti-close c-red-600 {% endif %} font-weight-bold"></i>
+                  </a>
+                </td>
+              </tr>
+                 <td>Publié? </td>
+                <td>
+                  <a href="{{path('admin_manage_publish', {'entity': 'partenaire', 'slug': entity.slug, })}}" data-toggle="tooltip" data-placement="top" title="Cliquez pour ne plus valider">
+                      <i class="{% if entity.enabled %}ti-check c-green-600 {% else %}ti-close c-red-600 {% endif %} font-weight-bold"></i>
+                  </a>
+                </td>
+              </tr>
+              <tr>
+                  <a href="{{path('admin_manage_check', {'entity': 'partenaire','slug' : entity.slug})}}" data-toggle="tooltip" data-placement="top" title="Publier">
+                      <i class="{% if entity.enabled %}ti-check{% else %}ti-close{% endif %} c-green-600 font-weight-bold"></i>
+                  </a>
+                </td>
+              </tr>
+          </table>
+    </div> <!-- /.bg-white -->
+  </div> <!-- /.col -->

@@ -1,0 +1,15 @@
+web_manage_index:
+    path:     /liste/{entity}
+    defaults: { _controller: AppWebBundle:Manager:index }
+
+web_manage_show:
+    path:     /page/{entity}/{slug}
+    defaults: { _controller: AppWebBundle:Manager:show }
+    requirements:
+      entity: news|page|partenaire
+web_manage_new:
+    path:     /formulaire/{entity}
+    defaults: { _controller: AppWebBundle:Manager:new }
+    requirements:
+      entity: contact|newsletter
+

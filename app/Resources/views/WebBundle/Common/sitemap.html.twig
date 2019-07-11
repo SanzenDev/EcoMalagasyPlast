@@ -1,0 +1,48 @@
+<div class="row pY-0 pX-60@lg body pT-20@md+ pT-10@md-">
+    <div class="col-lg-8 m-0 pL-40@md+ main">
+        <div class="breadcrumbs">
+            <ul class="list-unstyled">
+                <li><a class="mR-3" href="{{ path('homepage') }}">Accueil</a> »</li>
+                <li class="non_active"><a class="mR-3" href="#">Déchets</a> »</li>
+                <li class="active"><a href="#">Plan du site</a></li>
+            </ul>
+        </div>
+        <div class="row pB-30@md- pT-10@md- pT-20@md+ mB-40@md+">
+            <div class="col-lg-12">
+                <div class="text-left">
+                    <h3>Plan du site</h3>
+                </div>
+                <div class="text-left">
+                    <ul class="sitemap">
+                        <li><a href="{{ path('homepage') }}">Accueil</a></li>
+                        <li><a href="{{ path('web_manage_index', {'entity': 'news'}) }}">Actualités</a></li>
+                        <li><a href="{{ path('web_manage_index', {'entity': 'dechet'}) }}">Nos dechets</a></li>
+                        <li><a href="{{ path('web_manage_index', {'entity': 'partenaire'}) }}">Nos partenaires</a></li>
+                        <li><a href="{{ path('web_manage_new', {'entity': 'contact'}) }}">Contactez-nous</a></li>
+                        <li><a href="{{ path('web_manage_new', {'entity': 'newsletter'}) }}">Newsletter</a></li>
+                        <li><a href="{{ path('fos_user_security_login') }}">Connexion</a></li>
+                        <li><a href="{{ path('fos_user_registration_register') }}">Créer un compte</a></li>
+                        <li><a href="{{ path('sitemap') }}">Plan du site</a></li>
+                        <li><a href="#">A propos</a></li>
+                        {% for entity in news %}
+                        <li><a href="{{ path('web_manage_index', {'entity': 'news'}) }}">{{ entity.title }}</a></li>
+                        {% endfor %}
+                        {% for entity in partenaires %}
+                        <li><a href="{{ path('web_manage_index', {'entity': 'partenaire'}) }}">{{ entity.name }}</a></li>
+                        {% endfor %}
+                        {% for entity in dechets %}
+                        <li><a href="{{ path('web_manage_index', {'entity': 'dechet'}) }}">{{ entity.name }}</a></li>
+                        {% endfor %}
+                        {% for entity in pages %}
+                        <li><a href="{{ path('web_manage_index', {'entity': 'page'}) }}">{{ entity.name }}</a></li>
+                        {% endfor %}
+                        <li><a href="{{ path('sitemap') }}">Plan du site</a></li>
+                        <li><a href="#">A propos</a></li>
+                    </ul>
+                </div>
+            </div>  <!-- ./col -->                             
+        </div>  <!-- ./row -->
+    </div> <!-- /.col -->
+
+     {{ render(controller("AppWebBundle:Main:aside")) }}
+</div>    <!-- ./row -->

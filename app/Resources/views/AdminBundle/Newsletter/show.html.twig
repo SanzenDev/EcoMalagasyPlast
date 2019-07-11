@@ -1,0 +1,34 @@
+ <div class="col-md-12">
+    <div class="bgc-white  p-10@sm- p-20@sm+ bd">
+        <h6 class="text-weight-bold c-grey-800 bdB pB-5 mB-10">Information</h6>
+
+         <table class="table">
+            <tr>
+              <td>Id :</td>
+              <td>{{ entity.id }}</td>
+            </tr>
+             <tr>
+              <td>URL :</td>
+              <td>{{ entity.slug }}</td>
+            </tr>
+            <tr>
+              <td>Email</td>
+              <td>{{ entity.email }}</td>
+            </tr>
+              <tr>
+              <td>Ajouté le :</td>
+              <td>{% if entity.createdAt %}{{ entity.createdAt|date('d-m-Y H:i:s') }}{% endif %}</td>
+            </tr>
+           </tr>
+             <tr>
+              <td>Vu? </td>
+
+              <td>
+                <a href="{{path('admin_manage_check', {'entity': 'newsletter', 'slug': entity.slug, })}}" data-toggle="tooltip" data-placement="top" title="Cliquez pour ne plus valider">
+                    <i class="{% if entity.checked %}ti-check c-green-600 {% else %}ti-close c-red-600 {% endif %} font-weight-bold"></i>
+                </a>
+              </td>
+            </tr>
+        </table>
+  </div> <!-- /.bg-white -->
+</div> <!-- /.col -->

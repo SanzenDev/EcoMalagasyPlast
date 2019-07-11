@@ -1,0 +1,9 @@
+web_dechet_show:
+    path:     /show/dechets/{slug}
+    defaults: { _controller: AppWebBundle:Dechet:show }
+web_commande_show:
+    path:     /commandes/{slug_dechet}/{id}
+    defaults: { _controller: AppWebBundle:Commande:show }
+web_commande_cancel:
+    path:     /annuler/commandes/{id}
+    defaults: { _controller: AppWebBundle:Commande:cancel }

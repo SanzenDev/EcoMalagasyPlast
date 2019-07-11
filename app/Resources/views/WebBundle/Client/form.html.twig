@@ -1,0 +1,75 @@
+ <div class="row form">
+    <div class="col-lg-8 offset-lg-2 col-xl-6 offset-xl-3 col-md-12 col-12 col-sm-12 pX-30@md- left">
+        <div class="clear">
+            <div class="breadcrumbs pY-10@md+">
+                <ul class="list-unstyled">
+                    <li><a class="mR-3" href="{{ path('homepage') }}">Accueil</a> »</li>
+                    <li class="active"><a href="#">Devenir client</a></li>
+                </ul>
+            </div>
+            <h2 class="pT-15@md- mY-20@lg+">Information complémentaire</h2>
+
+            {{ form_start(form,{'attr': {'class': 'pT-15'}}) }}
+                <div class="form-group">
+                    {{form_label(form.name)}}
+                    {{form_widget(form.name)}}
+                    {{form_errors(form.name)}} 
+                </div>
+                <div class="form-group">
+                    {{form_label(form.tel)}}
+                    {{form_widget(form.tel)}}
+                    {{form_errors(form.tel)}}
+                    <small class="form-text text-muted">Ex: +261340000000</small>
+                </div>
+
+                <div class="form-group">
+                    {{form_label(form.address)}}
+                    {{form_widget(form.address)}}
+                    {{form_errors(form.address)}} 
+                </div>
+
+                <div class="form-group">
+                    {{form_label(form.nif)}}
+                    {{form_widget(form.nif)}}
+                    {{form_errors(form.nif)}} 
+                </div>
+                <div class="form-group">
+                    {{form_label(form.stat)}}
+                    {{form_widget(form.stat)}}
+                    {{form_errors(form.stat)}} 
+                </div>
+                <div class="form-group">
+                    {{form_label(form.rce)}}
+                    {{form_widget(form.rce)}}
+                    {{form_errors(form.rce)}} 
+                </div>
+
+                <div class="form-group cb">
+                    {{form_widget(form.showed)}}
+                    {{form_label(form.showed)}}
+                    {{form_errors(form.showed)}} 
+                </div>
+
+                {{form_rest(form)}}
+                <div class="form-group ta-l@md+">
+                    <small class="form-text text-muted"><strong class="c-red-900">*</strong> champ obligatoire.</small>
+                    <button type="submit" class="signin-btn">Enregistrer</button>
+                </div>
+            {{ form_end(form) }}
+        </div>   <!-- ./clear -->
+    </div> <!-- ./col -->
+    <div class="col-lg-8 offset-lg-2 col-xl-6 offset-xl-3 col-md-12 col-12 col-sm-12 right">
+        <h4 class="mT-30">Pourquoi créer un compte client?</h4>
+        <div class="mT-20 d">
+            <p>
+                Votre compte nous permet de mieux vous connaître et de vous envoyez des offres qui répondent à vos attentes. De plus vos coordonnées sont enregistrées dans votre compte client. Ainsi lors de vos prochaines commandes, vous n'avez pas à resaisir vos coordonnées. Vous gagnez ainsi du temps !       
+            </p>
+            <p class="mY-30"><b>
+                Si vous êtes déjà client  de {{ sitename }} mais que vous n'avez jamais commandé sur internet, créer votre compte client permettra d'avoir accès à toute vos informations ainsi que d'accéder à l'historique de vos commandes.         
+            </b></p>
+             <p>
+                Vous pourrez également commander directement en ligne les déchets que vous voulez récycler
+            </p>
+        </div>
+    </div> <!-- ./col -->
+</div> <!-- ./row -->

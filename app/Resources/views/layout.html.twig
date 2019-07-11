@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="Sufee Admin - HTML5 Admin Template">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>{% block title %}Mia - {% endblock %}</title>
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <link rel="stylesheet" href="{{asset('bundles/app/css/app.css')}}"/>
+        {% block stylesheets %}{% endblock %}
+</head>
+<body>
+
+
+
+    {% for type, messages in app.session.flashbag.all() %}
+        {% for message in messages %}
+            <div class="alert alert-{{ type }}">
+                <strong>{{ message }}</strong>
+            </div>
+        {% endfor %}
+    {% endfor %}
+
+    <div class="peers ai-s fxw-nw">
+        <div class="col-12 col-md-6 offset-md-3 col-sm-8 offset-sm-2 peer pB-80 pT-10 h-100">
+            <figure class="text-center mB-10">
+                <img src="{{ asset('bundles/app/images/logo-header.png') }}" alt="logo MIA" class="text-center mB-10">
+            </figure>           
+            {% block fos_user_content %}
+            {% endblock fos_user_content %}
+
+        </div>
+    </div>
+
+        <script src="{{asset('bundles/app/js/app.js')}}"></script>
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>

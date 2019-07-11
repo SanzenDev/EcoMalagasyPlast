@@ -1,0 +1,9 @@
+portfolio_blog:
+    resource: "@PortfolioCoreBundle/Resources/config/routing/blog.yml"
+    prefix:   /
+admin_portfolio_manager:
+    resource: "@PortfolioCoreBundle/Resources/config/routing/admin.yml"
+    prefix:   /
+ps_home:
+    path:     /portfolio/tiavina-michael
+    defaults: { _controller: PortfolioCoreBundle:Manager:home }

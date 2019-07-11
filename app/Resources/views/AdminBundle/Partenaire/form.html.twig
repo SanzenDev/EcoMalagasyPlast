@@ -1,0 +1,86 @@
+{{ form_start(form) }} 
+<div class="form-group">
+    {{form_label(form.name)}}
+    {{form_widget(form.name)}}
+    {{form_errors(form.name)}} 
+</div>
+<div class="form-group">
+    {{form_label(form.tel)}}
+    {{form_widget(form.tel)}}
+    {{form_errors(form.tel)}} 
+</div>
+<div class="form-group">
+    {{form_label(form.responsable)}}
+    {{form_widget(form.responsable)}}
+    {{form_errors(form.responsable)}} 
+</div>
+<div class="form-group">
+    {{form_label(form.livraison)}}
+    {{form_widget(form.livraison)}}
+    {{form_errors(form.livraison)}} 
+</div>
+
+    <div class="form-group">
+        {{form_label(form.address)}}
+        {{form_widget(form.address)}}
+        {{form_errors(form.address)}} 
+    </div>  <!-- /.form-group -->
+
+<div class="form-group">
+    {{form_label(form.website)}}
+    {{form_widget(form.website)}}
+    {{form_errors(form.website)}} 
+    <small class="form-text text-muted">Lien du siteweb</small>
+</div>
+<div class="form-group">
+    {{form_label(form.fb)}}
+    {{form_widget(form.fb)}}
+    {{form_errors(form.fb)}} 
+    <small class="form-text text-muted">Lien d'un compte ou page facebook</small>
+</div>
+
+<div class="form-group">
+    {{form_label(form.partenaireLogo)}}
+    {{form_widget(form.partenaireLogo)}}
+    {{form_errors(form.partenaireLogo)}} 
+    <small class="form-text text-muted">Logo de la société</small>
+</div>
+<div class="form-group">
+    {{form_label(form.partenaireImage)}}
+    {{form_widget(form.partenaireImage)}}
+    {{form_errors(form.partenaireImage)}} 
+    <small class="form-text text-muted">Image de la société</small>
+</div>
+<div class="form-group">
+    {{form_label(form.nif)}}
+    {{form_widget(form.nif)}}
+    {{form_errors(form.nif)}} 
+</div>  <!-- /.form-group -->
+<div class="form-group">
+    {{form_label(form.stat)}}
+    {{form_widget(form.stat)}}
+    {{form_errors(form.stat)}} 
+</div>  <!-- /.form-group -->
+<div class="form-group">
+    {{form_label(form.rce)}}
+    {{form_widget(form.rce)}}
+    {{form_errors(form.rce)}} 
+</div>  <!-- /.form-group -->
+<div class="checkbox checkbox-circle checkbox-info peers ai-c mB-15">
+    {{form_widget(form.enabled)}}
+    {{form_label(form.enabled)}}
+    {{form_errors(form.enabled)}} 
+</div>
+<div class="form-group">
+    {{form_label(form.description)}}
+    {{form_widget(form.description)}}
+    {{form_errors(form.description)}} 
+</div>
+
+{{form_rest(form)}}
+ <div class="form-group mT-10">
+    <small class="form-text text-muted"><strong class="c-red-900">*</strong> champ obligatoire.</small>
+    <button type="submit" class="btn btn-primary form-control mT-10">Enregistrer</button>
+</div>    <!-- /.form-group -->
+
+{{ form_end(form) }}

@@ -1,0 +1,29 @@
+{% for entity in entities %}
+<div class="row actu-list mY-20 pY-20">
+    <div class="col-lg-4 col-xl-4 col-3 col-md-4 col-sm-4 pY-0 pR-0 pL-5">
+        <figure class="ov-h mB-0">
+            <img src="{{ vich_uploader_asset(entity.newsImage, 'file') }}" class="w-100p pT-10"/>
+        </figure> 
+        <div class="pY-10">
+            <small class="date">
+                {% if entity.createdAt %}
+                  {{ entity.createdAt|date('d F Y') }}
+                {% endif %}
+            </small>
+        </div>
+    </div>
+    <div class="col-lg-8 col-xl-9 col-9 col-md-8 col-sm-8">
+        <div>
+            <h1>
+                <a href="{{ path('web_manage_index', {'entity': 'news', 'slug': entity.slug })}}">{{ entity.title }}</a>
+            </h1>
+        </div>
+        <div class="d  pB-10@md+">
+            {{ entity.content|length > 180 ? entity.content|striptags|slice(0, 180) ~ '...' : entity.content|striptags }}
+        </div> 
+        <div class="readMoreLink">
+            <a href="{{ path('web_manage_show', {'entity': 'news', 'slug': entity.slug })}}">Lire la suite</a> 
+        </div> <!-- /.col -->
+    </div>
+</div>
+{% endfor %}

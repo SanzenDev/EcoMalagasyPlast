@@ -1,0 +1,22 @@
+App\CoreBundle\Entity\NewsImage:
+    type:  entity
+    repositoryClass: App\CoreBundle\Repository\NewsImageRepository
+    table: news_image
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            column: name
+            type: string
+            length: 255
+        legend:
+            column: legend
+            type: string
+            length: 255
+            nullable: true
+        updatedAt:
+            column: updated_at
+            type: datetime

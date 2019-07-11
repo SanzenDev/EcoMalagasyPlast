@@ -1,0 +1,13 @@
+<h1>Nouvelle actualité : {{ entity.title }}</h1>
+
+<p><small>Ajouté le {{ entity.createdAt|created_ago }}</small></p>
+
+<blockquote style="color: #666666; font-style: italic;">
+	{% if entity.content %}
+      {{ entity.content|length > 75 ? entity.content|slice(0, 75) ~ '...' : entity.slice }}
+	{% endif %}
+</blockquote>
+
+<p>
+    <a href="{{ app.request.getSchemeAndHttpHost() ~ path('web_manage_view', { entity: 'contact', 'slug': entity.slug }) }}">Voir plus</a>
+</p>

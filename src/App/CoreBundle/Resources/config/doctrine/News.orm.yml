@@ -1,0 +1,123 @@
+App\CoreBundle\Entity\News:
+    type: entity
+    repositoryClass: App\CoreBundle\Repository\NewsRepository
+    table: news
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        title:
+            column: name
+            type: string
+            length: 255
+        content:
+            column: content
+            type: text
+        youtube:
+            column: youtube
+            type: string
+            nullable: true
+        metaTitle:
+            column: meta_title
+            type: string
+            length: 255
+            nullable: true
+        metaDescription:
+            column: meta_description
+            type: string
+            length: 255
+        metaKeywords:
+            column: meta_keywords
+            type: string
+            length: 255
+            nullable: true
+        slug:
+            column: slug
+            type: string
+            length: 255
+            gedmo:
+                slug:
+                    separator: -
+                    style: lower
+                    fields:
+                       - title
+        token:
+            column: token
+            type: string
+            length: 255
+
+        createdAt:
+            column: created_at
+            type: datetime
+            gedmo:
+                timestampable:
+                    on: create
+        updatedAt:
+            column: updated_at
+            type: datetime
+            type: boolean
+            gedmo:
+                timestampable:
+                    on: update
+        enabled:
+            column: enabled
+            type: boolean
+            nullable: true
+
+    oneToOne:
+        newsImage:
+            targetEntity: NewsImage
+            cascade: [ persist ]
+            orphanRemoval: true
+        newsVideoMp4:
+            targetEntity: NewsVideoMp4
+            cascade: [ persist ]
+            orphanRemoval: true
+        newsVideoOgg:
+            targetEntity: NewsVideoOgg
+            cascade: [ persist ]
+            orphanRemoval: true
+        newsVideoWebm:
+            targetEntity: NewsVideoWebm
+            cascade: [ persist ]
+            orphanRemoval: true
+        newsZip:
+            targetEntity: NewsZip
+            cascade: [ persist ]
+            orphanRemoval: true
+        newsPdf:
+            targetEntity: NewsPdf
+            cascade: [ persist ]
+            orphanRemoval: true
+
+    manyToOne:
+        user:
+            targetEntity: Utilisateur
+            inversedBy: newss
+            joinColumn:
+                name: user_id
+                referencedColumnName: id
+                nullable: true
+                onDelete: "SET NULL"
+                onUpdate: "CASCADE"
+
+    manyToMany:
+        newsOtherImages:
+            targetEntity: NewsOtherImages
+            cascade: ["persist", "remove"]
+            inversedBy: newss
+            joinTable:
+                name: other_images_news
+                joinColumns:
+                    news_id:
+                        referencedColumnName: id
+                        onDelete: "CASCADE"
+                inverseJoinColumns:
+                    news_other_images_id:
+                        referencedColumnName: id
+                        onDelete: "CASCADE"
+
+    lifecycleCallbacks:
+        prePersist: [ setMetaTitleValue, setMetaDescriptionValue, setMetaKeysValue ]

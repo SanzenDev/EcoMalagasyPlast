@@ -1,0 +1,129 @@
+ <div class="col-md-7">
+    <div class="bgc-white p-10@sm- p-20@sm+ bd">
+        <h6 class="text-weight-bold c-grey-800 bdB pB-5 mB-10">Image</h6>
+        <img src="{{ vich_uploader_asset(entity.newsImage, 'file') }}" class="w-50p"/>
+    </div> <!-- /.bg-white -->
+
+    {% if entity.newsVideoMp4 or entity.newsVideoOgg or entity.newsVideoWebm%}
+    <div class="bgc-white p-10@sm- p-20@sm+ bd">
+        <h6 class="text-weight-bold c-grey-800 bdB pB-5 mB-10">Vidéo</h6>
+        <video controls poster="{{ vich_uploader_asset(entity.newsImage, 'file') }}" class="w-100p table-dark">
+            {% if entity.newsVideoMp4 %}
+            <source src="{{ vich_uploader_asset(entity.newsVideoMp4, 'file') }}" />
+            {% endif %}
+            {% if entity.newsVideoOgg %}
+            <source src="{{ vich_uploader_asset(entity.newsVideoOgg, 'file') }}" />
+            {% endif %}
+            {% if entity.newsVideoWebm %}
+            <source src="{{ vich_uploader_asset(entity.newsVideoWebm, 'file') }}" />
+            {% endif %}
+        </video> 
+        <div class="pY-20">
+          {% if entity.newsVideoMp4 %}
+            {{entity.newsVideoMp4.sizeInMega}}
+          {% endif %}
+           {% if entity.newsVideoOgg %}
+            {{entity.newsVideoOgg.sizeInMega}}
+          {% endif %}
+           {% if entity.newsVideoWebm %}
+            {{entity.newsVideoWebm.sizeInMega}}
+          {% endif %}
+        </div> 
+  </div> <!-- /.bg-white -->
+  {% endif %}
+
+  <div class="bgc-white p-10@sm- p-20@sm+ bd">
+      <h6 class="text-weight-bold c-grey-800 bdB pB-5 mB-10">Contenu</h6>
+      <div>
+          {{ entity.content|raw }}
+      </div> <!-- /.bg-white -->
+  </div> <!-- /.bg-white -->
+
+  {% if entity.newsOtherImages|length  > 0 %}
+  <div class="bgc-white p-10@sm- p-20@sm+ bd">
+    <div class="row">
+      {% for image in entity.newsOtherImages %}
+       <div class="col-md-6">
+          <img src="{{ vich_uploader_asset(image, 'file') }}" class="w-100p"/>
+      </div> <!-- /.col -->
+      {% endfor %}
+    </div> <!-- /.row -->
+  </div> <!-- /.bgc-white -->
+  {% endif %}
+</div> <!-- /.col -->
+
+<div class="col-md-5">
+    {% if entity.newsPdf or entity.newsZip %}
+    <div class="bgc-white  p-10@sm- p-20@sm+ bd">
+          <h6 class="text-weight-bold c-grey-800 bdB pB-5 mB-10">Fichier</h6>
+
+          {% if entity.newsPdf %}
+            <a href="{{ vich_uploader_asset(entity.newsPdf, 'file') }}" class="bgc-blue-600 pY-5 pX-10 bdrs-2 c-white mR-5 mT-5 d-ib">PDF ({{entity.newsPdf.sizeInMega}})</a>
+         {% endif %}
+         {% if entity.newsZip %}
+            <a href="{{ vich_uploader_asset(entity.newsZip, 'file') }}" class="bgc-green-600 pY-5 pX-10 bdrs-2 c-white mR-5 mT-5 d-ib">{{entity.newsZip.extension|upper}}({{entity.newsZip.sizeInMega}})</a>
+          {% endif %}
+    </div>
+    {% endif %}
+
+    <div class="bgc-white  p-10@sm- p-20@sm+ bd">
+        <h6 class="text-weight-bold c-grey-800 bdB pB-5 mB-10">Information</h6>
+
+         <table class="table">
+            <tr>
+              <td>Id :</td>
+              <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+              <td>Titre du news</td>
+              <td>{{ entity.title }}</td>
+            </tr>
+             <tr>
+              <td>URL :</td>
+              <td>{{ entity.slug }}</td>
+            </tr>
+              <tr>
+              <td>Youtube :</td>
+              <td>{% if entity.youtube %}{{ entity.youtube }}{% else %}<code class="highlighter-rouge">Pas de lien youtube</code>{% endif %}</td>
+            </tr>
+              <tr>
+              <td>Ajouté le :</td>
+              <td>{% if entity.createdAt %}{{ entity.createdAt|date('d-m-Y H:i:s') }}{% endif %}</td>
+            </tr>
+              <tr>
+              <td>Modifié le : </td>
+                <td>{% if entity.updatedAt != entity.createdAt %}{{ entity.updatedAt|date('d-m-Y H:i:s') }}{% else %}<code class="highlighter-rouge">Pas encore modifié</code>{% endif %}</td>
+            </tr>
+           </tr>
+            <tr>
+              <td>Ajouté par :</td>
+              <td>{% if entity.user %}<a href="{{path('admin_manage_show', {'entity': 'utilisateur', 'slug': entity.user.slug })}}">{{ entity.user.lastName }}{% else %}Compte inconnu{% endif %}</a></td>
+            </tr>
+             <tr>
+              <td>Publié? </td>
+           <td>
+              <a href="{{path('admin_manage_publish', {'entity': 'news', 'slug': entity.slug, })}}" data-toggle="tooltip" data-placement="top" title="Cliquez pour ne plus valider">
+                  <i class="{% if entity.enabled %}ti-check c-green-600 {% else %}ti-close c-red-600 {% endif %} font-weight-bold"></i>
+              </a>
+            </td>
+            </tr>
+        </table>
+    </div> <!-- /.bg-white -->
+
+    <div class="bgc-white  p-10@sm+ bd">
+        <h6 class="text-weight-bold c-grey-800 bdB pB-5 mB-10">SEO</h6>
+
+          <div>
+            <strong>Métatitre : </strong>
+              {% if entity.metaTitle %}{{ entity.metaTitle|raw }}{% endif %}
+          </div>
+          <div>
+            <strong>Métadescription : </strong>
+              {% if entity.metaDescription %}{{ entity.metaDescription|raw }}{% endif %}
+          </div>
+          <div>
+            <strong>Mot clés : </strong>
+            {% if entity.metaKeywords %}{{ entity.metaKeywords|raw }}{% endif %}
+        </div>
+    </div> <!-- /.bg-white -->
+</div> <!-- /.col -->

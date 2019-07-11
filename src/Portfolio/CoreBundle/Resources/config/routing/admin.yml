@@ -1,0 +1,23 @@
+admin_ps_index:
+    path:     /901030/kuqurep/{entity}
+    defaults: { _controller: PortfolioCoreBundle:Admin:index }
+    requirements:
+        entity: blog|experience|about|cv|contact
+
+admin_ps_update:
+    path:     /901030/icpubp/{entity}/{token}
+    defaults: { _controller: PortfolioCoreBundle:Admin:update }
+    requirements:
+        entity: blog|experience|about|cv
+admin_ps_new:
+    path:     /901030/cpicpi/{entity}
+    defaults: { _controller: PortfolioCoreBundle:Admin:new }
+    requirements:
+        entity: blog|experience|about|cv
+
+admin_ps_delete:
+    path:     /901030/{entity}/{token}/fafana
+    defaults: { _controller: PortfolioCoreBundle:Admin:delete }
+    requirements:
+        entity: blog|experience|about|cv|contact
+

@@ -1,0 +1,118 @@
+App\CoreBundle\Entity\Partenaire:
+    type: entity
+    repositoryClass: App\CoreBundle\Repository\PartenaireRepository
+    table: partenaire
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            column: name
+            type: string
+            length: 255
+        tel:
+            column: tel
+            type: string
+            length: 255
+        responsable:
+            column: responsable
+            type: string
+            length: 255
+        livraison:
+            column: livraison
+            type: string
+            length: 255
+            nullable: true
+        type:
+            column: type
+            type: string
+            length: 255
+            nullable: true
+        address:
+            column: address
+            type: string
+            length: 255
+            nullable: true
+        website:
+            column: website
+            type: string
+            length: 255
+            nullable: true
+        fb:
+            column: fb
+            type: string
+            length: 255
+            nullable: true
+        description:
+            column: description
+            type: text
+            nullable: true
+        nif:
+            column: nif
+            type: string
+            nullable: true
+        stat:
+            column: stat
+            type: string
+            nullable: true
+        rce:
+            column: rce
+            type: string
+            nullable: true
+        slug:
+            column: slug
+            type: string
+            length: 255
+            gedmo:
+                slug:
+                    separator: -
+                    style: lower
+                    fields:
+                       - name
+        token:
+            column: token
+            type: string
+            length: 255
+
+        createdAt:
+            column: created_at
+            type: datetime
+            gedmo:
+                timestampable:
+                    on: create
+        updatedAt:
+            column: updated_at
+            type: datetime
+            type: boolean
+            gedmo:
+                timestampable:
+                    on: update
+        enabled:
+            column: enabled
+            type: boolean
+            nullable: true
+        checked:
+            column: checked
+            type: boolean
+            nullable: true
+
+    oneToOne:
+        user:
+            targetEntity: Utilisateur
+            inversedBy: partenaire
+        partenaireImage:
+            targetEntity: PartenaireImage
+            cascade: [ persist ]
+            orphanRemoval: true
+        partenaireLogo:
+            targetEntity: PartenaireLogo
+            cascade: [ persist ]
+            orphanRemoval: true
+    oneToMany:
+        dechetPartenaires:
+            targetEntity: DechetPartenaire
+            mappedBy: partenaire
+            cascade: [ persist ]
+            orphanRemoval: true

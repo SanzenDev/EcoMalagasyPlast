@@ -1,0 +1,225 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<div class="row cover">
+    <div class="col-md-12">
+        <div class="pB-0">
+            <img src="{{ asset('bundles/app/images/plan.jpg') }}" class="w-100p" alt="{{sitename}} logo" title="{{sitename}} logo, Antananarivo,Madagascar">
+        </div> 
+    </div>
+    {% include "WebBundle/Common/alert.html.twig" %} 
+</div> <!-- ./row -->
+ <div class="row feature tc apropos pB-30@md- pY-100@lg+">
+    <div class="col-lg-8 offset-lg-2 col-md-8 offset-md-2">
+        <div class="t pY-20 mT-30 mB-10">
+            <h1>Qui sommes-nous</h1>
+        </div>
+        <div class="d">
+
+<p>Re-Cycl'in est un décheterie moderne <br>
+</p>
+
+        </div>
+    </div> <!-- ./col -->
+    <div class="col-lg-8 offset-lg-2 more-block mT-60@md+ pY-20@md- ta-c@sm+">
+         <a href=""><i class="ti-arrow-right mR-5"></i>En savoir plus sur Recycl'in Mada</a>
+    </div> <!-- ./col -->
+</div> <!-- ./row -->
+
+ <div class="row feature tc mT-80@md+ connect pB-50@lg- pY-100@lg+">
+    <div class="col-lg-8 offset-lg-2 col-md-8 offset-md-2">
+        <div class="t pY-20 mT-30 mB-10">
+            <h1>Votre compte {{ sitename }}</h1>
+        </div>
+        <div class="d mT-50@lg+ mB-100@lg+">
+
+<p>Connectez-vous ou créez un compte gratuitement afin de pouvoir bénéficiez de tous les services et les fonctionnalités de {{ sitename }}.</p>
+
+        </div>
+        <div class="buttons pY-20 mT-40 text-center">
+            {% if not is_granted('IS_AUTHENTICATED_FULLY') %}           
+            <ul class="list-unstyled">
+                <li class="mR-5@sm+ mB-20@sm-">
+                    <a href="{{ path('fos_user_security_login') }}" class="signin-btn text-uppercase">
+                        Se connecter
+                    </a>
+                </li>
+                 <li class="mL-5@sm+">
+                    <a href="{{ path('fos_user_registration_register') }}" class="signup-btn text-uppercase">
+                        Créer un compte
+                    </a>
+                </li>
+            </ul> 
+            {% else %}
+            <ul class="list-unstyled">
+                {% if is_granted('ROLE_PARTENAIRE') or is_granted('ROLE_CLIENT') %} 
+                <li class="mR-5@sm+ mB-20@sm-">
+                    <a href="{{ path('fos_user_profile_show') }}" class="signin-btn text-uppercase">
+                        Mon Profil
+                    </a>
+                </li>
+                {% else %}
+                <li class="mR-5@sm+ mB-20@sm-">
+                    <a href="{{ path('web_client_new') }}" class="signin-btn text-uppercase">
+                        Devenir Client
+                    </a>
+                </li>               
+                <li class="mR-5@sm+ mB-20@sm-">
+                    <a href="{{ path('web_partenaire_new') }}" class="signin-btn text-uppercase">
+                        Devenir Partenaire
+                    </a>
+                </li>               
+                {% endif %}
+                 <li class="mL-5@sm+  mT-30@md+">
+                    <a href="{{ path('fos_user_security_logout') }}" class="signup-btn text-uppercase">
+                        Déconnexion
+                    </a>
+                </li>
+            </ul>             
+            {% endif %}                                
+        </div>
+    </div> <!-- ./col -->
+</div> <!-- ./row -->
+
+ <div class="row feature news clear pB-30@md- pB-30@md pB-50@md- pT-10@md- pT-50@md pY-100@lg+ mB-40@md+">
+    <div class="col-xl-10 offset-xl-1 col-lg-10 offset-lg-1 col-md-12 col-sm-12 col-12">
+        <div class="t pB-20 mT-30 mB-10@md+">
+            <h1>Nos dernières actualités</h1>
+        </div>
+        <div class="d row tc mB-40@md mB-60@lg+ mT-20@lg+">
+            <div class="col-lg-12">
+<p>Découvrez les dernières actualités de {{ sitename }} dans le domaine du recyclage et du traiment des déchets</p>
+            </div>
+        </div>
+
+        {% if news|length > 0 %}
+        <div class="row block">
+            {% for entity in news %}
+            <div class="m-a col-xl-5 
+            
+            {% if news|length == 1 %}offset-md-3 offset-lg-3 offset-sm-3 offset-xl-4 {% endif %}
+            col-lg-6 col-md-6 col-sm-6 col-12 pX-15@md+ pY-20@sm- mB-30@sm+">
+                <div class="ext p-10@sm+ p-20@lg+">
+                    <div class="in">
+                        <figure class="ov-h">
+                            <img src="{{ vich_uploader_asset(entity.newsImage, 'file') }}" class="w-100p" alt="{{entity.title}}" title="{{entity.title}}, {{sitename}}, Antananarivo,Madagascar"/>
+                        </figure>                               
+                        <div class="mY-20@lg+">
+                            <h1>
+                                <a href="{{ path('web_manage_show', {'entity': 'news', 'slug': entity.slug }) }}">
+                                    {{ entity.title|capitalize }}
+                                </a>
+                            </h1>
+                        </div>                               
+                        <div class="d">
+                            <p>
+ {{ entity.content|length > 130 ? entity.content|striptags|slice(0, 130) ~ '...' : entity.content|striptags }}                                         
+                            </p>                               
+                        </div> 
+                        {% if entity.newsPdf or entity.newsZip %}
+                        <div class="downloadLink">
+                            {% if entity.newsPdf %}
+                            <span>
+                                <a href="{{ vich_uploader_asset(entity.newsPdf, 'file') }}" class="mY-10"><i class="ti-download font-weight-bold mR-10"></i>Télécharger PDF</a>
+                            </span> 
+                            {% endif %}
+                            {% if entity.newsZip %}
+                             <span>
+                                <a href="{{ vich_uploader_asset(entity.newsZip, 'file') }}" class="mY-10"><i class="ti-download font-weight-bold mR-10"></i>Télécharger Zip</a>
+                            </span> 
+                            {% endif %}
+                        </div> <!-- /.col -->
+                        {% endif %}
+                        <div class="readMoreLink mT-30">
+                            <a href="{{ path('web_manage_show', {'entity': 'news', 'slug': entity.slug }) }}">Voir
+                                {{
+                                    entity.title|length > 20 
+                                        ? entity.title|slice(0, 20) ~ '...'
+                                        : entity.title 
+                                }}                                
+                            </a> 
+                        </div> <!-- /.col -->
+                    </div>                               
+                </div>                               
+            </div>    <!-- ./col -->
+            {% endfor %}
+        </div>    <!-- ./row -->
+        {% else %}
+        <div class="no-result">
+            <div class="text-center p-20">
+                <span class="ti-na fsz-lg d-b mB-20"></span>
+                <span class="r">Il n'y a pas encore d'actualité.</span>
+            </div>
+        </div>  <!-- ./row -->
+        {% endif %}
+
+        {% if news|length > 4 %}
+        <div class="more-block mT-60@md mT-100@lg+ pY-20@md- ta-c@lg+ ta-r@lg-">
+            <a href="{{ path('web_manage_index', {'entity': 'news'}) }}">
+                <i class="ti-arrow-right mR-5"></i>Voir toute les actualités
+            </a>
+        </div> <!-- ./col -->
+        {% endif %}
+    </div>    <!-- ./col -->
+</div>    <!-- ./row -->
+
+ <div class="row feature clear f-dechet pB-30@md- pT-10@md- pT-20@md pT-40@lg+ mB-40@md pB-100@lg+">
+    <div class="col-lg-12">
+        <div class="t pB-20@md- pB-40@md+ mB-10@md mB-30@lg+">
+            <h1>Les déchets que nous récyclons</h1>
+        </div>
+        {% if dechets|length > 0 %}
+        <div class=" m-a row block {% if dechets|length > 0 and dechets|length <= 8 %} text-center{% endif %}">
+            {% for entity in dechets %}
+            <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 col-12 pX-15@md+ pY-20@sm- mB-30@sm+">
+                <div class="in p-0 pB-30@lg+">
+                    <figure class="ov-h m-0 img-container">
+                        <img src="{{ vich_uploader_asset(entity.dechetImage, 'file') }}" class="w-100p@sm+ w-70p@sm-" alt="{{entity.name}}" title="{{entity.name}}, {{sitename}}, Antananarivo,Madagascar"/>
+                        <div class="text-container">
+                            <p class="t">{{ entity.mesuredAmount }} disponibles</p>
+                            <p class="i">
+                                <a href="{{ path('web_dechet_show', {'slug': entity.slug }) }}" class="ti-shopping-cart enabled">
+                                    
+                                </a>
+                            </p>
+                        </div>
+                    </figure>                               
+                    <div class="mT-0 pY-5 ta-c@sm+">
+                        <h1 class="d-ib@sm- mR-5@sm+ mB-15@lg+">
+                            <a href="{{ path('web_dechet_show', {'slug': entity.slug }) }}">
+                                {{ entity.name }}
+                            </a>
+                        </h1>
+                        <p class="t d-n@sm+ d-ib@sm-">({{ entity.mesuredAmount }})</p>
+                    </div> 
+                   <div class="ta-c@sm+ pT-0@sm-">
+                       <a href="{{ path('web_dechet_show', {'slug': entity.slug }) }}" class="gray-button menu-click pX-20@md- c-white">
+                            <i class="ti-shopping-cart"></i>
+                            <span class="mL-5@md- bdL bdc-white">Commander</span>
+                        </a>
+                   </div>
+                </div>
+            </div>  <!-- ./col --> 
+            {% endfor %}
+        </div>  <!-- ./row -->
+        {% else %}
+        <div class="no-result">
+            <div class="text-center p-20">
+                <span class="ti-na fsz-lg d-b mB-20"></span>
+                <span class="r">Il n'y a pas encore de déchet.</span>
+            </div>
+        </div>  <!-- ./row -->
+        {% endif %}
+
+        {% if dechets|length > 4 %}
+        <div class="more-block mT-60@md+ pY-20@md- ta-c@lg+ ta-r@lg-">
+            <a href="{{ path('web_manage_index', {'entity': 'dechet'}) }}">
+                <i class="ti-arrow-right mR-5"></i>Voir toutes les actualités
+            </a>
+        </div> <!-- ./col -->
+        {% endif %}
+    </div>  <!-- ./col -->
+</div>  <!-- ./row --> 
+
+{% endblock %}

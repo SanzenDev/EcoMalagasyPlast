@@ -1,0 +1,27 @@
+<table class="table mT-20">    
+      <tr>
+        <td>Nom de la société</td>
+        <td>{{ entity.name }}</td>
+      </tr>
+      <tr>
+        <td>Adresse</td>
+        <td>{{ entity.address }}</td>
+      </tr>
+      <tr>
+        <td>Créé le :</td>
+        <td>{% if entity.createdAt %}{{ entity.createdAt|date('d/m/Y') }}{% endif %}</td>
+      </tr>
+</table>
+
+<h4 class="mY-5">Les commandes que {{ entity.name }} a faites</h4>
+{% if entity.commandes|length > 0 %}
+  {{ render(controller("AppWebBundle:Commande:commandeByUser", {'client_id': entity.id})) }}
+
+{% else %}
+      <div class="no-result">
+          <div class="p-30">
+              <span class="ti-na fsz-lg d-b mB-30"></span>
+              <span class="r">Vous n'avez pas encore commandé de déchet.</span>
+          </div>
+      </div>  <!-- ./row -->
+{% endif %}

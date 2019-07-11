@@ -1,0 +1,58 @@
+Portfolio\CoreBundle\Entity\Experience:
+    type: entity
+    repositoryClass: Portfolio\CoreBundle\Repository\ExperienceRepository
+    table: ps_experience
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        poste:
+            column: poste
+            type: string
+            length: 255
+        duree:
+            column: duree
+            type: string
+            length: 255
+        society:
+            column: society
+            type: string
+            length: 255
+            nullable: true
+        description:
+            column: description
+            type: text
+            nullable: true
+        link:
+            column: lien
+            type: text
+            nullable: true
+        token:
+            column: token
+            type: string
+            length: 255
+    oneToOne:
+        logo:
+            targetEntity: Image
+            cascade: [ persist ]
+            orphanRemoval: true
+        fichier:
+            targetEntity: Fichier
+            cascade: [ persist ]
+            orphanRemoval: true
+    manyToMany:
+        images:
+            targetEntity: Image
+            cascade: ["persist", "remove"]
+            # joinTable:
+            #     name: experience_image
+            #     joinColumns:
+            #         experience_id:
+            #             referencedColumnName: id
+            #             onDelete: "CASCADE"
+            #     inverseJoinColumns:
+            #         image_id:
+            #             referencedColumnName: id
+            #             onDelete: "CASCADE"

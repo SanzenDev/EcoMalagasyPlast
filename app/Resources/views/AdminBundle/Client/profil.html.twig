@@ -1,0 +1,73 @@
+ <div class="col-md-12">
+
+    <div class="bgc-white  p-10@sm- p-20@sm+ bd">
+        <h6 class="text-weight-bold c-grey-800 bdB pB-5 mB-10">Information</h6>
+
+         <table class="table">
+            <tr>
+              <td>Id</td>
+              <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+              <td>Nom</td>
+              <td>{{ entity.name }}</td>
+            </tr>
+             <tr>
+              <td>URL </td>
+              <td>{{ entity.slug }}</td>
+            </tr>
+              <tr>
+              <td>Adresse</td>
+              <td>{{ entity.address }}</td>
+            </tr>
+              <tr>
+              <td>Username</td>
+              <td>{{ entity.user.username }}</td>
+            </tr>
+               <tr>
+              <td>Email</td>
+              <td>{{ entity.user.email }}</td>
+            </tr>
+              <tr>
+              <td>Ajouté le :</td>
+              <td>{% if entity.createdAt %}{{ entity.createdAt|date('d-m-Y H:i:s') }}{% endif %}</td>
+            </tr>
+              <tr>
+              <td>Modifié le : </td>
+              <td>{% if entity.updatedAt %}{{ entity.updatedAt|date('d-m-Y H:i:s') }}{% else %}<code class="highlighter-rouge">Pas encore modifié</code>{% endif %}</td>
+            </tr>
+           </tr>
+             <tr>
+              <td>Actif? </td>
+              <td>
+                <a href="{{path('admin_manage_publish', {'entity': 'client', 'slug': entity.slug, })}}" data-toggle="tooltip" data-placement="top" title="Cliquez pour ne plus valider">
+                    <i class="{% if entity.enabled %}ti-check c-green-600 {% else %}ti-close c-red-600 {% endif %} font-weight-bold"></i>
+                </a>
+              </td>
+            </tr>
+             <tr>
+              <td>Vu </td>
+              <td>
+                <a href="{{path('admin_manage_check', {'entity': 'client', 'slug': entity.slug, })}}" data-toggle="tooltip" data-placement="top" title="Marquez comme vu">
+                    <i class="{% if entity.enabled %}ti-check c-green-600 {% else %}ti-close c-red-600 {% endif %} font-weight-bold"></i>
+                </a>
+              </td>
+            </tr>
+        </table>
+  </div> <!-- /.bg-white -->
+
+  <div class="bgc-white  p-10@sm- p-20@sm+ bd">
+    <h6 class="text-weight-bold c-grey-800 bdB pB-5 mB-10">Information</h6>
+
+         {% if entity.commandes|length > 0 %}
+            {% include "AdminBundle/Commande/index.html.twig" with {'entities': entity.commandes} %} 
+        {% else %}
+          <div class="no-result">
+              <div class="text-center p-30">
+                  <span class="ti-na fsz-lg d-b mB-30"></span>
+                  <span class="r">Cet Utilisateur n'a pas encore commandé de déchet.</span>
+              </div>
+          </div>  <!-- ./row -->
+        {% endif %}
+  </div> <!-- /.bg-white -->
+</div> <!-- /.col -->

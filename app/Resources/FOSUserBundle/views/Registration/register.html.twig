@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block fos_user_content %}
+    <div class="row cover signup-cover d-n@md-">
+        <div class="col-md-12  ov-h p-0">
+            <div class="pB-0">
+                <img src="{{ asset('bundles/app/images/signup-header.jpg') }}" class="w-100p">
+            </div> 
+        </div>
+    </div> <!-- ./row -->
+
+     <div class="row signup form bg-form">
+        <div class="col-lg-7 col-xl-6 offset-xl-1 col-md-12 col-12 col-sm-12 col-12 p-30@md- left">
+            <div class="clear">
+                <h2>Créer un compte</h2>
+                <h4 class="mY-30">Information du compte</h4>
+
+
+                {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
+
+                    {{ form_widget(form) }}
+                    <div class="form-group ta-l@md+ mT-40@sm+">
+                        <button type="submit" class="signin-btn">Enregistrer</button>
+                    </div> 
+                {{ form_end(form) }}
+            </div>
+        </div> <!-- ./col -->
+
+
+         <div class="col-lg-5 col-xl-4 order-md-first order-sm-first col-md-12 order-first col-12 col-sm-12 order-lg-7 order-xl-7 pX-30@md- pB-20@sm- right">
+
+            <div class="breadcrumbs">
+                <ul class="list-unstyled">
+                    <li><a class="mR-3" href="{{ path('homepage') }}">Accueil</a> »</li>
+                    <li class="active"><a href="#">Création compte</a></li>
+                </ul>
+            </div>
+            <h4 class="mT-40">Vous avez déjà un compte?</h4>
+            <div class="form-group mT-40@md+ mT-20@md-">
+                <a class="signin-btn c-white">Connectez-vous</a>
+            </div>
+            <div class="readMoreLink mT-40@md+ mT-20md-">
+                <a href="{{ path('fos_user_resetting_request') }}">Mot de passe oublié?</a> 
+            </div>
+            <h4 class="mT-60">Pourquoi créer un compte?</h4>
+            <div class="mT-20 d">
+<p>Securities offered through strategic capital investments, llc. Member finra/sipc. Disclaimer: private securities offerings may have a long holding period, be illiquid, and contain a high degree of risk. Investors must be able to afford the loss of all of their principal.
+<br>No money or other consideration is being solicited, and if sent in response, will not be accepted.
+</p>
+            </div>
+        </div> <!-- ./col -->
+    </div> <!-- ./row -->
+{% endblock fos_user_content %}

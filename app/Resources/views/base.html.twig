@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}{{ sitename }}{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+        <link rel="stylesheet" href="{{asset('bundles/app/css/app.css')}}"/>
+        <link rel="stylesheet" href="{{asset('bundles/app/css/themify-icons.css')}}"/>
+        <link rel="stylesheet" href="{{asset('bundles/app/css/style.css')}}"/>
+
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+
+    </head>
+    <body>
+        <div class="main">
+            {# full width toggled dialog #}
+            <div id="toggle-nav" class="overlay"> 
+               <a href="" class="closebtn" onclick="closeNav()">×</a>
+               <div class="overlay-content mB-0">
+                    <ul id="menu-menu-haut" class="menu-content">
+                         <li><a href="">Nous connaitre</a></li>
+                         <li><a href="{{ path('web_manage_index', {'entity': 'news'}) }}">Nos actualités</a></li>
+                         <li><a href="{{ path('web_manage_index', {'entity': 'dechet'}) }}">Déchets</a></li>
+
+                         {% if is_granted('IS_AUTHENTICATED_FULLY') and app.user and is_granted('ROLE_ADMIN') or  is_granted('ROLE_SUPERADMIN')%}
+                         <li>
+                            <a href="{{ path('admin_dashboard') }}">
+                                <i class="ti-home mR-10 mT-nv-10"></i>Tableau de bord
+                            </a>
+                        </li>
+                        {% else %}
+                         <li><a href="{{ path('web_manage_new', {'entity': 'newsletter'}) }}">Newsletter</a></li>
+                        {% endif %}
+
+                          {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                         <li>
+                            <a href="{{ path('fos_user_profile_show') }}">
+                                <i class="ti-user mR-10 mT-nv-10"></i>Mon Profil
+                            </a>
+                        </li>
+
+
+                         <li>
+                            <a href="{{ path('fos_user_security_logout') }}">
+                                <i class="ti-power-off mR-10"></i>Se déconnecter
+                            </a>
+                        </li>
+                        {% else %}
+                         <li>
+                            <a href="{{ path('fos_user_security_login') }}">
+                                <i class="ti-unlock mR-10 mT-nv-10"></i>Se connecter
+                            </a>
+                        </li>
+                         <li>
+                            <a href="{{ path('fos_user_registration_register') }}">
+                                <i class="ti-notepad mR-10"></i>S'enregistrer
+                            </a>
+                        </li>
+                        {% endif %}
+
+                        <li class="nav-form pY-20 d-n@md+">
+                            <form class="bd pY-5">
+                                <input type="text" placeholder="RECHERCHER" class="m-0 d-ib search-input-1" />
+                                <a href="#" class="btn search-button-1 pL-3 pR-0 pY-0 d-ib"><i class="ti-search"></i></a>
+                            </form>
+                        </li>
+                    </ul>
+               </div>   <!-- /.overlay-content -->
+               <div class="col-md-10 menu-header-1 d-n@md+">
+                    <div class="row">
+                        <ul class="list-unstyled text-center m-auto">
+                            <li class="mT-10">
+                                {% if is_granted('IS_AUTHENTICATED_FULLY') and app.user.hasRole('ROLE_CLIENT')%}
+                                   <a class="gray-button text-uppercase" href="{{ path('fos_user_profile_show') }}">
+                                        Mon Profil
+                                    </a>                               
+                                 {% else %}
+                                    <a class="gray-button text-uppercase" href="{{ path('web_client_new') }}">
+                                        Devenir Client
+                                    </a>
+                                {% endif %}
+                            </li>
+                            <li class="mT-10">
+                                {% if is_granted('IS_AUTHENTICATED_FULLY') and app.user.hasRole('ROLE_PARTENAIRE')%}
+                                    <a class="green-button text-uppercase" href="{{ path('fos_user_profile_show') }}">
+                                        Mon Profil
+                                    </a>
+                                {% else %}
+                                    <a class="green-button text-uppercase" href="{{ path('web_partenaire_new') }}">
+                                            Devenir Partenaire
+                                    </a>
+                                {% endif %}
+                            </li>
+                             <li class="mT-10">
+                                <a class="gray-button" href="{{ path('web_manage_new', {'entity': 'contact'}) }}">
+                                    Contactez-nous
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>   <!-- /.menu-header-1 -->
+            </div>    <!-- /.overlay -->
+            {# end full width toggled dialog #}
+            <div id="header">
+                {# mobile nav #}
+                <nav class="navbar navbar-expand-md pT-15@md+ d-n@md- menu-header-1">
+                    <div class="collapse navbar-collapse">
+                        <ul class="navbar-nav">
+                            <li class="nav-item pX-10@md+">
+                                {% if is_granted('IS_AUTHENTICATED_FULLY') and app.user.hasRole('ROLE_PARTENAIRE')%}
+                                    <a class="green-button text-uppercase" href="{{ path('fos_user_profile_show') }}">
+                                        Mon Profil
+                                    </a>
+                                {% else %}
+                                    <a class="green-button text-uppercase" href="{{ path('web_partenaire_new') }}">
+                                            Devenir Partenaire
+                                    </a>
+                                {% endif %}
+                            </li>
+                            <li class="nav-item pX-10@md+">
+                                {% if is_granted('IS_AUTHENTICATED_FULLY') and app.user.hasRole('ROLE_CLIENT')%}
+                                   <a class="gray-button text-uppercase" href="{{ path('fos_user_profile_show') }}">
+                                        Mon Profil
+                                    </a>                               
+                                 {% else %}
+                                    <a class="gray-button text-uppercase" href="{{ path('web_client_new') }}">
+                                        Devenir Client
+                                    </a>
+                                {% endif %}
+                            </li>
+                            <li class="nav-item pX-10@md+">
+                                <a class="green-button" href="{{ path('web_manage_new', {'entity': 'contact'}) }}">
+                                    CONTACT
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+                {# end mobile nav #}
+                {# desktop nav #}
+                  <nav class="navbar navbar-expand-lg pT-5@md+ menu-header-2 pL-10@md+">
+                    <a class="navbar-brand homepage" href="{{ path('homepage') }}">
+                        <img src="{{ asset('bundles/app/images/logo-header.png') }}" />
+                    </a>
+                    <button class="navbar-toggler m-0" type="button" aria-expanded="false" onclick="openNav()">
+                        <i class="navbar-toggler-icon ti-menu"></i>
+                    </button>
+                    <div class="collapse navbar-collapse text-right">
+                        <ul class="navbar-nav mL-a@md+">
+                            <li class="nav-item pX-10">
+                                <a href="{{ path('web_manage_index', {'entity': 'news'}) }}">
+                                    NOS ACTUALITES
+                                </a>
+                            </li>
+                            <li class="nav-item pX-10">
+                                <a href="{{ path('web_manage_index', {'entity': 'dechet'}) }}">
+                                    NOS DECHETS
+                                </a>
+                            </li>
+                             <li class="nav-item pX-10">
+                                <a href="#">
+                                    A PROPOS
+                                </a>
+                            </li>
+                            <li class="nav-item pX-10 nav-form">
+                                <form class="pY-2 pX-5">
+                                    <input type="text" placeholder="RECHERCHER" class="m-0 search-input-2"/>
+                                    <a href="#" class="btn search-button-2 pL-3 pR-0 pY-0"><i class="ti-search"></i></a>
+                                </form>
+                            </li>
+                            <li class="nav-item pX-10 li-toggle">
+                                <span class="mT-10 menu-click gray-button" onclick="openNav()">
+                                    <i class="ti-menu"></i>
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+                {# end desktop nav #}
+            </div>   <!-- /#header -->
+
+            <main class='main-content p-0'>
+                <div id='mainContent' class="m-0 p-0">
+                    <div class="container-fluid pX-0">
+                        {% include "WebBundle/Common/alert.html.twig" %} 
+                        {% block body %}{% endblock %}
+
+                        {% block fos_user_content %}
+                        {% endblock fos_user_content %}
+                    </div>   <!-- /.container-fluid -->
+
+                    <footer class="container-fluid pB-80@lg+"> 
+                       <div class="row first pT-70@md+ ta-c@md-"> 
+                            <div class="col-lg-6 order-lg-first col-xl-6 order-xl-first order-sm-6 order-md-6 order-6 pT-40@md-"> 
+                                <a class="logo_footer" href="{{ path('homepage') }}">
+                                    <img src="{{ asset('bundles/app/images/logo-footer.png') }}" />
+                                </a> 
+                            </div> 
+                            <div class="col-lg-2 p-0@md+ pT-40@md-"> 
+                                <h4 class="text-uppercase mB-5@lg- mB-15@lg+">Nos partenaires</h4> 
+                                <ul class="list-unstyled ta-l@md+"> 
+                                    <li><a href="">Devenir Partenaire</a></li> 
+                                    <li><a href="">Partenaire n2</a></li> 
+                                    <li><a href="">Partenaire n3</a></li> 
+                                    <li><a href="">Partenaire n3</a></li> 
+                                 </ul>
+                            </div> 
+                            <div class="col-lg-2 p-0@md+ pT-40@md-"> 
+                                <h4 class="text-uppercase mB-5@lg- mB-15@lg+">Navigation</h4> 
+                                <ul class="list-unstyled ta-l@md+"> 
+                                    <li><a href="">Devenir Client</a></li> 
+                                    <li><a href="">Newsletter</a></li> 
+                                    <li><a href="">Nous contacter</a></li> 
+                                 </ul> 
+                            </div> 
+                            <div class="col-lg-2 p-0@md+ contact pT-40@md-"> 
+                                <h4 class="text-uppercase mB-5@lg- mB-15@lg+">Contact</h4> 
+                                <ul class="list-unstyled ta-l@md+"> 
+                                    <li>Lot VN 50B Ankazolava</li> 
+                                    <li> 
+                                         Antananarivo</li> 
+                                    <li>Madagascar</li> 
+                                    <li>+261826578906</li> 
+                                    <li> Malagasinplast@gmail.com</li> 
+                                 </ul>
+                            </div> 
+                        </div> <!-- /.row -->
+
+                       <div class="row second pT-70@md+ ta-c@md- pB-20@md+ pT-20@md-"> 
+                            <div class="col-lg-6 order-lg-first col-xl-6 order-xl-first order-sm-6 order-md-6 order-6"> 
+                                <p>Copyright<strong> {{ sitename }} </strong> {{ "now"|date('Y') }}. Tout droit reservé</p> 
+                            </div> 
+                            <div class="col-lg-4 mT-50@md- pY-10@md-"> 
+                                <ul class="list-unstyled social"> 
+                                    <li class="mR-10"> 
+                                        <a href=""> <i class="ti-facebook"></i> </a> 
+                                    </li> 
+                                    <li class="mR-10"> 
+                                        <a href="{{ path('flux_index') }}"> <i class="ti-rss"></i> </a> 
+                                    </li> 
+                                    <li class="mR-10">
+                                        <a href="{{ path('web_manage_new', {'entity': 'contact'}) }}"> <i class="ti-email"></i> </a>
+                                    </li> 
+                                </ul>  
+                            </div>    <!-- /.col -->
+                            <div class="col-lg-2 pY-15@md-"> 
+                                <a class="plan-site-link" href="{{ path('sitemap') }}">Plan du site</a> 
+                            </div>    <!-- /.col -->
+                        </div>  <!-- /.row -->
+                    </footer>  <!-- /.container-fluid -->
+                </div>      <!-- /#mainContent -->
+            </main>
+        </div> <!-- /.main -->
+
+
+        {% block javascripts %}{% endblock %}
+        <script src="{{asset('bundles/app/js/jquery.js')}}"></script>
+        <script src="{{asset('bundles/app/js/main.js')}}"></script>
+        <script src="{{asset('bundles/app/js/app.js')}}"></script>
+
+
+        <script>$(window).scroll(function(){var sticky=$('#header'),scroll=$(window).scrollTop();if(scroll>=100)sticky.removeClass('top-0');if(scroll>=300)sticky.addClass('fixed');else sticky.removeClass('fixed');});function openNav(){document.getElementById("toggle-nav").style.top="0%";}
+            function closeNav(){document.getElementById("toggle-nav").style.top="-100%";}
+        </script>  
+    </body>
+</html>

@@ -1,0 +1,28 @@
+App\CoreBundle\Entity\NewsZip:
+    type:  entity
+    repositoryClass: App\CoreBundle\Repository\NewsZipRepository
+    table: news_zip
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            column: name
+            type: string
+            length: 255
+        extension:
+            column: extension
+            type: string
+            length: 255
+        mimeType:
+            column: mime_type
+            type: string
+            length: 255
+        size:
+            column: size
+            type: integer
+        updatedAt:
+            column: updated_at
+            type: datetime

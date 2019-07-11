@@ -1,0 +1,24 @@
+Portfolio\CoreBundle\Entity\About:
+    type: entity
+    repositoryClass: Portfolio\CoreBundle\Repository\AboutRepository
+    table: ps_about
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        description:
+            column: description
+            type: text
+            nullable: true
+        token:
+            column: token
+            type: string
+            length: 255
+
+    oneToOne:
+        profil:
+            targetEntity: Image
+            cascade: [ persist ]
+            orphanRemoval: true

@@ -1,0 +1,6 @@
+web_partenaire_update:
+    path:     /partenaires/modifier/{slug}
+    defaults: { _controller: AppWebBundle:Partenaire:update }
+web_partenaire_new:
+    path:     /partenaires/formulaire
+    defaults: { _controller: AppWebBundle:Partenaire:new }

@@ -1,0 +1,29 @@
+<div class="row pY-0 pX-60@lg body pT-20@md+ pT-10@md-">
+    <div class="col-lg-8 m-0 pL-40@md+ main">
+        <div class="breadcrumbs">
+            <ul class="list-unstyled">
+                <li><a class="mR-3" href="{{ path('homepage') }}">Accueil</a> »</li>
+                <li class="active"><a href="#">Newsletter</a></li>
+            </ul>
+        </div>
+
+         <div class="form pT-20">
+            <h3 class="pY-20">Vous aimez nos actualités?</h3>
+            <p>Inscrivez-vous à la lettre d'information pour recevoir par email nos toutes dernières actualités</p>
+
+            {{ form_start(form) }}
+                <div class="form-group">
+				    {{form_label(form.email)}}
+				    {{form_widget(form.email)}}
+				    {{form_errors(form.email)}} 
+                </div>  
+                {{form_rest(form)}}
+                <div class="form-group ta-l@md+">
+                    <button type="submit" class="signin-btn">S'abonner</button>
+                </div>
+            {{ form_end(form) }} 
+        </div> <!-- ./form -->
+    </div> <!-- ./col -->
+
+     {{ render(controller("AppWebBundle:Main:aside")) }}
+</div> <!-- ./row -->

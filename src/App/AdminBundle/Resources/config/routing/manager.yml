@@ -1,0 +1,52 @@
+admin_manage_index:
+    path:     /liste/{entity}
+    defaults: { _controller: AppAdminBundle:Manager:index }
+admin_manage_search:
+    path:     /recherche/{entity}/{key}
+    defaults: { _controller: AppAdminBundle:Manager:index }
+admin_manage_show:
+    path:     /preview/{entity}/{slug}
+    defaults: { _controller: AppAdminBundle:Manager:show }
+
+admin_manage_update:
+    path:     /modifier/{entity}/{slug}/{token}
+    defaults: { _controller: AppAdminBundle:Manager:update }
+    requirements:
+        entity: client|partenaire|news|page|dechet|utilisateur
+admin_manage_new:
+    path:     /ajouter/{entity}
+    defaults: { _controller: AppAdminBundle:Manager:new }
+    requirements:
+        entity: news|page|dechet|utilisateur
+
+admin_manage_delete:
+    path:     /supprimer/{entity}/{token}
+    defaults: { _controller: AppAdminBundle:Manager:delete }
+    requirements:
+        entity: contact|newsletter|client|partenaire|utilisateur|news|page|dechet|commande
+
+admin_manage_check:
+    path:     /vu/{entity}/{slug}
+    defaults: { _controller: AppAdminBundle:Manager:check }
+    requirements:
+      entity: contact|newsletter|client|partenaire|utilisateur|commande
+
+admin_manage_publish:
+    path:     /publier/{entity}/{slug}
+    defaults: { _controller: AppAdminBundle:Manager:publish }
+    requirements:
+        entity: client|partenaire|utilisateur|news|page|dechet|commande
+
+admin_manage_filter:
+    path:     /liste/{entity}/{filter}
+    defaults: { _controller: AppAdminBundle:Manager:filter }
+    requirements:
+      entity: contact|newsletter|client|partenaire|utilisateur|news|page|dechet|commande
+      filter: checked|enabled
+
+admin_manage_filter_all:
+    path:     /tout/{entity}/{filter}
+    defaults: { _controller: AppAdminBundle:Manager:filterAll}
+    requirements:
+      entity: contact|newsletter|client|partenaire|utilisateur|news|page|dechet|commande
+      filter: checked|enabled

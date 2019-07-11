@@ -1,0 +1,36 @@
+
+        {% if entities|length > 0 %}
+        <div class=" m-a row block">
+            {% for entity in entities %}
+            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 pY-20@sm- mB-50@sm+">
+                <div class="in p-0 pB-30@lg+">
+                    <figure class="ov-h m-0 img-container">
+                        <img src="{{ vich_uploader_asset(entity.dechetImage, 'file') }}" class="w-100p@sm+ w-70p@sm-" alt="{{entity.name}}" title="{{entity.name}}, {{sitename}}, Antananarivo,Madagascar"/>
+                        <div class="text-container">
+                            <p class="t">{{ entity.mesuredAmount }} disponibles</p>
+                            <p class="i">
+                                <a href="{{ path('web_dechet_show', {'slug': entity.slug }) }}" class="ti-shopping-cart enabled">
+                                    
+                                </a>
+                            </p>
+                        </div>
+                    </figure>                               
+                    <div class="mT-0 pY-5 ta-c@sm+">
+                        <h1 class="d-ib@sm- mR-5@sm+ mB-15@lg+">
+                            <a href="{{ path('web_dechet_show', {'slug': entity.slug }) }}">
+                                {{ entity.name }}
+                            </a>
+                        </h1>
+                        <p class="t d-n@sm+ d-ib@sm-">({{ entity.mesuredAmount }})</p>
+                    </div> 
+                   <div class="ta-c@sm+ pT-0@sm-">
+                       <a href="{{ path('web_dechet_show', {'slug': entity.slug }) }}" class="gray-button menu-click pX-20@md- c-white">
+                            <i class="ti-shopping-cart"></i>
+                            <span class="mL-5@md- bdL bdc-white">Commander</span>
+                        </a>
+                   </div>
+                </div>
+            </div>  <!-- ./col --> 
+            {% endfor %}
+        </div>  <!-- ./row -->
+        {% endif %}

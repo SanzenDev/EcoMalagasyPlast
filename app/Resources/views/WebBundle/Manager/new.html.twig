@@ -1,0 +1,5 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% include "WebBundle/"~entity|title~"/form.html.twig" with {'form': form, 'entity': entity } %} 
+{% endblock %}

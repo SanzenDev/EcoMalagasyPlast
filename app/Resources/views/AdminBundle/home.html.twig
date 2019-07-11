@@ -1,0 +1,180 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block body %}
+<div class="col-md-12">
+    <div class="ta-c@sm+ pY-10">
+        <a class="navbar-brand" href="#">
+            <img src="{{ asset('bundles/app/images/logo-header.png') }}" />
+        </a>
+    </div>
+
+    <div class="ta-c@sm+ pY-20">
+        <h4>Bienvenu sur la page d'administration de Re-cycl'in Mada</h4>
+    </div>
+    {% if app.user %}
+    <div class="pY-10 profil">
+        <div class="clear p-4 w-40p@sm+ m-auto ta-c@sm+">
+            <figure class="m-0">
+
+                {% if app.user and app.user.userImage %}
+                    <img class="w-100p" src="{{ vich_uploader_asset(app.user.userImage, 'file') }}" alt="User Avatar">
+                {% else %}
+                    <img src="{{asset('bundles/app/images/default-avatar.png')}}"  class="w-100p" alt="User Avatar"/>
+                {% endif %}
+                <figcaption>
+                   <p>
+                   	<a href="{{ path('fos_user_profile_show') }}">{{ app.user.lastName ? app.user.lastName : app.user.username }}</a>
+                   </p>
+                   <p><a href="{{ path('fos_user_profile_edit') }}">Modifier mon profil</a></p>
+                   <p><a href="{{ path('fos_user_change_password') }}">Changer mon mot de passe</a></p>
+                <figcaption>
+            </figure>
+        </div>
+    </div>
+    {% endif %}
+
+    <div class="ta-c@sm+ pY-10 mT-30">
+        <h3>Statistique</h3>
+    </div>
+    <div class="text-center pY-10 cadre">
+        <ul class="list-unstyled">
+            <li class="d-ib mX-10 mY-15">
+                <a href="{{ path('admin_manage_index',{'entity': 'partenaire'}) }}">
+                    <ul class="list-unstyled pX-5 pY-20">
+                        <li class="pY-10">
+                            <i class="ti-stamp"></i>
+                        </li>
+                         <li class="pY-10">
+                            <span>
+                                <b>{{ partenaire_count }}</b> Partenaire{% if partenaire_count > 1 %}s{% endif %}
+                            </span>
+                        </li>
+                    </ul>
+                </a>
+            </li>
+            <li class="d-ib mX-10 mY-15">
+                <a href="{{ path('admin_manage_index',{'entity': 'news'}) }}">
+                    <ul class="list-unstyled pX-5 pY-20">
+                        <li class="pY-10">
+                            <i class="ti-clipboard"></i>
+                        </li>
+                         <li class="pY-10">
+                            <span>
+                                <b>{{ news_count }}</b> Actualité{% if news_count > 1 %}s{% endif %}
+                            </span>
+                        </li>
+                    </ul>
+                </a>
+            </li>
+            <li class="d-ib mX-10 mY-15">
+                <a href="{{ path('admin_manage_index',{'entity': 'dechet'}) }}">
+                    <ul class="list-unstyled pX-5 pY-20">
+                        <li class="pY-10">
+                            <i class="ti-trash"></i>
+                        </li>
+                         <li class="pY-10">
+                            <span>
+                                <b>{{ dechet_count }}</b> Dechet{% if dechet_count > 1 %}s{% endif %}
+                            </span>
+                        </li>
+                    </ul>
+                </a>
+            </li>
+             <li class="d-ib mX-10 mY-15">
+                <a href="{{ path('admin_manage_index',{'entity': 'page'}) }}">
+                    <ul class="list-unstyled pX-5 pY-20">
+                        <li class="pY-10">
+                            <i class="ti-layout"></i>
+                        </li>
+                         <li class="pY-10">
+                            <span>
+                                <b>{{ page_count }}</b> Page{% if page_count > 1 %}s{% endif %}
+
+                            </span>
+                        </li>
+                    </ul>
+                </a>
+            </li>
+              <li class="d-ib mX-10 mY-15">
+                <a href="{{ path('admin_manage_index',{'entity': 'contact'}) }}">
+                    <ul class="list-unstyled pX-5 pY-20">
+                        <li class="pY-10">
+                            <i class="ti-email"></i>
+                        </li>
+                         <li class="pY-10">
+                            <span>
+                                <b>{{ contact_count }}</b> Message{% if contact_count > 1 %}s{% endif %}
+                            </span>
+                        </li>
+                    </ul>
+                </a>
+            </li>
+               <li class="d-ib mX-10 mY-15">
+                <a href="{{ path('admin_manage_index',{'entity': 'newsletter'}) }}">
+                    <ul class="list-unstyled pX-5 pY-20">
+                        <li class="pY-10">
+                            <i class="ti-pin-alt"></i>
+                        </li>
+                         <li class="pY-10">
+                            <span>
+                                <b>{{ newsletter_count }}</b> Abonné{% if newsletter_count > 1 %}s{% endif %}
+
+                            </span>
+                        </li>
+                    </ul>
+                </a>
+            </li>
+               <li class="d-ib mX-10 mY-15">
+                <a href="{{ path('admin_manage_index',{'entity': 'client'}) }}">
+                    <ul class="list-unstyled pX-5 pY-20">
+                        <li class="pY-10">
+                            <i class="ti-wallet"></i>
+                        </li>
+                         <li class="pY-10">
+                            <span>
+                                <b>{{ client_count }}</b> Client{% if client_count > 1 %}s{% endif %}
+                            </span>
+                        </li>
+                    </ul>
+                </a>
+            </li>
+                <li class="d-ib mX-10 mY-15">
+                <a href="{{ path('admin_manage_index',{'entity': 'commande'}) }}">
+                    <ul class="list-unstyled pX-5 pY-20">
+                        <li class="pY-10">
+                            <i class="ti-shopping-cart"></i>
+                        </li>
+                         <li class="pY-10">
+                            <span>
+                                <b>{{ commande_count }}</b> Commande{% if commande_count > 1 %}s{% endif %}
+                            </span>
+                        </li>
+                    </ul>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="ta-c@sm+ pY-10 mT-20">
+        <h3>Navigation</h3>
+    </div>
+    <div class="pY-10">
+        <ul class="navigation text-left">
+            <li><i class="ti-angle-double-right mR-5 fsz-xs"></i><a href="{{ path('homepage') }}">Voir le site</a></li>
+            <li><i class="ti-angle-double-right mR-5 fsz-xs"></i><a href="{{ path('admin_manage_new',{'entity': 'dechet'}) }}">Ajouter Dechet</a></li>
+            <li><i class="ti-angle-double-right mR-5 fsz-xs"></i><a href="{{ path('admin_manage_index',{'entity': 'news'}) }}">Ajouter Actualité</a></li>
+            <li><i class="ti-angle-double-right mR-5 fsz-xs"></i><a href="">Ajouter Partenaire</a></li>
+            <li><i class="ti-angle-double-right mR-5 fsz-xs"></i><a href="{{ path('admin_manage_new',{'entity': 'page'}) }}">Ajouter Page</a></li>
+            <li><i class="ti-angle-double-right mR-5 fsz-xs"></i><a href="{{ path('admin_manage_new',{'entity': 'utilisateur'}) }}">Ajouter Utilisateur</a></li>
+            <li><i class="ti-angle-double-right mR-5 fsz-xs"></i><a href="{{ path('admin_manage_index',{'entity': 'utilisateur'}) }}">Liste Utilisateur</a></li>
+            <li><i class="ti-angle-double-right mR-5 fsz-xs"></i><a href="{{ path('admin_manage_index',{'entity': 'news'}) }}">Liste Actualité</a></li>
+            <li><i class="ti-angle-double-right mR-5 fsz-xs"></i><a href="{{ path('admin_manage_index',{'entity': 'dechet'}) }}">Liste Dechet</a></li>
+            <li><i class="ti-angle-double-right mR-5 fsz-xs"></i><a href="{{ path('admin_manage_index',{'entity': 'page'}) }}">Liste Page</a></li>
+            <li><i class="ti-angle-double-right mR-5 fsz-xs"></i><a href="{{ path('admin_manage_index',{'entity': 'contact'}) }}">Liste Contact</a></li>
+            <li><i class="ti-angle-double-right mR-5 fsz-xs"></i><a href="{{ path('admin_manage_index',{'entity': 'partenaire'}) }}">Liste Partenaire</a></li>
+            <li><i class="ti-angle-double-right mR-5 fsz-xs"></i><a href="{{ path('admin_manage_index',{'entity': 'newsletter'}) }}">Liste Newsletter</a></li>
+            <li><i class="ti-angle-double-right mR-5 fsz-xs"></i><a href="#">Liste Commande</a></li>
+        </ul>
+    </div>
+</div>  <!-- ./col --> 
+{% endblock %}

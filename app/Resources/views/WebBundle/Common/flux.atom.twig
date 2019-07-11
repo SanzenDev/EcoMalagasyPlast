@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <title>{{ sitename }}</title>
+    <subtitle>Nos Déchets</subtitle>
+    <link href="{{ url('flux_index') }}" rel="self"/>
+    <link href="{{ url('homepage') }}" rel="alternate" type="text/html"/>
+    <updated>{{ lastUpdated }}</updated>
+    <author><name>{{ sitename }}</name></author>
+    <id>{{ feedId }}</id>
+
+    	{% for entity in entities %}
+        <entry>
+            <title>{{ entity.name }}</title>
+            <link href="{{ url('web_dechet_show', { 'entity': 'dechet', 'slug': entity.slug }) }}" />
+            <id>{{ entity.id }}</id>
+            <published>{{ entity.createdAt.format(constant('DATE_ATOM')) }}</published>
+            <updated>{% if entity.updatedAt != entity.createdAt %}{{ entity.updatedAt.format(constant('DATE_ATOM')) }}{% else %}{{ entity.createdAt.format(constant('DATE_ATOM')) }}{% endif %}</updated>
+            <summary type="xhtml">
+                <div xmlns="http://www.w3.org/1999/xhtml">
+                    {% if  entity.dechetImage %}
+                        <div>
+                            <a href="{{ url('web_dechet_show', { 'entity': 'dechet', 'slug': entity.slug }) }}">
+                                <img src="{{ vich_uploader_asset(entity.dechetImage, 'file') }}" alt="{{ entity.name }}, {{ sitename }}" />
+                            </a>
+                        </div>
+                    {% endif %}
+                    <div>
+                       {{ entity.mesuredAmount }}
+                    </div>
+                    {% if entity.description %}
+                    <div>
+                       {{ entity.description }}
+                    </div>
+                    {% endif %}
+                </div>
+            </summary>
+            <author><name>{{ sitename }}</name></author>
+        </entry>
+        {% endfor %}
+</feed>

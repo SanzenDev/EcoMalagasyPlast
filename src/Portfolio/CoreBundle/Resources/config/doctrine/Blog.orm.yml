@@ -1,0 +1,56 @@
+Portfolio\CoreBundle\Entity\Blog:
+    type: entity
+    repositoryClass: Portfolio\CoreBundle\Repository\BlogRepository
+    table: ps_blog
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        title:
+            column: title
+            type: string
+            length: 255
+        content:
+            column: content
+            type: text
+        tags:
+            column: tags
+            type: string
+            length: 255
+            nullable: true
+        slug:
+            column: slug
+            type: string
+            length: 255
+            gedmo:
+                slug:
+                    separator: -
+                    style: lower
+                    fields:
+                       - title
+        token:
+            column: token
+            type: string
+            length: 255
+
+        createdAt:
+            column: created_at
+            type: datetime
+            gedmo:
+                timestampable:
+                    on: create
+        updatedAt:
+            column: updated_at
+            type: datetime
+            type: boolean
+            gedmo:
+                timestampable:
+                    on: update
+
+    oneToOne:
+        image:
+            targetEntity: Image
+            cascade: [ persist ]
+            orphanRemoval: true

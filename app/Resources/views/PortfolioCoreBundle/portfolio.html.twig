@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+        <link rel="stylesheet" href="{{asset('bundles/app/css/app.css')}}"/>
+        <link rel="stylesheet" href="{{asset('bundles/app/css/themify-icons.css')}}"/>
+        <link rel="stylesheet" href="{{asset('bundles/portfolio/css/style.css')}}"/>
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+
+    </head>
+    <body>
+ 
+    <div class="main">
+       <div id="toggle-nav" class="overlay"> 
+           <a href="" class="closebtn" onclick="closeNav()">×</a>
+           <div class="overlay-content mB-0">
+                <ul id="menu-menu-haut" class="menu-content">
+                        <li class="pY-10">
+                            <a href="#" class="anchor-link" dest="competence">
+                                Compétence
+                            </a>
+                        </li>
+                         <li class="pY-10">
+                            <a href="#" class="anchor-link" dest="experience">
+                                Experiences
+                            </a>
+                        </li>
+                          <li class="pY-10">
+                            <a href="#" class="anchor-link" dest="about">
+                                A propos de moi
+                            </a>
+                        </li>
+                        {% if blogs|length >  0 %}
+                        <li class="pY-10">
+                            <a href="#" class="anchor-link" dest="blog">
+                                Blog
+                            </a>
+                        </li>
+                        {% endif %}
+                        <li class="pY-10">
+                            <a href="#" class="anchor-link" dest="contact">
+                                Contact
+                            </a>
+                        </li>
+
+                </ul>
+           </div>
+        </div>
+        <header class="main-bg">
+            <nav class="navbar navbar-expand-lg pT-5@md+ menu-header-2 pL-10@md+">
+                <a class="navbar-brand homepage" href="#">
+                    <img src="{{ asset('bundles/portfolio/images/logo.png') }}" />
+                </a>
+                <button class="navbar-toggler m-0 c-white" type="button" aria-expanded="false" onclick="openNav()">
+                    <i class="navbar-toggler-icon ti-menu"></i>
+                </button>
+                <div class="collapse navbar-collapse text-right">
+                    <ul class="navbar-nav mL-a@md+ link-wrap">
+                        <li class="nav-item pX-10 mR-5">
+                            <a href="#" class="anchor-link" dest="competence">
+                                Compétences
+                            </a>
+                        </li>
+                          <li class="nav-item pX-10 mR-5">
+                            <a href="#" class="anchor-link" dest="experience">
+                                Expériences
+                            </a>
+                        </li>
+                         <li class="nav-item pX-10 mR-5">
+                            <a href="#" class="anchor-link" dest="about">
+                                A propos de moi
+                            </a>
+                        </li>
+                        {% if blogs|length >  0 %}
+                         <li class="nav-item pX-10 mR-5">
+                            <a href="#" class="anchor-link" dest="blog">
+                                Blog
+                            </a>
+                        </li>
+                        {% endif %}
+                        <li class="nav-item pX-10 mR-5">
+                            <a href="#" class="anchor-link" dest="contact">
+                                Contact
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <div class="me text-center pB-80">
+                <h1 class="font-nunito mT-30 mB-20"><span class="primary">Designer</span> <span class="c-white font-weight-bold">/<span> <span class="secondary">Developpeur</span></h1> 
+                <h1 class="mT-60@sm+ mT-10@sm-"><span class="c-white">Hi! Je suis </span><span class="primary name">Tiavina Michael R.</span></h1> 
+                <h3 class="c-white mB-40 mT-30@sm-">Je suis développeur full-stack web et mobile</h3>
+                <h6 class="mT-80"><a class="download" href="{% if cv and cv.fichier %}{{ vich_uploader_asset(cv.fichier, 'file') }}{% else %}{{ asset('bundles/portfolio/cv.pdf') }}{% endif %}">Télécharger mon CV</a></h6> 
+            </div>
+        </header>
+
+
+       <main class='main-content p-0'>
+            <div id='mainContent' class="m-0 p-0">
+                <div class="container-fluid pX-0"> 
+
+                {% if app.session.flashbag.has('danger') or app.session.flashbag.has('info') or app.session.flashbag.has('warning') %}
+                    {% for type, messages in app.session.flashbag.all() %}
+
+                <div class="alert alert-{{type}} bdrs-0 mB-0" role="alert">
+                    <button class="close" data-dismiss="alert">&times;</button>
+                    <ul class="list-unstyled">
+                        {% for message in messages %}
+                        <li class="mB-5">
+                            <i class="{% if app.session.flashbag.has('danger') or app.session.flashbag.has('warning') %}ti-close{% elseif app.session.flashbag.has('info') %}ti-check{% endif %}mR-10 badge-{{type}}"></i>
+                            {{ message }}
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                    {% endfor %}
+                {% endif %}
+
+                    <div class="row competence feature text-center">
+                        <div class="col-md-12 pX-20@md- p-0@md+">
+
+                           <h1 class="mT-40 font-nunito waypoint" data-animation="slide-in-left">Mes compétences</h1>
+                            <div class="header-bar waypoint mT-20 mB-30" data-animation="slide-in-left" data-delay=".5s"></div> 
+
+                           <p class="waypoint pB-30 pT-10 title pL-10@sm-" data-animation="slide-in-left" data-delay=".5s" id="competence">Langages informatiques, outils et frameworks que je maîtrise</p> 
+
+                           <div class="feature"> 
+                           <h4 class="mT-20 mB-30 waypoint" data-animation="slide-in-left"></h4>
+                                <ul class="list-unstyle text-justify pX-10@sm-"> 
+                                     <li>
+                                        <figure class="waypoint"  data-animation="flip-in-x">
+                                            <img src="{{ asset('bundles/portfolio/images/logo/ajax.png') }}">
+                                             <figcaption>
+                                                <a href="">Ajax</a>
+                                            </figcaption>
+                                        </figure>
+                                    </li>  
+                                   <li>
+                                        <figure class="waypoint"  data-animation="flip-in-x">
+                                            <img class="big" src="{{ asset('bundles/portfolio/images/logo/apache.png') }}">
+                                             <figcaption>
+                                                <a href="">Apache</a>
+                                            </figcaption>
+                                        </figure>
+                                    </li>  
+
+                                     <li>
+                                        <figure class="waypoint"  data-animation="flip-in-x">
+                                            <img class="big" src="{{ asset('bundles/portfolio/images/logo/bootstrap.png') }}">
+                                             <figcaption>
+                                                <a href="">Bootstrap</a>
+                                            </figcaption>
+                                        </figure>
+                                    </li>
+                                       <li>
+                                        <figure class="waypoint"  data-animation="flip-in-x">
+                                            <img class="big" src="{{ asset('bundles/portfolio/images/logo/css.png') }}">
+                                             <figcaption>
+                                                <a href="">CSS</a>
+                                            </figcaption>
+                                        </figure>
+                                    </li> 
+                                     <li>
+                                        <figure class="waypoint"  data-animation="flip-in-x">
+                                            <img class="big" src="{{ asset('bundles/portfolio/images/logo/doctrine.png') }}">
+                                             <figcaption>
+                                                <a href="">Doctrine</a>
+                                            </figcaption>
+                                        </figure>
+                                    </li> 
+                                     <li>
+                                        <figure class="waypoint"  data-animation="flip-in-x">
+                                            <img class="big" src="{{ asset('bundles/portfolio/images/logo/drupal.png') }}">
+                                             <figcaption>
+                                                <a href="">Drupal</a>
+                                            </figcaption>
+                                        </figure>
+                                    </li> 
+                                     <li>
+                                        <figure class="waypoint"  data-animation="flip-in-x">
+                                            <img src="{{ asset('bundles/portfolio/images/logo/express.png') }}">
+                                             <figcaption>
+                                                <a href="">Express</a>
+                                            </figcaption>
+                                        </figure>
+                                    </li> 
+                                       <li>
+                                        <figure class="waypoint"  data-animation="flip-in-x">
+                                            <img src="{{ asset('bundles/portfolio/images/logo/graph-ql.jpg') }}">
+                                             <figcaption>
+                                                <a href="">Graphql</a>
+                                            </figcaption>
+                                        </figure>
+                                    </li>  
+                                    <li>
+                                        <figure class="waypoint"  data-animation="flip-in-x">
+                                            <img class="big" src="{{ asset('bundles/portfolio/images/logo/html.png') }}">
+                                             <figcaption>
+                                                <a href="">HTML</a>
+                                            </figcaption>
+                                        </figure>
+                                    </li>  
+                                    <li>
+                                        <figure class="waypoint"  data-animation="flip-in-x">
+                                            <img class="big" src="{{ asset('bundles/portfolio/images/logo/js.png') }}">
+                                             <figcaption>
+                                                <a href="">Javscript</a>
+                                            </figcaption>
+                                        </figure>
+                                    </li> 
+                                      <li>
+                                        <figure class="waypoint"  data-animation="flip-in-x">
+                                            <img class="big" src="{{ asset('bundles/portfolio/images/logo/jquery.png') }}">
+                                             <figcaption>
+                                                <a href="">Jquery</a>
+                                            </figcaption>
+                                        </figure>
+                                    </li> 
+                                     <li>
+                                        <figure class="waypoint"  data-animation="flip-in-x">
+                                            <img class="big" src="{{ asset('bundles/portfolio/images/logo/json.jpg') }}">
+                                             <figcaption>
+                                                <a href="">Json</a>
+                                            </figcaption>
+                                        </figure>
+                                    </li> 
+                                     <li>
+                                        <figure class="waypoint"  data-animation="flip-in-x">
+                                            <img src="{{ asset('bundles/portfolio/images/logo/jsx.jpg') }}">
+                                             <figcaption>
+                                                <a href="">Jsx</a>
+                                            </figcaption>
+                                        </figure>
+                                    </li>
+                                    <li>
+                                        <figure class="waypoint"  data-animation="flip-in-x">
+                                            <img class="big" src="{{ asset('bundles/portfolio/images/logo/mongodb.jpg') }}">
+                                             <figcaption>
+                                                <a href="">MongoDB</a>
+                                            </figcaption>
+                                        </figure>
+                                    </li>  
+                                     <li>
+                                        <figure class="waypoint"  data-animation="flip-in-x">
+                                            <img class="big" src="{{ asset('bundles/portfolio/images/logo/mysql.png') }}">
+                                             <figcaption>
+                                                <a href="">MySql</a>
+                                            </figcaption>
+                                        </figure>
+                                    </li> 
+                                     <li>
+                                        <figure class="waypoint"  data-animation="flip-in-x">
+                                            <img class="big" src="{{ asset('bundles/portfolio/images/logo/netbean.png') }}">
+                                             <figcaption>
+                                                <a href="">NetBeans</a>
+                                            </figcaption>
+                                        </figure>
+                                    </li>  
+                                     <li>
+                                        <figure class="waypoint"  data-animation="flip-in-x">
+                                            <img class="big" src="{{ asset('bundles/portfolio/images/logo/node.png') }}">
+                                             <figcaption>
+                                                <a href="">Node.js</a>
+                                            </figcaption>
+                                        </figure>
+                                    </li>
+                                    <li>
+                                        <figure class="waypoint"  data-animation="flip-in-x">
+                                            <img class="big" src="{{ asset('bundles/portfolio/images/logo/ps.jpg') }}">
+                                             <figcaption>
+                                                <a href="">Photoshop</a>
+                                            </figcaption>
+                                        </figure>
+                                    </li> 
+                                   <li>
+                                        <figure class="waypoint"  data-animation="flip-in-x">
+                                            <img src="{{ asset('bundles/portfolio/images/logo/php.png') }}">
+                                             <figcaption>
+                                                <a href="">PHP</a>
+                                            </figcaption>
+                                        </figure>
+                                    </li> 
+                                     <li>
+                                        <figure class="waypoint"  data-animation="flip-in-x">
+                                            <img src="{{ asset('bundles/portfolio/images/logo/react.jpg') }}">
+                                             <figcaption>
+                                                <a href="">React</a>
+                                            </figcaption>
+                                        </figure>
+                                    </li>  
+                                    <li>
+                                        <figure class="waypoint"  data-animation="flip-in-x">
+                                            <img src="{{ asset('bundles/portfolio/images/logo/react-native.jpg') }}">
+                                             <figcaption>
+                                                <a href="">React Native</a>
+                                            </figcaption>
+                                        </figure>
+                                    </li>  
+                                    <li>
+                                        <figure class="waypoint"  data-animation="flip-in-x">
+                                            <img src="{{ asset('bundles/portfolio/images/logo/redux.jpg') }}">
+                                             <figcaption>
+                                                <a href="">Redux</a>
+                                            </figcaption>
+                                        </figure>
+                                    </li> 
+                                      <li>
+                                        <figure class="waypoint"  data-animation="flip-in-x">
+                                            <img class="big" src="{{ asset('bundles/portfolio/images/logo/rest.jpg') }}">
+                                             <figcaption>
+                                                <a href="">Rest API</a>
+                                            </figcaption>
+                                        </figure>
+                                    </li> 
+                                   <li>
+                                        <figure class="waypoint"  data-animation="flip-in-x">
+                                            <img class="big" src="{{ asset('bundles/portfolio/images/logo/symfony.png') }}">
+                                             <figcaption>
+                                                <a href="">Symfony</a>
+                                            </figcaption>
+                                        </figure>
+                                    </li> 
+                                     <li>
+                                        <figure class="waypoint"  data-animation="flip-in-x">
+                                            <img src="{{ asset('bundles/portfolio/images/logo/twig.jpg') }}">
+                                             <figcaption>
+                                                <a href="">Twig</a>
+                                            </figcaption>
+                                        </figure>
+                                    </li>
+                                    <li>
+                                        <figure class="waypoint"  data-animation="flip-in-x">
+                                            <img src="{{ asset('bundles/portfolio/images/logo/webpack.jpg') }}">
+                                             <figcaption>
+                                                <a href="">Webpack</a>
+                                            </figcaption>
+                                        </figure>
+                                    </li> 
+                                      <li>
+                                        <figure class="waypoint"  data-animation="flip-in-x">
+                                            <img class="big" src="{{ asset('bundles/portfolio/images/logo/wp.png') }}">
+                                             <figcaption>
+                                                <a href="">Wordpress</a>
+                                            </figcaption>
+                                        </figure>
+                                    </li>  
+                              </ul> 
+                           </div> 
+                        </div>
+                    </div> <!-- ./row -->
+
+                    <div class="row experience feature text-center">
+                        <div class="col-md-12 pX-20@md- p-0@md+">
+
+                           <h1 class="mT-40 font-nunito waypoint" data-animation="slide-in-left">Projets</h1>
+                            <div class="header-bar waypoint mT-20 mB-30" data-animation="slide-in-left" data-delay=".5s"></div> 
+
+                            <p class="waypoint pT-10 title"  id="experience"data-animation="slide-in-left" data-delay=".5s">Les projets que j'ai réalisé</p> 
+
+                            {% for entity in experiences %}
+                             <div class="text-center p-20">
+                                  <div class="poste pY-20 waypoint" data-animation="slide-up"> 
+                                      <h3 class="bg-yellow font-nunito pY-5">{{entity.poste}}</h3>
+                                  </div>
+                                 <div class="date waypoint" data-animation="slide-up" data-delay=".4s"> 
+                                        <span>{{ entity.duree }}</span> 
+                                  </div>
+                                  {% if entity.logo %}
+                                   <div class="logo pY-20 waypoint" data-animation="slide-up" data-delay=".8s"> 
+                                    <a href="{% if entity.link %}{{entity.link}}{%else%}{{path(('ps_home'))}}{%endif%}">
+                                        <img src="{{ vich_uploader_asset(entity.logo, 'file') }}" />
+                                    </a>
+                                  </div>
+                                  {% else %}
+                                    <div class="pT-20 waypoint" data-animation="slide-up" data-delay=".8s">
+                                        <h3>
+                                            {% if entity.link %}
+                                            <a href="{{entity.link}}">
+                                                {{entity.society}}
+                                            </a>
+                                            {% else %}
+                                                {{entity.society}}
+                                            {% endif %}
+                                        </h3>
+                                    </div>
+                                  {% endif %}
+                                  <div class="description pY-20 waypoint" data-animation="slide-up" data-delay="1s"> 
+                                    {{ entity.description}}
+                                  </div>
+
+                                  {% if entity.images|length != 0 %}
+                                  <div class="pY-20 waypoint" data-animation="slide-up" data-delay="1.1s"> 
+                                    {% set image =  entity.images[0] %}
+                                    <img src="{{ vich_uploader_asset(image, 'file') }}"  class="w-60p@md w-50p@lg+ w-90p@sm w-100p@sm-"/>
+                                  </div>
+                                  {% endif %}
+
+                                  {% if entity.link %}
+                                    <div class="p-20 more">
+                                        <a href="{{entity.link}}" class="">Voir plus</a>
+                                    </div>
+                                  {% else %}
+                                     <div class="p-20 more">
+                                        <a href="{{ vich_uploader_asset(entity.fichier, 'file') }}" class="">Télécharger le code source</a>
+                                    </div>                                   
+                                  {% endif %}
+                              </div>
+                              {% endfor %}
+                        </div>
+                    </div>
+
+                     <div class="row about text-center">
+                        <div class="col-md-12 pX-20@md- p-0@md+">
+
+                            <h1 class="mT-40 font-nunito waypoint primary" data-animation="slide-in-left" id="about">Qui suis-je?</h1>
+                            <div class="header-bar bg-primary waypoint mT-20 mB-10" data-animation="slide-in-left" data-delay=".5s"></div> 
+
+                            <div class="text-justify pX-40@md+ pX-5@md- text">
+                                {% if about %}
+                                    {{about.description|raw}} 
+                                {% endif %}                  
+                            </div>                    
+                        </div>                    
+                    </div> 
+
+                    {% if blogs|length >  0 %}
+                    <div class="row blog text-center">
+                        <div class="col-md-12 pX-20@md- p-0@md+">
+
+                            <h1 class="dark d-ib mT-40 font-nunito waypoint" data-animation="slide-in-left" id="blog">Blog</h1>
+                            <span class="d-ib mL-5 font-nunito waypoint" data-animation="slide-in-left"><a href="{{path('ps_blog_index')}}"><i class="ti-plus fsz-lg "></i></a></span>
+                            <div class="bg-dark header-bar waypoint mT-20 mB-10" data-animation="slide-in-left" data-delay=".5s"></div> 
+
+                           
+                            <div class="row pX-60@md+">
+                                {% for entity in blogs %}
+                                <div class="col-lg-6 col-xl-6 {% if blogs|length == 1 %}offset-lg-3 offset-xl-3 {% endif %}col-sm-12 col-12 pX-20@sm text-left pY-20 mB-20 waypoint" data-animation="fade-in">
+                                       <div class="image"> 
+                                          {% if entity.image %}
+                                            <img src="{{ vich_uploader_asset(entity.image, 'file') }}" class="w-100p"/>
+                                          {% endif %}
+                                      </div>
+                                        <div class="title pT-15"> 
+                                            <h1><a href="{{path('ps_blog_show',{'slug': entity.slug})}}" class="font-weight-bold">{{entity.title}}</a></h1>
+                                      </div>
+                                       <div class="date pB-10"> 
+                                            <div class="pB-20 text-uppercase">{% if entity.createdAt %}{{ entity.createdAt|date('d F Y') }}{% endif %}</div>
+                                            <div class="bg-primary"></div>
+                                      </div>
+                                       <div class="text"> 
+                                        {{ entity.content|length > 100 ? entity.decodedContent|striptags|slice(0, 100) ~ '...' : entity.decodedContent|striptags }}
+                                      </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+
+
+                    <div class="row contact main-bg text-center pB-80"  id="contact">
+                        <div class="col-md-12 pX-20@md- p-0@md+">
+
+                           <h1 class="mT-40 font-nunito waypoint secondary" data-animation="slide-in-left">Contact</h1>
+                            <div class="header-bar bg-secondary waypoint mT-20 mB-30" data-animation="slide-in-left" data-delay=".5s"></div> 
+                            <div class="form mT-20"> 
+                                {{ form_start(form,{'attr': {'class': 'text-center m-auto w-50p@md+'}}) }} 
+                                    <div class="form-group waypoint"  data-animation="slide-down">
+                                          {{form_widget(form.name)}}
+                                    </div>  
+                                   <div class="form-group waypoint" data-animation="slide-down" data-delay=".2s">
+                                          {{form_widget(form.email)}}
+                                    </div>   
+
+                                     <div class="form-group waypoint" data-animation="slide-down" data-delay=".4s">
+                                          {{form_widget(form.message)}} 
+                                    </div>   
+
+                                    {{form_rest(form)}}
+                                    <div class="form-group waypoint" data-animation="slide-down" data-delay=".6s">
+                                        <button type="submit" class="form-control pY-10 bdrs-0">Envoyer</button>
+                                    </div>
+                                </form> 
+                            </div> 
+                        </div> 
+                    </div>
+
+                   <footer class="row main-bg text-center pB-60">
+                        <div class="col-md-12 pX-20@md- p-0@md+">
+                             <div class="row text-center">
+                                <div class="col-lg-2 col-sm-12 p-0">
+                                    <img src="{{ asset('bundles/portfolio/images/logo.png') }}" class="logo-footer"/>
+                                </div> 
+                                 <div class="pY-20@md- col-lg-1 p-0 col-sm-12">
+                                    <a href="#" class=" social-button"><i class="ti-facebook"></i></a>
+                                </div> 
+                                 <div class="pY-20@md- col-lg-2 offset-lg-2 p-0 col-sm-12 ta-r@md+">
+                                    <ul class="list-unstyled  ta-l@md+">
+                                      <li class="mB-15"><h6 class="font-weight-bold"><span class="primary font-weight-bold">_ </span>Contact</h6></li>
+                                      <li>VN 50B Ankazolava</li>
+                                      <li>Antananarivo</li>
+                                      <li>Madagascar</li>
+                                    </ul>
+                                </div> 
+                                <div class="pY-20@md- col-lg-5 p-0 col-sm-12 ta-r@md+">
+                                    <ul class="list-unstyled  ta-l@md+">
+                                      <li class="mB-15"><h6 class="font-weight-bold"><span class="primary font-weight-bold">_ </span>Poste</h6></li>
+                                      <li>Développeur MERN Stack/Symfony</li>
+                                      <li>Développeur Back/Front-End</li>
+                                      <li>Développeur Mobile Android/IOS</li>
+                                      <li>Web Designer</li>
+                                      <li>Formateur Développeur</li>
+                                    </ul>
+                                </div> 
+                            </div> 
+                        </div> 
+                    </footer> 
+                    
+                </div> 
+           </div> <!-- /#mainContent -->
+        </main> <!-- /.main -->
+    </div>
+        {% block javascripts %}{% endblock %}
+        <script src="{{asset('bundles/app/js/jquery.js')}}"></script>
+        <script src="{{asset('bundles/app/js/app.js')}}"></script>
+        <script src="{{asset('bundles/portfolio/js/jquery.waypoints.min.js')}}"></script>
+        <script src="{{asset('bundles/portfolio/js/main.js')}}"></script>
+    </body>
+</html>

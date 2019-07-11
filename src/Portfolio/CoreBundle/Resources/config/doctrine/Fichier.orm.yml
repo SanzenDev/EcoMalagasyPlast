@@ -1,0 +1,17 @@
+Portfolio\CoreBundle\Entity\Fichier:
+    type:  entity
+    repositoryClass: Portfolio\CoreBundle\Repository\FichierRepository
+    table: ps_fichier
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            column: name
+            type: string
+            length: 255
+        updatedAt:
+            column: updated_at
+            type: datetime

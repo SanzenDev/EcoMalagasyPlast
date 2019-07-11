@@ -1,0 +1,4 @@
+services:
+#    portfolio_core.example:
+#        class: Portfolio\CoreBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]

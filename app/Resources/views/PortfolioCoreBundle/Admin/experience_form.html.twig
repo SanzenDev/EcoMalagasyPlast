@@ -1,0 +1,51 @@
+{{ form_start(form,{'attr': {'class': 'text-left m-auto w-50p@md+'}}) }}
+      <div class="form-group">
+          {{form_label(form.poste)}}
+          {{form_widget(form.poste)}}
+          {{form_errors(form.poste)}} 
+      </div> 
+      <div class="form-group">
+          {{form_label(form.duree)}}
+          {{form_widget(form.duree)}}
+          {{form_errors(form.duree)}} 
+      </div> 
+      <div class="form-group">
+          {{form_label(form.description)}}
+          {{form_widget(form.description)}}
+          {{form_errors(form.description)}} 
+      </div> 
+      <div class="form-group">
+          {{form_label(form.link)}}
+          {{form_widget(form.link)}}
+          {{form_errors(form.link)}} 
+      </div>   
+      <div class="form-group">
+          {{form_label(form.society)}}
+          {{form_widget(form.society)}}
+          {{form_errors(form.society)}} 
+      </div>   
+      <div class="form-group">
+          {{form_label(form.logo)}}
+          {{form_widget(form.logo)}}
+          {{form_errors(form.logo)}} 
+      </div>   
+      <div class="form-group">
+          {{form_label(form.fichier)}}
+          {{form_widget(form.fichier)}}
+          {{form_errors(form.fichier)}} 
+      </div>   
+      <h6><strong>Autres Images</strong></h6>
+       <div class="form-group">                       
+          {{form_widget(form.images)}}
+          {{form_errors(form.images)}} 
+          <a type="button" class="btn pY-5 pX-10 bgc-orange-600 c-white bdrs-3 add-files" title="add">
+                <i class="ti-image mR-10"></i>
+                Ajouter d'autres images
+          </a>
+      </div>  
+
+      {{form_rest(form)}}
+      <div class="form-group">
+          <button type="submit" class="form-control pY-10 bdrs-0 btn-primary">Enregistrer</button>
+      </div>
+  </form> 

@@ -1,0 +1,69 @@
+{{ form_start(form) }} 
+<div class="form-group">
+    {{form_label(form.title)}}
+    {{form_widget(form.title)}}
+    {{form_errors(form.title)}} 
+</div>
+<div class="form-group">
+    {{form_label(form.content)}}
+    {{form_widget(form.content)}}
+    {{form_errors(form.content)}} 
+</div>
+
+<div class="form-group">
+    {{form_label(form.pageImage)}}
+    {{form_widget(form.pageImage)}}
+    {{form_errors(form.pageImage)}} 
+    <small class="form-text text-muted">Format: jpg et png. Taille max: 5Mo</small>
+</div>
+
+<div class="mY-20 bd p-10 bdrs-3">
+    <div class="form-group">
+        <h6 class="font-weight-bold c-gray-900">SEO</h6>
+        <small class="form-text text-muted">Pour les moteurs de recherches (Google, Yahoo, Bing, ...)</small>
+    </div>                            
+    <div class="form-group">
+        {{form_label(form.metaTitle)}}
+        {{form_widget(form.metaTitle)}}
+        {{form_errors(form.metaTitle)}} 
+        <small class="form-text text-muted">Titre affiché sur les moteur de recherche</small>
+     </div>    <!-- /.form-group -->
+
+    <div class="form-group">
+        {{form_label(form.metaKeywords)}}
+        {{form_widget(form.metaKeywords)}}
+        {{form_errors(form.metaKeywords)}} 
+        <small class="form-text text-muted">Titre affiché sur les moteur de recherche. Le titre de la publication est la valeur par defaut</small>
+    </div>    <!-- /.form-group -->
+     <div class="form-group">
+        {{form_label(form.metaDescription)}}
+        {{form_widget(form.metaDescription)}}
+        {{form_errors(form.metaDescription)}} 
+        <small class="form-text text-muted">Mot clés séparés par des virgules.Les 120 premiers mots du contenu de la publication est la valeur par defaut</small>
+     </div>    <!-- /.form-group -->
+ </div>
+
+
+<div class="checkbox checkbox-circle checkbox-info peers ai-c mB-15">
+    {{form_widget(form.enabled)}}
+    {{form_label(form.enabled)}}
+    {{form_errors(form.enabled)}} 
+</div>
+
+<h6><strong>Autres Images</strong></h6>
+ <div class="form-group">                       
+    {{form_widget(form.pageOtherImages)}}
+    {{form_errors(form.pageOtherImages)}} 
+    <a type="button" class="btn pY-5 pX-10 bgc-orange-600 c-white bdrs-3 add-files" data-toggle="modal" data-target="#file-modal" title="add">
+          <i class="ti-image mR-10"></i>
+          Ajouter d'autres images
+    </a>
+</div>
+
+{{form_rest(form)}}
+ <div class="form-group mT-10">
+    <small class="form-text text-muted"><strong class="c-red-900">*</strong> champ obligatoire.</small>
+    <button type="submit" class="btn btn-primary form-control mT-10">Enregistrer</button>
+</div>    <!-- /.form-group -->
+
+{{ form_end(form) }}

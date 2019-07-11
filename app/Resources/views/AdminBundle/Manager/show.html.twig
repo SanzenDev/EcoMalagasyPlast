@@ -1,0 +1,134 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title %}
+	{{entity|capitalize}} - 
+    {% if entity == 'dechet' or entity =='client' or entity == 'partenaire' %}
+    	{{ obj.name }} 
+    {% elseif entity == 'news' or entity =='page' %}
+    	{{ obj.title }} 
+    {% else %}
+    	{{ obj.id }}
+    {% endif %}
+	| {{ parent() }}
+{% endblock %}
+
+{% block breadcrumb %}
+      <span class="breadcrumb-item">
+        {% if entity == 'contact' %}<a href="{{path('admin_manage_index', {'entity': 'contact'})}}">Messages</a>{% endif %}
+        {% if entity == 'dechet' %}<a href="{{path('admin_manage_index', {'entity': 'dechet'})}}">Dechets</a>{% endif %}
+        {% if entity == 'commande' %}<a href="{{path('admin_manage_index', {'entity': 'commande'})}}">Commandes</a>{% endif %}
+        {% if entity == 'newsletter' %}<a href="{{path('admin_manage_index', {'entity': 'dechet'})}}">Newsletters</a>{% endif %}
+        {% if entity == 'news' %}<a href="{{path('admin_manage_index', {'entity': 'news'})}}">Actualités</a>{% endif %}
+        {% if entity == 'page' %}<a href="{{path('admin_manage_index', {'entity': 'page'})}}">Pages</a>{% endif %}
+        {% if entity == 'utilisateur' %}<a href="{{path('admin_manage_index', {'entity': 'utilisateur'})}}">Utilisateurs</a>{% endif %}
+        {% if entity == 'client' %}<a href="{{path('admin_manage_index', {'entity': 'client'})}}">Clients</a>{% endif %}
+        {% if entity == 'partenaire' %}<a href="{{path('admin_manage_index', {'entity': 'partenaire'})}}">Partenaires</a>{% endif %}
+      </span>
+
+      <span class="breadcrumb-item active">
+        {% if entity == 'dechet' %}<a href="#">{{obj.name}}</a>{% endif %}
+        {% if entity == 'news' %}<a href="#">{{obj.title}}</a>{% endif %}
+        {% if entity == 'page' %}<a href="#">{{obj.title}}</a>{% endif %}
+        {% if entity == 'utilisateur' %}<a href="#">{{obj.username}}</a>{% endif %}
+        {% if entity == 'commande' %}<a href="#">{{obj.id}}</a>{% endif %}
+        {% if entity == 'client' %}<a href="#">{{obj.name}}</a>{% endif %}
+        {% if entity == 'partenaire' %}<a href="#">{{obj.name}}</a>{% endif %}
+        {% if entity == 'contact' %}<a href="#">{{obj.id}}</a>{% endif %}
+        {% if entity == 'newsletter' %}<a href="#">{{obj.id}}</a>{% endif %}
+      </span>
+
+{% endblock %}
+{% block body %}
+
+<div class="row">
+ 	<div class="col-md-12">
+        <div class="">
+            <ul class="list-unstyled">
+				<li class="list-inline-item mR-20">
+	               <a href="#" class="d-b td-n pY-5 pX-10 bgcH-grey-100 c-grey-700" data-toggle="modal" data-target="#modal-delete" title="Supprimer">
+	                  <i class="c-grey-900 ti-trash mR-5"></i>
+	                  <span>Supprimer</span>
+	              </a>
+	                <!-- Modal -->
+	                <div class="modal fade" id="modal-delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	                  <div class="modal-dialog  modal-sm" role="document">
+	                    <div class="modal-content">
+	                      <div class="modal-header">
+	                        <h5 class="modal-title" id="exampleModalLabel">
+	                            <i class="ti-alert mR-10 c-red-900"></i>Suppression
+	                        </h5>
+	                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	                          <span aria-hidden="true">&times;</span>
+	                        </button>
+	                      </div>
+	                      <div class="modal-body">
+	                        <p>
+	                            Voulez-vous vraiment supprimer?
+	                        </p>
+	                      </div>
+	                      <div class="modal-footer">
+	                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annullr</button>
+	                        <a href="{{path('admin_manage_delete', {'entity': 'page', 'token': obj.token })}}" class="btn btn-primary">Confirmer</a>
+	                      </div>
+	                    </div>
+	                  </div>
+	                </div>
+
+	              </li>
+	              <li class="list-inline-item mR-20">
+	                <a href="
+{% if entity == 'news' %}{{path('update', {'entity': 'news', 'slug':obj.slug, 'token': obj.token })}}{% endif %}{% if entity == 'partenaire' %}{{path('update', {'entity': 'partenaire', 'slug':obj.slug, 'token': obj.token })}}{% endif %}{% if entity == 'dechet' %}{{path('update', {'entity': 'dechet', 'slug':obj.slug, 'token': obj.token })}}{% endif %}{% if entity == 'page' %}{{path('update', {'entity': 'page', 'slug':obj.slug, 'token': obj.token })}}{% endif %}
+	                " class="d-b td-n pY-5 pX-10 bgcH-grey-100 c-grey-700" data-toggle="tooltip" data-placement="right" title="Modifier">
+	                  <i class="c-grey-900 ti-pencil-alt mR-5"></i>
+	                  <span>Modifier</span>
+	                </a>
+	              </li>
+	              <li class="list-inline-item mR-20">
+	                <a href="#" class="d-b td-n pY-5 pX-10 bgcH-grey-100 c-grey-700" data-toggle="tooltip" data-placement="right" title="Voir le site">
+	                  <i class="c-grey-900 ti-shift-right mR-5"></i>
+	                  <span>Voir</span>
+	                </a>
+	              </li>
+	              <li class="list-inline-item mR-20">
+	              	{% if entity == 'client' %}
+	                <a href="{{path('print', {'entity': 'client', 'id': obj.id})}}" class="d-b td-n pY-5 pX-10 bgcH-grey-100 c-grey-700" data-toggle="tooltip" data-placement="right" title="Imprimer">
+	                  <i class="c-grey-900 ti-shift-right mR-5"></i>
+	                  <span>Imprimer</span>
+	                </a>
+	                {% endif %}
+	              	{% if entity == 'partenaire' %}
+	                <a href="{{path('print', {'entity': 'partenaire', 'id': obj.id})}}" class="d-b td-n pY-5 pX-10 bgcH-grey-100 c-grey-700" data-toggle="tooltip" data-placement="right" title="Imprimer">
+	                  <i class="c-grey-900 ti-shift-right mR-5"></i>
+	                  <span>Imprimer</span>
+	                </a>
+	                {% endif %}
+	              	{% if entity == 'commande' %}
+	                <a href="{{path('print', {'entity': 'commande', 'id': obj.id})}}" class="d-b td-n pY-5 pX-10 bgcH-grey-100 c-grey-700" data-toggle="tooltip" data-placement="right" title="Imprimer">
+	                  <i class="c-grey-900 ti-shift-right mR-5"></i>
+	                  <span>Imprimer</span>
+	                </a>
+	                {% endif %}
+	              </li>
+
+	              <li class="list-inline-item mR-20">
+	                <a href="
+						{% if entity == 'news' %}{{path('admin_manage_index', {'entity': 'news'})}}{% endif %}{% if entity == 'partenaire' %}{{path('admin_manage_index', {'entity': 'partenaire'})}}{% endif %}{% if entity == 'dechet' %}{{path('admin_manage_index', {'entity': 'dechet'})}}{% endif %}{% if entity == 'page' %}{{path('admin_manage_index', {'entity': 'page'})}}{% endif %}
+	                " class="d-b td-n pY-5 pX-10 bgcH-grey-100 c-grey-700" data-toggle="tooltip" data-placement="right" title="Voir la liste">
+	                  <i class="c-grey-900 ti-list mR-5"></i>
+	                  <span>Retour à la liste</span>
+	                </a>
+	              </li>
+            <ul>
+        </div>
+
+	    <div class="bgc-white pY-10 pX-20 bgc-grey-700">
+	        <h6 class="c-white d-ib">{% if obj.slug %}{{ obj.slug }}{% else %}{{ obj.id }}{% endif %}</h6>
+     	</div> <!-- /.bg-white -->
+    </div> <!-- /.col -->
+</div> <!-- /.row --> 
+
+<div class="row">
+    {% include "AdminBundle/"~entity|title~"/show.html.twig" with {'entity': obj } %} 
+</div> <!-- /.row --> 
+
+{% endblock %}

@@ -1,0 +1,135 @@
+{{ form_start(form) }} 
+<div class="form-group">
+    {{form_label(form.title)}}
+    {{form_widget(form.title)}}
+    {{form_errors(form.title)}} 
+</div>
+<div class="form-group">
+    {{form_label(form.content)}}
+    {{form_widget(form.content)}}
+    {{form_errors(form.content)}} 
+</div>
+<div class="form-group">
+    {{form_label(form.youtube)}}
+    {{form_widget(form.youtube)}}
+    {{form_errors(form.youtube)}} 
+</div>
+
+<div class="form-group file">
+    {{form_label(form.newsImage)}}
+    {{form_widget(form.newsImage)}}
+    {{form_errors(form.newsImage)}} 
+    <small class="form-text text-muted">Format: jpg et png. Taille max: 5Mo</small>
+</div>
+
+<div class="mY-20 bd p-10 bdrs-3">
+    <div class="form-group">
+        <a class="pY-5 pX-10 bgc-grey-600 c-white bdrs-3" data-toggle="modal" data-target="#file-modal" title="add">
+              <i class="ti-clip mR-10"></i>
+              Ajouter des fichiers
+        </a>
+
+        <small class="form-text text-muted">Documents, Vidéos, ...</small>
+        <div class="modal fade" id="file-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog  modal-md" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">
+                            <i class="ti-pin mR-10 c-red-900"></i>Fichiers
+                        </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                         <div class="form-group file">
+                            <label>Vidéo Mp4</label>
+                            {{form_widget(form.newsVideoMp4)}}
+                            {{form_errors(form.newsVideoMp4)}} 
+                             <small class="form-text text-muted">Format: mp4 et avi. Taille max: 200Mo. Navigateur: Firefox (34+), Opera, Google Chrome, Apple (Safari, Safari Mobile)</small>
+                          </div>    <!-- /.form-group -->
+                         <div class="form-group file">
+                            <label>Vidéo Ogg</label>
+                            {{form_widget(form.newsVideoOgg)}}
+                            {{form_errors(form.newsVideoOgg)}} 
+                             <small class="form-text text-muted">Format: OGG. Taille max: 200Mo. Navigateur: Firefox (3,5+), Opera, Google Chrome</small>
+                          </div>    <!-- /.form-group -->
+                         <div class="form-group file">
+                            <label>Vidéo Webm</label>
+                            {{form_widget(form.newsVideoWebm)}}
+                            {{form_errors(form.newsVideoWebm)}} 
+                             <small class="form-text text-muted">Format: mp4 et avi. Taille max: 200Mo. Navigateur: Firefox (4+), Opera, Google Chrome</small>
+                          </div>    <!-- /.form-group -->
+                         <div class="form-group file">
+                            <label>Document</label>
+                            {{form_widget(form.newsPdf)}}
+                            {{form_errors(form.newsPdf)}} 
+                             <small class="form-text text-muted">Format: pdf. Taille max: 25Mo</small>
+                          </div>    <!-- /.form-group -->
+                         <div class="form-group file">
+                            <label>Fichier compressé</label>
+                            {{form_widget(form.newsZip)}}
+                            {{form_errors(form.newsZip)}} 
+                             <small class="form-text text-muted">Format: Zip, Rar. Taille max: 25Mo</small>
+                        </div>    <!-- /.form-group -->
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close">Ok</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>   
+</div>    <!-- /.form-group -->
+
+<div class="mY-20 bd p-10 bdrs-3">
+    <div class="form-group">
+        <h6 class="font-weight-bold c-gray-900">SEO</h6>
+        <small class="form-text text-muted">Pour les moteurs de recherche (Google, Yahoo, Bing, ...)</small>
+    </div>                            
+    <div class="form-group">
+        {{form_label(form.metaTitle)}}
+        {{form_widget(form.metaTitle)}}
+        {{form_errors(form.metaTitle)}} 
+        <small class="form-text text-muted">Titre affiché sur les moteurs de recherche</small>
+     </div>    <!-- /.form-group -->
+
+    <div class="form-group">
+        {{form_label(form.metaKeywords)}}
+        {{form_widget(form.metaKeywords)}}
+        {{form_errors(form.metaKeywords)}} 
+        <small class="form-text text-muted">Titre affiché sur les moteurs de recherche. Le titre de la publication est la valeur par defaut</small>
+    </div>    <!-- /.form-group -->
+     <div class="form-group">
+        {{form_label(form.metaDescription)}}
+        {{form_widget(form.metaDescription)}}
+        {{form_errors(form.metaDescription)}} 
+        <small class="form-text text-muted">Mot clés séparés par des virgules.Les 120 premiers mots du contenu de la publication est la valeur par defaut</small>
+     </div>    <!-- /.form-group -->
+ </div>
+
+<div class="checkbox checkbox-circle checkbox-info peers ai-c mB-15">
+    {{form_widget(form.enabled)}}
+    {{form_label(form.enabled)}}
+    {{form_errors(form.enabled)}} 
+</div>
+
+<h6><strong>Autres Images</strong></h6>
+ <div class="form-group">                       
+    {{form_widget(form.newsOtherImages)}}
+    {{form_errors(form.newsOtherImages)}} 
+    <a type="button" class="btn pY-5 pX-10 bgc-orange-600 c-white bdrs-3 add-files" data-toggle="modal" data-target="#file-modal" title="add">
+          <i class="ti-image mR-10"></i>
+          Ajouter d'autres images
+    </a>
+</div>
+
+{{form_rest(form)}}
+ <div class="form-group mT-10">
+    <small class="form-text text-muted"><strong class="c-red-900">*</strong> champ obligatoire.</small>
+    <button type="submit" class="btn btn-primary form-control mT-10">Enregistrer</button>
+</div>    <!-- /.form-group -->
+
+{{ form_end(form) }}

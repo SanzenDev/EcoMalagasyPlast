@@ -1,0 +1,90 @@
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Société</th>
+        <th scope="col">Adresse</th>
+        <th scope="col">Tél</th>
+        <th scope="col">Login</th>
+        <th scope="col">Vu</th>
+        <th scope="col">Validé</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for entity in entities %}
+      <tr>
+        <th scope="row"><a href="#">{{ entity.id }}</a></th>
+        <td>{{ entity.name }}</td>
+        <td>{{ entity.address }}</td>
+        <td>{{ entity.tel }}</td>
+        <td>{% if entity.user %}{{ entity.user.username }}{% else %}<code class="highlighter-rouge">Pas de compte</code>{% endif %}</td>
+        <td>
+          <a href="{{path('admin_manage_check', {'entity': 'partenaire', 'slug': entity.slug })}}" data-toggle="tooltip" data-placement="top" title="Cliquez pour ne plus valider">
+              <i class="{% if entity.checked %}ti-check c-green-600 {% else %}ti-close c-red-600 {% endif %} font-weight-bold"></i>
+          </a>
+        </td>
+        <td>
+          <a href="{{path('admin_manage_publish', {'entity': 'partenaire', 'slug': entity.slug, })}}" data-toggle="tooltip" data-placement="top" title="Cliquez pour ne plus valider">
+              <i class="{% if entity.enabled %}ti-check c-green-600 {% else %}ti-close c-red-600 {% endif %} font-weight-bold"></i>
+          </a>
+        </td>
+        <td class="action">
+          <ul class="list-unstyled">
+              <li class="d-ib mR-10">
+                  <a href="{{path('admin_manage_show', {'entity': 'partenaire', 'slug': entity.slug, })}}" class="c-grey-900" data-toggle="tooltip" data-placement="top" title="Prévisualiser">
+                      <i class="ti-eye"></i>
+                  </a>
+              </li>
+              <li class="d-ib mR-10">
+                  <a href="{{path('admin_manage_update', {'entity': 'partenaire', 'token': entity.token, 'slug' : entity.slug})}}" class="c-grey-900" data-toggle="tooltip" data-placement="top" title="Modifier">
+                      <i class="ti-pencil-alt"></i>
+                  </a>
+              </li>
+               <li class="d-ib mR-10">
+                  <a href="#" class="c-grey-900" data-toggle="modal" data-target="#id-{{entity.id}}" title="Supprimer">
+                      <i class="ti-trash"></i>
+                  </a>
+                   <!-- Modal -->
+                  <div class="modal fade" id="id-{{entity.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog  modal-sm" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">
+                              <i class="ti-alert mR-10 c-red-900"></i>Suppression
+                          </h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <p>
+                              Voulez-vous vraiment supprimer?
+                          </p>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                          <a href="{{path('admin_manage_delete', {'entity': 'partenaire', 'token': entity.token })}}" class="btn btn-primary">Confirmer</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+              </li>
+               <li class="d-ib mR-10">
+                  <a href="{{path('print', {'entity': 'partenaire', 'id': entity.id })}}" class="c-grey-900" data-toggle="tooltip" data-placement="top" title="Imprimer">
+                      <i class="ti-printer"></i>
+                  </a>
+              </li>
+              {% if entity.fb %}
+              <li class="d-ib">
+                  <a href="{{ entity.fb }}" class="fb fsz-xs c-white bgc-grey-900 bdrs-2 p-5" data-toggle="tooltip" data-placement="top" title="Voir la page facebook">
+                      <i class="ti-facebook"></i>
+                  </a>
+             </li> 
+             {% endif %}
+          <ul>
+        </td>
+      </tr>
+      {% endfor %}      
+    </tbody>
+</table>

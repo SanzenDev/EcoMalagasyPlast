@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="row pY-0 pX-60@lg body pT-20@md+ pT-10@md-">
+    <div class="col-lg-8 m-0 pL-40@md+ main">
+        <div class="breadcrumbs">
+            <ul class="list-unstyled">
+                <li><a class="mR-3" href="{{ path('homepage') }}">Accueil</a> »</li>
+                <li class="active"><a href="#">{{ entity == 'news' ? 'Actualités' : entity|capitalize }}</a></li>
+            </ul>
+        </div>
+
+        {% if entity != 'news' %}
+        <div class="row feature clear f-dechet pB-30@md- pT-10@md- pT-20@md+ mB-40@md+">
+            <div class="col-lg-12">
+                <div class="t pB-20@md- pY-20@md+ mB-10@md+">
+                    <h1>{% if entity == 'dechet' %}Les déchets que nous récyclons{% elseif entity == 'news' %} Nos dernières actualités {% else %}Nos Partenaires{% endif %}</h1>
+                </div>
+                {% if entities|length > 0 %}
+
+                    {% include "WebBundle/"~entity|title~"/index.html.twig" with {'entities': entities} %} 
+
+                    {{ knp_pagination_render(entities) }}  
+
+                {% else %}
+
+                    <div class="no-result">
+                        <div class="text-center p-30">
+                            <span class="ti-na fsz-lg d-b mB-30"></span>
+                            <span class="r">Resultat introuvable</span>
+                        </div>
+                    </div>  <!-- ./row -->
+                {% endif %}
+            </div>    <!-- ./col -->
+        </div>    <!-- ./row -->
+        {% else %}
+            {% if entities|length > 0 %}
+
+                {% include "WebBundle/News/index.html.twig" with {'entities': entities} %} 
+
+                {{ knp_pagination_render(entities) }}  
+
+            {% else %}
+
+                <div class="no-result">
+                    <div class="text-center p-30">
+                        <span class="ti-na fsz-lg d-b mB-30"></span>
+                        <span class="r">Resultat introuvable</span>
+                    </div>
+                </div>  <!-- ./row -->
+            {% endif %}                       
+        {% endif %}
+    </div>    <!-- ./col -->
+
+     {{ render(controller("AppWebBundle:Main:aside")) }}
+</div>    <!-- ./row -->
+{% endblock %}

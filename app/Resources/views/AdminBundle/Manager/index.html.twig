@@ -1,0 +1,92 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title %}
+    {% if key %}Resultat des recherches - {% else %}Liste {% endif %}{{ entity|title }} ({{ entities|length }}) | {{ parent() }}
+{% endblock %}
+
+{% block body %}
+<div class="row">
+    <div class="col-md-12">
+      <div class="bgc-white bd bdrs-3 p-20 mB-20">
+        <h4 class="c-grey-900 mB-20 d-ib w-100p@sm-">Liste des {{entity}}s</h4>
+
+        {% if entities|length >= 2 %}
+        <div class="dropdown d-ib float-md-right mR-10">
+          <button class="btn btn-secondary dropdown-toggle bdrs-0" type="button" id="order" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Ordre
+          </button>
+          <div class="dropdown-menu" aria-labelledby="order">
+                    {{ knp_pagination_sortable(
+                        entities,
+                        'Titre A à Z',
+                        'slug', {}, {'direction': 'asc'}) 
+                    }}
+                    {{ knp_pagination_sortable(
+                        entities,
+                        'Titre Z à A',
+                        'slug', {}, {'direction': 'desc'}) 
+                    }}
+
+
+                    {{ knp_pagination_sortable(
+                        entities,
+                        'Récent à Ancien',
+                        'createdAt', {}, {'direction': 'asc'}) 
+                    }}
+                     {{ knp_pagination_sortable(
+                        entities,
+                        'Ancien à Récent',
+                        'createdAt', {}, {'direction': 'desc'}) 
+                    }}
+          </div>
+        </div>
+         <div class="dropdown d-ib float-md-right mR-10">
+          <button class="btn btn-warning dropdown-toggle bdrs-0" type="button" id="order" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Actions
+          </button>
+          <div class="dropdown-menu" aria-labelledby="order">
+            <a class="dropdown-item" href="
+              {% if entity == 'news' %}{{path('admin_manage_filter_all', {'entity': 'news', 'filter': 'enabled'})}}{% endif %}{% if entity == 'partenaire' %}{{path('admin_manage_filter_all', {'entity': 'partenaire', 'filter': 'enabled'})}}{% endif %}{% if entity == 'commande' %}{{path('admin_manage_filter_all', {'entity': 'commande', 'filter': 'enabled'})}}{% endif %}{% if entity == 'client' %}{{path('admin_manage_filter_all', {'entity': 'client', 'filter': 'enabled'})}}{% endif %}{% if entity == 'page' %}{{path('admin_manage_filter_all', {'entity': 'page', 'filter': 'enabled'})}}{% endif %}{% if entity == 'utilisateur' %}{{path('admin_manage_filter_all', {'entity': 'utilisateur', 'filter': 'enabled'})}}{% endif %}{% if entity == 'dechet' %}{{path('admin_manage_filter_all', {'entity': 'dechet', 'filter': 'enabled'})}}{% endif %}
+            ">Marquer tout comme inactif</a>
+          </div>
+        </div>
+        <div class="dropdown d-ib float-md-right mR-10">
+          <button class="btn btn-success dropdown-toggle bdrs-0" type="button" id="filter" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Filtre
+          </button>
+          <div class="dropdown-menu" aria-labelledby="filter">
+            {% if entity == 'contact' or entity == 'partenaire' or entity == 'commande' or entity == 'client' or entity == 'newsletter' %}
+            <a class="dropdown-item" href="
+              {% if entity == 'contact' %}{{path('admin_manage_filter', {'entity': 'contact', 'filter': 'checked'})}}{% endif %}{% if entity == 'partenaire' %}{{path('admin_manage_filter', {'entity': 'partenaire', 'filter': 'checked'})}}{% endif %}{% if entity == 'commande' %}{{path('admin_manage_filter', {'entity': 'commande', 'filter': 'checked'})}}{% endif %}{% if entity == 'client' %}{{path('admin_manage_filter', {'entity': 'client', 'filter': 'checked'})}}{% endif %}{% if entity == 'newsletter' %}{{path('admin_manage_filter', {'entity': 'newsletter', 'filter': 'checked'})}}{% endif %}
+            ">Non Lus</a>
+            {% endif %}
+            <a class="dropdown-item" href="
+              {% if entity == 'news' %}{{path('admin_manage_filter', {'entity': 'news', 'filter': 'enabled'})}}{% endif %}{% if entity == 'partenaire' %}{{path('admin_manage_filter', {'entity': 'partenaire', 'filter': 'enabled'})}}{% endif %}{% if entity == 'commande' %}{{path('admin_manage_filter', {'entity': 'commande', 'filter': 'enabled'})}}{% endif %}{% if entity == 'client' %}{{path('admin_manage_filter', {'entity': 'client', 'filter': 'enabled'})}}{% endif %}{% if entity == 'page' %}{{path('admin_manage_filter', {'entity': 'page', 'filter': 'enabled'})}}{% endif %}{% if entity == 'utilisateur' %}{{path('admin_manage_filter', {'entity': 'utilisateur', 'filter': 'enabled'})}}{% endif %}{% if entity == 'dechet' %}{{path('admin_manage_filter', {'entity': 'dechet', 'filter': 'enabled'})}}{% endif %}
+            ">Inactifs</a>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if entities|length > 0 %}
+            {% include "AdminBundle/"~entity|title~"/index.html.twig" with {'entities': entities} %} 
+
+        <div class="pY-15">
+            {{ knp_pagination_render(entities) }}
+        </div> 
+        {% else %}
+        <div class="no-result">
+              <div class="text-center p-30">
+                  <span class="ti-na fsz-lg d-b mB-30"></span>
+                  {% if key %}
+                  <span class="r">Resultat introuvable pour <b>{{ key }}</b></span>
+                  {% else %}
+                   <span class="r">Liste vide. Veuillez entrer de nouvelles entrées.</span>                 
+                  {% endif %}
+              </div>
+          </div>  <!-- ./row -->
+        {% endif %}
+
+    </div>
+  </div>
+</div>
+{% endblock %}

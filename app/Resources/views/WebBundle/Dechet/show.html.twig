@@ -1,0 +1,72 @@
+<div class="breadcrumbs">
+    <ul class="list-unstyled">
+        <li><a class="mR-3" href="{{path('homepage')}}">Accueil</a> »</li>
+        <li class="non_active"><a class="mR-3" href="#">Déchets</a> »</li>
+        <li class="active"><a href="#">{{entity.name}}</a></li>
+    </ul>
+</div>
+<div class="t pY-10@xl- pT-20@xl+">
+    <h1>{{ entity.name }}</h1>
+</div>
+<h3 class="fw-700 mB-20 d-n@sm-">
+    {% if entity.mesuredAmount > 0 %}
+        {{ entity.mesuredAmount }} disponibles
+    {% else %}
+    Cet article n'est pas disponible pour le moment. Nous vous contacterons lorque le produit est de nouveau disponible.
+    {% endif %}
+</h3>
+<div class="row">
+    <div class="col-xl-4">
+        <div class="i s-dechet-i text-center">
+            <figure class="w-100p@md+ w-80p@md w-50p@sm-">
+                <img src="{{ vich_uploader_asset(entity.dechetImage, 'file') }}" class="w-100p ta-c@sm+">
+            </figure>
+        </div>
+
+        <div class="text d-n@sm+">
+            <h1 class="fw-700 mY-20@xl+">
+                {% if entity.mesuredAmount > 0 %}
+                    {{ entity.mesuredAmount }} disponibles
+                {% else %}
+                Cet article n'est pas disponible pour le moment. Nous vous contacterons lorque le produit est de nouveau disponible.
+                {% endif %}
+            </h1>
+
+            {% if entity.description %}<p class="fsz-lg@">{{ entity.description }}</p>{% endif %}
+        </div> <!-- /.text -->
+     </div> <!-- /.col -->
+
+    <div class="col-xl-8 mT-30@md-">
+        {% if app.user and is_granted('IS_AUTHENTICATED_FULLY') %}
+            {% if entity.amount > 1 and app.user and app.user.client %}
+                {% include "WebBundle/Commande/form.html.twig" with {'form': form } %} 
+            {% endif %}
+        {% endif %}
+
+        {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
+            <div class="readMoreLink mT-30@md+">
+                <a href="{{ path('fos_user_security_login') }}">
+                </a> 
+            </div> <!-- /.col -->
+            <div class="readMoreLink mT-10">
+                <a href="{{ path('fos_user_registration_register') }}">
+                    Connectez-vous pour pouvoir faire une commande
+                    Inscrivez-vous si vous n'avez pas encore de compte
+                </a> 
+            </div> <!-- /.col -->
+        {% endif %}
+    </div>
+</div>
+
+<div class="text">
+    {% if entity.description %}<p class="fsz-lg@">{{ entity.description }}</p>{% endif %}
+</div> <!-- /.text -->
+ 
+
+    {% if app.user and not app.user.client %}
+    <div class="readMoreLink mT-30@md+">
+        <a href="{{ path('web_client_new') }}">
+            Vous devriez continuer l'incription pour pouvoir faire une commande
+        </a> 
+    </div> <!-- /.col -->
+    {% endif %}

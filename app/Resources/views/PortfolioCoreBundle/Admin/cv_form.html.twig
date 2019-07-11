@@ -1,0 +1,11 @@
+{{ form_start(form,{'attr': {'class': 'text-left m-auto w-50p@md+'}}) }}
+      <div class="form-group">
+          {{form_label(form.fichier)}}
+          {{form_widget(form.fichier)}}
+          {{form_errors(form.fichier)}} 
+      </div>
+      {{form_rest(form)}}
+      <div class="form-group">
+          <button type="submit" class="form-control pY-10 bdrs-0 btn-primary">Enregistrer</button>
+      </div>
+  </form> 
