@@ -27,28 +27,28 @@ git https://github.com/SanzenDev/EcoMalagasyPlast.git
 ![Login](https://github.com/SanzenDev/EcoMalagasyPlast/blob/master/screenshots/EMP-login.png)
 
 #### Creation de compte
-![Login](https://github.com/SanzenDev/EcoMalagasyPlast/blob/master/screenshots/EMP-signup.png)
+![SIGNUP](https://github.com/SanzenDev/EcoMalagasyPlast/blob/master/screenshots/EMP-signup.png)
 
 #### Liste des actualités
-![Login](https://github.com/SanzenDev/EcoMalagasyPlast/blob/master/screenshots/EMP-list_actus.png)
+![Liste Actus](https://github.com/SanzenDev/EcoMalagasyPlast/blob/master/screenshots/EMP-list_actus.png)
 
 #### Liste des déchets
-![Login](https://github.com/SanzenDev/EcoMalagasyPlast/blob/master/screenshots/EMP-list_dechets.png)
+![Liste des dechets](https://github.com/SanzenDev/EcoMalagasyPlast/blob/master/screenshots/EMP-list_dechets.png)
 
 #### Voir Actus
-![ShowActu](https://github.com/SanzenDev/EcoMalagasyPlast/blob/master/screenshots/EMP-voir_actus.png)
+![Voir Actu](https://github.com/SanzenDev/EcoMalagasyPlast/blob/master/screenshots/EMP-voir_actus.png)
 
 #### Contact
 ![CONCTACT](https://github.com/SanzenDev/EcoMalagasyPlast/blob/master/screenshots/EMP-dashboard-contact.png)
 
 #### Responsive Home Page
-![CONCTACT](https://github.com/SanzenDev/EcoMalagasyPlast/blob/master/screenshots/EMP-home-responsive.png)
+![Responsive home page](https://github.com/SanzenDev/EcoMalagasyPlast/blob/master/screenshots/EMP-home-responsive.png)
 
 #### Dashboard
-![Login](https://github.com/SanzenDev/EcoMalagasyPlast/blob/master/screenshots/EMP-dashboard-.png)
+![Dashboard home](https://github.com/SanzenDev/EcoMalagasyPlast/blob/master/screenshots/EMP-dashboard-.png)
 
 #### Dashboard - Liste dechets
-![Login](https://github.com/SanzenDev/EcoMalagasyPlast/blob/master/screenshots/EMP-dashboard-list-dechet.png)
+![Dashboar, liste des dechets](https://github.com/SanzenDev/EcoMalagasyPlast/blob/master/screenshots/EMP-dashboard-list-dechet.png)
 
 #### Dashboard - Ajout des actus
 ![ADD_ACTUS](https://github.com/SanzenDev/EcoMalagasyPlast/blob/master/screenshots/EMP-dashboard-actus-add.png)
