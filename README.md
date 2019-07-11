@@ -1,6 +1,6 @@
 # Recyclin'Mada
-C'est une application web responsive que j'ai développé en 2017 pour la société Eco Malagasy Plast, le société n'a malheureusement le temps ni le moyen de le mettre en production à l'époque, du coup j'ai décidé de le faire open source. 
-Il y en certain bugs surtout au niveau de l'affichage mais comme c'est open source, tout le monde peut contribuer au projet en fixant des bugs ou ajoutant de nouvelles fonctionnalités.
+C'est une application web responsive que j'ai développé en 2017 pour la société Eco Malagasy Plast, la société n'a malheureusement pas le temps ni le moyen de le mettre en production à l'époque, du coup j'ai décidé de le faire open source. 
+Il y en a encore certains bugs surtout au niveau de l'affichage mais comme c'est open source, tout le monde peut contribuer au projet en fixant ces bugs ou en ajoutant de nouvelles fonctionnalités.
 
 ## :file_folder: Technos:
  1. Front-End:
