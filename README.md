@@ -39,7 +39,7 @@ git https://github.com/SanzenDev/EcoMalagasyPlast.git
 ![Voir Actu](https://github.com/SanzenDev/EcoMalagasyPlast/blob/master/screenshots/EMP-voir_actus.png)
 
 #### Contact
-![CONCTACT](https://github.com/SanzenDev/EcoMalagasyPlast/blob/master/screenshots/EMP-dashboard-contact.png)
+![CONCTACT](https://github.com/SanzenDev/EcoMalagasyPlast/blob/master/screenshots/EMP-contact.png)
 
 #### Responsive Home Page
 ![Responsive home page](https://github.com/SanzenDev/EcoMalagasyPlast/blob/master/screenshots/EMP-home-responsive.png)
