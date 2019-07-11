@@ -5,7 +5,7 @@ namespace App\CoreBundle;
 final class Events
 {
 	// Contact events
-	const ADMIN_DEFAULT_EMAIL = 'expressionmalagasyholding@gmail.com';
+	const ADMIN_DEFAULT_EMAIL = 'tikskun@gmail.com';
 
 	// Contact events
 	const CONTACT_CREATED = 'contact.created';
