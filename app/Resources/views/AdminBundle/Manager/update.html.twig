@@ -42,7 +42,7 @@
                 </li>
                 <li class="list-inline-item mR-20">
                   <a href="
-                  {% if entity == 'news' %}{{path('app_manage_show', {'entity': 'news', 'slug': obj.slug })}}{% endif %}{% if entity == 'dechet' %}{{path('app_manage_show', {'entity': 'dechet', 'slug': obj.slug})}}{% endif %}{% if entity == 'page' %}{{path('app_manage_show', {'entity': 'page', 'slug': obj.slug})}}{% endif %}
+                  {% if entity == 'news' %}{{path('web_manage_show', {'entity': 'news', 'slug': obj.slug })}}{% endif %}{% if entity == 'dechet' %}{{path('app_manage_show', {'entity': 'dechet', 'slug': obj.slug})}}{% endif %}{% if entity == 'page' %}{{path('app_manage_show', {'entity': 'page', 'slug': obj.slug})}}{% endif %}
                   " class="d-b td-n pY-5 pX-10 bgcH-grey-100 c-grey-700" data-toggle="tooltip" data-placement="right" title="Voir le site">
                     <i class="c-grey-900 ti-shift-right mR-5"></i>
                     <span>Voir</span>
